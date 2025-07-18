@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AHR Traffic Engineer Portfolio</title>
+  <title>Amir H. Rusli Traffic Engineer Portfolio</title>
   <meta name="description" content="Traffic Engineering Portfolio: TIA, SIDRA, Python/VBA automation, AI workflows, swept path analysis">
   <meta name="keywords" content="Traffic Engineering, TIA, SIDRA, Python, VBA, AI, AutoCAD">
-  <meta name="author" content="AHR">
-  <meta name="google-site-verification" content="_nMHhTZiH35ywJveiz_u9jYmsPogLlnUai55dGx6d5U" />
+  <meta name="author" content="Amir H. Rusli">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -92,8 +91,8 @@
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.08);
       padding: 0 2rem;
-      display: flex;
-      justify-content: center;
+      display: flex; /* Changed to flex */
+      justify-content: space-between; /* Changed to space-between */
       align-items: center;
       z-index: 1000;
       transition: var(--transition);
@@ -102,6 +101,18 @@
     body.dark header {
       background: rgba(18, 18, 18, 0.92);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .header-logo {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2rem; /* Adjust size as needed */
+        background: linear-gradient(90deg, var(--accent), var(--accent-dark), var(--accent-secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1; /* Ensure proper vertical alignment */
+        padding: 0.5rem 0; /* Align with nav links */
     }
     
     nav {
@@ -453,7 +464,7 @@
       opacity: 0.8;
     }
 
-    .skill-card-enhanced .skill-info-wrapper { /* NEW WRAPPER STYLES */
+    .skill-card-enhanced .skill-info-wrapper { /* NEW WRAPPER FOR TEXT CONTENT */
         width: 100%; /* Take full width in column layout */
         text-align: left; /* Ensure text inside is left-aligned */
     }
@@ -1075,6 +1086,15 @@
       .contact-form {
         padding: 1.5rem;
       }
+
+      /* Mobile-specific header layout */
+      header {
+        padding: 0 1rem; /* Adjust padding for smaller screens */
+      }
+
+      .header-logo {
+        font-size: 1.5rem; /* Smaller logo on mobile */
+      }
     }
 
     /* Mobile-specific styles for Skill Cards */
@@ -1121,6 +1141,7 @@
 <body class="no-tap-highlight">
   <div id="scroll-progress-indicator"></div>
   <header>
+    <div class="header-logo">AHR</div>
     <nav>
       <a href="#intro">Home</a>
       <a href="#projects">Projects</a>
@@ -1134,7 +1155,7 @@
   </button>
 
   <section id="intro" class="hero">
-    <h1 class="will-change">Hello, I'm AHR</h1>
+    <h1 class="will-change">Hello, I'm Amir H. Rusli</h1>
     <p class="will-change">Traffic Engineer | Specializing in TIA, SIDRA, Python Automation, VBA Tools, Swept Path Analysis & AI-Enhanced Workflows.</p>
     <a href="#projects" class="cta-button will-change">View My Projects <i class="fas fa-arrow-right"></i></a>
   </section>
@@ -2009,7 +2030,7 @@
                 <div class="skill-tags">
                   <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
                   <span class="skill-tag">Machine Learning</span>
-                  <span class="skill-tag">Data Science</span>
+                  <span class="skill-tag">Data Processing</span>
                   <span class="skill-tag">Predictive Analytics</span>
                   <span class="skill-tag">Natural Language Processing</span>
                 </div>
@@ -2063,7 +2084,7 @@
   </section>
 
   <footer class="will-change">
-    <p>© 2025 AHR Traffic Engineer. Built with ❤</p>
+    <p>© 2025 Amir H. Rusli Traffic Engineer. Built with ❤</p>
   </footer>
 
   <!-- Update WhatsApp number -->
@@ -2273,10 +2294,10 @@
       if (savedTheme) {
         if (savedTheme === 'dark') {
           body.classList.add('dark');
-          themeIcon.textContent = ' ';
+          themeIcon.textContent = '🌙';
           themeToggleBtn.title = 'Toggle light mode';
         } else {
-          themeIcon.textContent = '🌞';
+          themeIcon.textContent = '�';
           themeToggleBtn.title = 'Toggle dark mode';
         }
       } else if (prefersDark) {
@@ -2388,4 +2409,4 @@
   </script>
 </body>
 </html>
- 
+�
