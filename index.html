@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --bg-light: #fefefe;
@@ -192,89 +193,6 @@
       border-radius: 2px;
     }
     
-    /* Card styling */
-    .projects-grid, .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
-    }
-    
-    .project-card, .skill-card {
-      background: white;
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    body.dark .project-card, 
-    body.dark .skill-card {
-      background: #1e1e1e;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .project-card:hover, 
-    .skill-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 48px rgba(0, 180, 216, 0.15);
-    }
-    
-    body.dark .project-card:hover,
-    body.dark .skill-card:hover {
-      box-shadow: 0 12px 48px rgba(0, 180, 216, 0.25);
-    }
-    
-    .card-content {
-      padding: 2rem;
-    }
-    
-    .card-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-    
-    body.dark .card-content h3 {
-      color: var(--accent-secondary);
-    }
-    
-    .expanded-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease-out;
-    }
-    
-    .expanded-content.show {
-      max-height: 500px;
-    }
-    
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes gradientText {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
-    }
-    
     /* Updated theme toggle */
     .theme-toggle {
       position: fixed;
@@ -360,6 +278,391 @@
       transform: scale(1.1);
     }
     
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes gradientText {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    
+    /* ENHANCED PROJECTS SECTION */
+    #projects {
+      position: relative;
+    }
+    
+    .projects-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+    
+    .project-category {
+      margin-bottom: 2rem;
+    }
+    
+    .project-category h3 {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(0, 180, 216, 0.2);
+    }
+    
+    body.dark .project-category h3 {
+      color: var(--accent-secondary);
+    }
+    
+    .project-category-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    .project-card-enhanced {
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      height: 100%;
+    }
+    
+    body.dark .project-card-enhanced {
+      background: #1e1e1e;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .project-card-enhanced:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(0, 180, 216, 0.2);
+    }
+    
+    .project-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .project-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+    }
+    
+    .project-header {
+      padding: 1.5rem 1.5rem 1rem;
+    }
+    
+    .project-header h4 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+    
+    body.dark .project-header h4 {
+      color: var(--accent-secondary);
+    }
+    
+    .project-client {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+    
+    body.dark .project-client {
+      color: #aaa;
+    }
+    
+    .project-content {
+      padding: 0 1.5rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .project-description {
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    body.dark .project-description {
+      color: #aaa;
+    }
+    
+    .project-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: auto;
+    }
+    
+    .project-stat {
+      background: rgba(0, 180, 216, 0.08);
+      border-radius: 8px;
+      padding: 0.8rem;
+      text-align: center;
+    }
+    
+    body.dark .project-stat {
+      background: rgba(0, 180, 216, 0.12);
+    }
+    
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    
+    body.dark .stat-value {
+      color: var(--accent-secondary);
+    }
+    
+    .stat-label {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    body.dark .stat-label {
+      color: #aaa;
+    }
+    
+    .project-tech {
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    body.dark .project-tech {
+      background: #1a1a1a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .project-tech h5 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+      color: #666;
+    }
+    
+    body.dark .project-tech h5 {
+      color: #aaa;
+    }
+    
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .tech-tag {
+      background: rgba(0, 180, 216, 0.1);
+      color: var(--accent);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    body.dark .tech-tag {
+      background: rgba(0, 180, 216, 0.15);
+      color: var(--accent-secondary);
+    }
+    
+    /* ENHANCED SKILLS SECTION */
+    #skills {
+      position: relative;
+    }
+    
+    .skills-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    
+    .skill-category {
+      margin-bottom: 2rem;
+    }
+    
+    .skill-category h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(0, 180, 216, 0.2);
+    }
+    
+    body.dark .skill-category h3 {
+      color: var(--accent-secondary);
+    }
+    
+    .skill-category-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .skill-card-enhanced {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    body.dark .skill-card-enhanced {
+      background: #1e1e1e;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .skill-card-enhanced:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 180, 216, 0.15);
+    }
+    
+    .skill-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    .skill-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: rgba(0, 180, 216, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    
+    body.dark .skill-icon {
+      background: rgba(0, 180, 216, 0.15);
+      color: var(--accent-secondary);
+    }
+    
+    .skill-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    
+    .skill-description {
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    
+    body.dark .skill-description {
+      color: #aaa;
+    }
+    
+    .skill-metrics {
+      margin-top: auto;
+    }
+    
+    .skill-level {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .skill-bar {
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    body.dark .skill-bar {
+      background: #333;
+    }
+    
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      border-radius: 4px;
+      transition: width 1s ease-in-out;
+    }
+    
+    .skill-experience {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    body.dark .skill-experience {
+      color: #aaa;
+    }
+    
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .skill-tag {
+      background: rgba(0, 180, 216, 0.1);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    body.dark .skill-tag {
+      background: rgba(0, 180, 216, 0.15);
+      color: var(--accent-secondary);
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
       nav {
@@ -374,14 +677,19 @@
         padding: 4rem 1.5rem;
       }
       
-      .projects-grid, .skills-grid {
-        grid-template-columns: 1fr;
-      }
-      
       .theme-toggle, .whatsapp-button {
         width: 44px;
         height: 44px;
         font-size: 1.1rem;
+      }
+      
+      .project-category-content, 
+      .skill-category-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .project-stats {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -407,36 +715,268 @@
 
   <section id="projects">
     <h2 class="will-change">My Projects</h2>
-    <div class="projects-grid will-change">
-      <div class="project-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>Traffic Impact Assessment – Penang Mall</h3>
-          <div class="expanded-content">
-            <p>This project included a detailed TIA study including SIDRA modelling and junction improvements for a new mall in Penang.</p>
+    
+    <div class="projects-container">
+      <!-- Traffic Impact Assessments -->
+      <div class="project-category">
+        <h3><i class="fas fa-file-alt"></i> Traffic Impact Assessments</h3>
+        <div class="project-category-content">
+          <!-- Penang Mall TIA -->
+          <div class="project-card-enhanced">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1591160690555-5debfba289f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <h4>Traffic Impact Assessment – Penang Mall</h4>
+              <div class="project-client">
+                <i class="fas fa-building"></i> Client: Penang Development Corp
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">Comprehensive TIA for a new shopping mall development with 1,200 parking spaces. Included SIDRA modeling for 4 signalized intersections and proposed junction improvements.</p>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <div class="stat-value">32%</div>
+                  <div class="stat-label">Delay Reduction</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">4</div>
+                  <div class="stat-label">Junctions Optimized</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">1200+</div>
+                  <div class="stat-label">Parking Spaces</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">D → B</div>
+                  <div class="stat-label">LOS Improvement</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">SIDRA</span>
+                <span class="tech-tag">AutoCAD</span>
+                <span class="tech-tag">GIS</span>
+                <span class="tech-tag">VBA</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Industrial Park TIA -->
+          <div class="project-card-enhanced">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <h4>Industrial Park Access Study</h4>
+              <div class="project-client">
+                <i class="fas fa-industry"></i> Client: National Industrial Authority
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">Traffic impact assessment for a new industrial park with heavy vehicle access requirements. Included swept path analysis for 53' trailers and signal optimization.</p>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <div class="stat-value">45%</div>
+                  <div class="stat-label">Safety Improvement</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">12</div>
+                  <div class="stat-label">Access Points</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">1.2M</div>
+                  <div class="stat-label">Sq.Ft. Area</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">8</div>
+                  <div class="stat-label">Signal Designs</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">AutoTURN</span>
+                <span class="tech-tag">SIDRA</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">GIS</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="project-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>Python: Batch Junction Analysis Tool</h3>
-          <div class="expanded-content">
-            <p>A Python automation tool to batch process and generate junction performance summaries from data inputs.</p>
+      
+      <!-- Automation & Tools -->
+      <div class="project-category">
+        <h3><i class="fas fa-cogs"></i> Automation & Tools</h3>
+        <div class="project-category-content">
+          <!-- Python Junction Tool -->
+          <div class="project-card-enhanced">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <h4>Python: Batch Junction Analysis Tool</h4>
+              <div class="project-client">
+                <i class="fas fa-code"></i> Internal Development
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">A Python automation tool to batch process and generate junction performance summaries from multiple SIDRA outputs. Processes 50+ junctions in minutes instead of hours.</p>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <div class="stat-value">90%</div>
+                  <div class="stat-label">Time Savings</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">50+</div>
+                  <div class="stat-label">Junctions Processed</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">12</div>
+                  <div class="stat-label">Performance Metrics</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">1-Click</div>
+                  <div class="stat-label">Reporting</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">SIDRA API</span>
+                <span class="tech-tag">Excel</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- VBA Reporting Tool -->
+          <div class="project-card-enhanced">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <h4>VBA Macro: Auto Caption for Traffic Reports</h4>
+              <div class="project-client">
+                <i class="fas fa-file-word"></i> Internal Workflow
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">Automated Word macro that inserts and labels figures in TIA documentation. Reduced report preparation time by 40% and eliminated manual errors in figure numbering.</p>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <div class="stat-value">40%</div>
+                  <div class="stat-label">Time Savings</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">100%</div>
+                  <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">15</div>
+                  <div class="stat-label">Reports/Month</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">1-Click</div>
+                  <div class="stat-label">Processing</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">VBA</span>
+                <span class="tech-tag">Microsoft Word</span>
+                <span class="tech-tag">Automation</span>
+                <span class="tech-tag">Documentation</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="project-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>VBA Macro: Auto Caption for Traffic Reports</h3>
-          <div class="expanded-content">
-            <p>This macro inserts and labels figures automatically, saving time in TIA documentation.</p>
+      
+      <!-- SIDRA Modeling -->
+      <div class="project-category">
+        <h3><i class="fas fa-chart-line"></i> SIDRA Modeling</h3>
+        <div class="project-category-content">
+          <!-- Interchange Upgrade -->
+          <div class="project-card-enhanced">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <h4>SIDRA Modelling: Interchange Upgrade</h4>
+              <div class="project-client">
+                <i class="fas fa-road"></i> Client: Highway Authority
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">Modelled various phases and signal scenarios for an urban interchange redesign. Proposed solution reduced queues by 41% during peak hours and improved safety metrics.</p>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <div class="stat-value">41%</div>
+                  <div class="stat-label">Queue Reduction</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">18%</div>
+                  <div class="stat-label">Travel Time Savings</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">5</div>
+                  <div class="stat-label">Signal Scenarios</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">$2.1M</div>
+                  <div class="stat-label">Project Value</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">SIDRA</span>
+                <span class="tech-tag">GIS</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">AutoCAD</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="project-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>SIDRA Modelling: Interchange Upgrade</h3>
-          <div class="expanded-content">
-            <p>Modelled various phases and signal scenarios for an urban interchange redesign proposal.</p>
+          
+          <!-- Corridor Optimization -->
+          <div class="project-card-enhanced">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <h4>Corridor Signal Optimization</h4>
+              <div class="project-client">
+                <i class="fas fa-road"></i> Client: City Municipal Council
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">Coordinated signal timing optimization for a 5-mile corridor with 15 intersections. Reduced travel time by 22% and improved Level of Service from D to B during PM peak.</p>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <div class="stat-value">22%</div>
+                  <div class="stat-label">Travel Time Reduction</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">15</div>
+                  <div class="stat-label">Intersections</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">12%</div>
+                  <div class="stat-label">Fuel Savings</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">D → B</div>
+                  <div class="stat-label">LOS Improvement</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">SIDRA</span>
+                <span class="tech-tag">VISSIM</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">GIS</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -444,69 +984,241 @@
   </section>
 
   <section id="skills">
-    <h2 class="will-change">Skills</h2>
-    <div class="skills-grid will-change">
-      <div class="skill-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>Traffic Engineering</h3>
-          <div class="expanded-content">
-            <p>Proficient in signal timing, capacity analysis, and planning of intersections and corridors.</p>
+    <h2 class="will-change">My Skills</h2>
+    
+    <div class="skills-container">
+      <!-- Core Traffic Engineering Skills -->
+      <div class="skill-category">
+        <h3><i class="fas fa-traffic-light"></i> Core Traffic Engineering</h3>
+        <div class="skill-category-content">
+          <!-- Traffic Engineering -->
+          <div class="skill-card-enhanced">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <i class="fas fa-road"></i>
+              </div>
+              <h4 class="skill-title">Traffic Engineering</h4>
+            </div>
+            <p class="skill-description">Expertise in signal timing, capacity analysis, and planning of intersections and corridors.</p>
+            <div class="skill-metrics">
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 7+ years experience
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Signal Timing</span>
+              <span class="skill-tag">Capacity Analysis</span>
+              <span class="skill-tag">Corridor Planning</span>
+            </div>
+          </div>
+          
+          <!-- TIA Report -->
+          <div class="skill-card-enhanced">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <h4 class="skill-title">TIA Report</h4>
+            </div>
+            <p class="skill-description">Preparation of TIA in accordance with local guidelines and authority requirements.</p>
+            <div class="skill-metrics">
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 50+ reports completed
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Compliance</span>
+              <span class="skill-tag">Analysis</span>
+              <span class="skill-tag">Documentation</span>
+            </div>
+          </div>
+          
+          <!-- SIDRA -->
+          <div class="skill-card-enhanced">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h4 class="skill-title">SIDRA</h4>
+            </div>
+            <p class="skill-description">Experienced in SIDRA Intersection modelling including calibration and optimization.</p>
+            <div class="skill-metrics">
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>98%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 98%"></div>
+              </div>
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 200+ projects
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Modelling</span>
+              <span class="skill-tag">Calibration</span>
+              <span class="skill-tag">Optimization</span>
+            </div>
+          </div>
+          
+          <!-- Swept Path -->
+          <div class="skill-card-enhanced">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <i class="fas fa-car"></i>
+              </div>
+              <h4 class="skill-title">Swept Path Analysis</h4>
+            </div>
+            <p class="skill-description">Vehicle turning template checks using AutoTURN for site access and design validation.</p>
+            <div class="skill-metrics">
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>92%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 92%"></div>
+              </div>
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 5+ years experience
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">AutoTURN</span>
+              <span class="skill-tag">Vehicle Tracking</span>
+              <span class="skill-tag">Design Validation</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="skill-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>TIA Report</h3>
-          <div class="expanded-content">
-            <p>Preparation of TIA in accordance with local guidelines and authority requirements.</p>
+      
+      <!-- Technical & Software Skills -->
+      <div class="skill-category">
+        <h3><i class="fas fa-laptop-code"></i> Technical & Software</h3>
+        <div class="skill-category-content">
+          <!-- Python -->
+          <div class="skill-card-enhanced">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <i class="fab fa-python"></i>
+              </div>
+              <h4 class="skill-title">Python</h4>
+            </div>
+            <p class="skill-description">Scripting tools for traffic analysis and automation of data handling/reporting.</p>
+            <div class="skill-metrics">
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 4+ years experience
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Pandas</span>
+              <span class="skill-tag">Automation</span>
+              <span class="skill-tag">Data Analysis</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="skill-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>SIDRA</h3>
-          <div class="expanded-content">
-            <p>Experienced in SIDRA Intersection modelling including calibration and optimization.</p>
+          
+          <!-- VBA -->
+          <div class="skill-card-enhanced">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <i class="fas fa-file-excel"></i>
+              </div>
+              <h4 class="skill-title">VBA</h4>
+            </div>
+            <p class="skill-description">Created Excel/Word automation for reporting, graph generation, and data structuring.</p>
+            <div class="skill-metrics">
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>88%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 88%"></div>
+              </div>
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 25+ tools developed
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Excel</span>
+              <span class="skill-tag">Automation</span>
+              <span class="skill-tag">Reporting</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="skill-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>Swept Path</h3>
-          <div class="expanded-content">
-            <p>Vehicle turning template checks using AutoTURN for site access and design validation.</p>
+          
+          <!-- AutoCAD -->
+          <div class="skill-card-enhanced">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <i class="fas fa-drafting-compass"></i>
+              </div>
+              <h4 class="skill-title">AutoCAD</h4>
+            </div>
+            <p class="skill-description">Drafting traffic plans, road geometry, and swept path layouts.</p>
+            <div class="skill-metrics">
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 6+ years experience
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Drafting</span>
+              <span class="skill-tag">Design</span>
+              <span class="skill-tag">Layouts</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="skill-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>Python</h3>
-          <div class="expanded-content">
-            <p>Scripting tools for traffic analysis and automation of data handling/reporting.</p>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>VBA</h3>
-          <div class="expanded-content">
-            <p>Created Excel/Word automation for reporting, graph generation, and data structuring.</p>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>AutoCAD</h3>
-          <div class="expanded-content">
-            <p>Drafting traffic plans, road geometry, and swept path layouts.</p>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card" onclick="toggleExpand(this)">
-        <div class="card-content">
-          <h3>AI Workflows</h3>
-          <div class="expanded-content">
-            <p>Implemented AI-assisted workflows to streamline document generation and design review.</p>
+          
+          <!-- AI Workflows -->
+          <div class="skill-card-enhanced">
+            <div class="skill-header">
+              <div class="skill-icon">
+                <i class="fas fa-robot"></i>
+              </div>
+              <h4 class="skill-title">AI Workflows</h4>
+            </div>
+            <p class="skill-description">Implemented AI-assisted workflows to streamline document generation and design review.</p>
+            <div class="skill-metrics">
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>75%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 2+ years experience
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Automation</span>
+              <span class="skill-tag">Documentation</span>
+              <span class="skill-tag">Efficiency</span>
+            </div>
           </div>
         </div>
       </div>
@@ -537,6 +1249,15 @@
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
             observer.unobserve(entry.target);
+            
+            // Animate progress bars
+            if (entry.target.id === 'skills') {
+              setTimeout(() => {
+                document.querySelectorAll('.skill-progress').forEach(bar => {
+                  bar.style.width = bar.style.width;
+                });
+              }, 300);
+            }
           }
         });
       }, { threshold: 0.1 });
@@ -563,12 +1284,6 @@
       }, 600);
     }
     
-    // Optimized card expansion
-    function toggleExpand(card) {
-      const content = card.querySelector('.expanded-content');
-      content.classList.toggle('show');
-    }
-    
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
       // Set initial theme
@@ -585,7 +1300,7 @@
       document.body.classList.add('no-tap-highlight');
       
       // Preload hover states
-      document.querySelectorAll('.project-card, .skill-card, .theme-toggle, .whatsapp-button').forEach(el => {
+      document.querySelectorAll('.project-card-enhanced, .skill-card-enhanced, .theme-toggle, .whatsapp-button').forEach(el => {
         el.style.transform = 'translateZ(0)';
       });
     });
