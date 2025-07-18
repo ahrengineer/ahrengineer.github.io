@@ -13,7 +13,7 @@
   <!-- SEO Enhancement: Explicit robots meta tag -->
   <meta name="robots" content="index, follow">
   <!-- SEO Enhancement: Canonical URL to prevent duplicate content issues -->
-  <link rel="canonical" href="https://yourusername.github.io/your-repo-name/">
+  <link rel="canonical" href="https://yourdomain.com/">
   <!-- SEO Enhancement: Favicon for browser tabs -->
   <link rel="icon" href="https://placehold.co/32x32/00b4d8/ffffff?text=AR" type="image/png">
 
@@ -28,13 +28,15 @@
       --bg-dark: #121212;
       --text-light: #111;
       --text-dark: #f5f5f5;
-      --accent: #00b4d8;
-      --accent-dark: #0077b6;
-      --accent-secondary: #90e0ef;
+      --accent: #00b4d8; /* Blue */
+      --accent-dark: #0077b6; /* Darker blue */
+      --accent-secondary: #90e0ef; /* Lighter blue */
+      --dark-mode-hover-accent: #FF6347; /* Orangey Red for dark mode hovers/clicks */
       --header-height: 80px;
       --border-radius: 16px;
       --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       --glow-shadow: 0 0 20px rgba(0, 180, 216, 0.6), 0 0 40px rgba(0, 180, 216, 0.4);
+      --dark-mode-glow-shadow: 0 0 20px rgba(255, 99, 71, 0.6), 0 0 40px rgba(255, 99, 71, 0.4);
     }
     
     /* ===== BASE STYLES ===== */
@@ -57,11 +59,18 @@
       line-height: 1.7;
       letter-spacing: 0.02em;
       overflow-x: hidden;
+      /* Subtle background animation for engagement across the entire site */
+      background: linear-gradient(45deg, rgba(0,180,216,0.02), rgba(0,119,182,0.02)); /* Very subtle */
+      background-size: 300% 300%; /* Larger size for flowing effect */
+      animation: gradientBackground 25s ease infinite; /* Slower animation */
     }
     
     body.dark {
       background-color: var(--bg-dark);
       color: var(--text-dark);
+      background: linear-gradient(45deg, rgba(255,99,71,0.02), rgba(255,69,0,0.02)); /* Very subtle */
+      background-size: 300% 300%;
+      animation: gradientBackground 25s ease infinite;
     }
 
     /* Prevent body scroll when modal is open */
@@ -160,6 +169,13 @@
       color: var(--accent);
     }
     
+    body.dark nav a:hover {
+      color: var(--dark-mode-hover-accent); /* Orangey red text color */
+    }
+    body.dark nav a::after {
+      background: linear-gradient(90deg, var(--dark-mode-hover-accent), #FF4500); /* Orangey red gradient */
+    }
+
     /* ===== HERO SECTION ===== */
     .hero {
       min-height: 100vh;
@@ -171,6 +187,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      background: none; /* Background handled by body for flowing effect */
     }
     
     .hero h1 {
@@ -193,6 +210,15 @@
       animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
     }
 
+    .hero .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards; /* Delayed animation */
+    }
+
     .hero .cta-button {
         background: linear-gradient(90deg, var(--accent), var(--accent-dark));
         color: white;
@@ -203,13 +229,11 @@
         font-weight: 600;
         cursor: pointer;
         text-decoration: none; /* For anchor tag button */
-        display: inline-block; /* For anchor tag button */
-        margin-top: 1rem;
+        display: inline-flex; /* For anchor tag button and icon alignment */
+        align-items: center;
+        gap: 0.75rem;
         box-shadow: 0 8px 24px rgba(0, 180, 216, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards; /* Delayed animation */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .hero .cta-button:hover {
@@ -217,6 +241,36 @@
         box-shadow: 0 12px 36px rgba(0, 180, 216, 0.4);
     }
     
+    body.dark .hero .cta-button:hover {
+      box-shadow: 0 12px 36px rgba(255, 99, 71, 0.4); /* Orangey red shadow */
+    }
+
+    /* Secondary CTA button style */
+    .hero .cta-button.secondary {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      box-shadow: none;
+    }
+
+    body.dark .hero .cta-button.secondary {
+      border-color: var(--dark-mode-hover-accent);
+      color: var(--dark-mode-hover-accent);
+    }
+
+    .hero .cta-button.secondary:hover {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 8px 24px rgba(0, 180, 216, 0.2);
+    }
+
+    body.dark .hero .cta-button.secondary:hover {
+      background: var(--dark-mode-hover-accent);
+      color: white;
+      box-shadow: 0 8px 24px rgba(255, 99, 71, 0.2);
+    }
+
+
     /* ===== SECTIONS ===== */
     section {
       padding: 6rem 2rem;
@@ -313,11 +367,20 @@
       box-shadow: 0 12px 36px rgba(0, 180, 216, 0.15); /* More subtle hover glow */
     }
     
+    body.dark .project-card-enhanced:hover,
+    body.dark .skill-card-enhanced:hover {
+      box-shadow: 0 12px 36px rgba(255, 99, 71, 0.3); /* Orangey red shadow */
+    }
+
     /* Clicked (Glow) State */
     .project-card-enhanced.clicked,
     .skill-card-enhanced.clicked {
       box-shadow: var(--glow-shadow);
       transform: scale(1.01); /* Even slighter scale for emphasis */
+    }
+    body.dark .project-card-enhanced.clicked,
+    body.dark .skill-card-enhanced.clicked {
+      box-shadow: var(--dark-mode-glow-shadow); /* Use new variable */
     }
     
     /* --- Project Card Specifics --- */
@@ -685,6 +748,9 @@
       color: var(--accent);
       transform: rotate(90deg);
     }
+    body.dark .modal-close:hover {
+      color: var(--dark-mode-hover-accent); /* Orangey red color */
+    }
 
     .modal-content h3 {
         font-size: 1.8rem;
@@ -847,6 +913,10 @@
       color: var(--accent-dark);
       border-bottom: 2px solid var(--accent-dark);
     }
+    body.dark #contact a:hover {
+      color: var(--dark-mode-hover-accent); /* Orangey red color */
+      border-bottom-color: var(--dark-mode-hover-accent);
+    }
 
     /* Contact Form Styling */
     .contact-form {
@@ -932,6 +1002,9 @@
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(0, 180, 216, 0.3);
     }
+    body.dark .contact-form button[type="submit"]:hover {
+        box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3); /* Orangey red shadow */
+    }
 
     /* ===== FOOTER ===== */
     footer {
@@ -946,6 +1019,32 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+    }
+
+    .social-links {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1.8rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    body.dark .social-links a {
+      color: var(--text-dark);
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    body.dark .social-links a:hover {
+      color: var(--dark-mode-hover-accent);
     }
     
     /* ===== UTILITY BUTTONS ===== */
@@ -973,6 +1072,10 @@
         box-shadow: 0 0 25px rgba(0, 180, 216, 0.7), 0 0 40px rgba(0, 180, 216, 0.5); /* Subtle glow on hover */
     }
     
+    body.dark .theme-toggle:hover {
+        box-shadow: 0 0 25px rgba(255, 99, 71, 0.7), 0 0 40px rgba(255, 99, 71, 0.5); /* Orangey red glow */
+    }
+
     .theme-toggle #theme-icon {
         transition: transform 0.5s ease-in-out; /* Icon rotation transition */
     }
@@ -1015,6 +1118,16 @@
         z-index: 1001; /* Above header but below modal */
         transition: background 0.3s ease; /* Smooth color transition on theme change */
     }
+
+    /* Animated Characters */
+    .animated-character {
+      position: fixed;
+      font-size: 2.5rem; /* Small size */
+      transition: transform 10s ease-in-out, opacity 2s ease; /* Slower, smoother transitions */
+      z-index: 999; /* Below header, above background */
+      opacity: 0; /* Start hidden */
+      pointer-events: none; /* Don't block clicks */
+    }
     
     /* ===== ANIMATIONS ===== */
     @keyframes fadeInUp {
@@ -1036,6 +1149,14 @@
     @keyframes gradientText {
       0% { background-position: 0% center; }
       100% { background-position: 200% center; }
+    }
+
+    @keyframes gradientBackground {
+      0% { background-position: 0% 0%; }
+      25% { background-position: 50% 50%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 50% 50%; }
+      100% { background-position: 0% 0%; }
     }
     
     /* ===== RESPONSIVE ADJUSTMENTS ===== */
@@ -1065,6 +1186,11 @@
       
       .project-stats {
         grid-template-columns: 1fr;
+      }
+
+      .hero .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
       }
 
       .modal-content {
@@ -1154,7 +1280,7 @@
     "@type": "Person",
     "name": "Amir H. Rusli",
     "jobTitle": "Traffic Engineer & Consultant",
-    "url": "https://yourusername.github.io/your-repo-name/",
+    "url": "https://yourdomain.com/",
     "alumniOf": {
       "@type": "EducationalOrganization",
       "name": "Your University Name"
@@ -1186,7 +1312,7 @@
       "telephone": "+60123456789",
       "contactType": "Sales"
     },
-    "url": "https://yourusername.github.io/your-repo-name/"
+    "url": "https://yourdomain.com/"
   }
   </script>
 </head>
@@ -1196,6 +1322,7 @@
     <div class="header-logo">AHR</div>
     <nav>
       <a href="#intro">Home</a>
+      <a href="#services">What I Do</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
@@ -1208,8 +1335,32 @@
 
   <section id="intro" class="hero">
     <h1 class="will-change">Hello, I'm Amir H. Rusli</h1>
-    <p class="will-change">Traffic Engineer | Specializing in TIA, SIDRA, Python Automation, VBA Tools, Swept Path Analysis & AI-Enhanced Workflows. Providing expert traffic consulting and transportation planning solutions.</p>
-    <a href="#projects" class="cta-button will-change">View My Projects <i class="fas fa-arrow-right"></i></a>
+    <p class="will-change">Traffic Engineer & Automation Specialist | Driving efficiency in transportation planning through advanced Traffic Impact Assessments (TIA), SIDRA modeling, Python/VBA automation, and innovative AI-enhanced workflows. Delivering data-driven solutions for safer, more efficient urban mobility.</p>
+    <div class="cta-buttons">
+      <a href="#projects" class="cta-button will-change">View My Projects <i class="fas fa-arrow-right"></i></a>
+      <a href="/path/to/your-resume.pdf" download="Amir_H_Rusli_Resume.pdf" class="cta-button secondary will-change">Download Resume <i class="fas fa-download"></i></a>
+    </div>
+  </section>
+
+  <section id="services">
+    <h2 class="will-change">What I Do</h2>
+    <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: center;">
+      <div class="service-item" style="background: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(0,0,0,0.05); transition: var(--transition);">
+        <i class="fas fa-chart-pie" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+        <h4 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Traffic Impact Assessments</h4>
+        <p style="font-size: 0.95rem;">Conducting detailed analyses of development impacts on traffic flow and recommending effective mitigation strategies.</p>
+      </div>
+      <div class="service-item" style="background: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(0,0,0,0.05); transition: var(--transition);">
+        <i class="fas fa-network-wired" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+        <h4 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Traffic Simulation & Modeling</h4>
+        <p style="font-size: 0.95rem;">Utilizing advanced software like SIDRA and VISSIM to model and optimize complex transportation networks.</p>
+      </div>
+      <div class="service-item" style="background: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(0,0,0,0.05); transition: var(--transition);">
+        <i class="fas fa-robot" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+        <h4 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Automation & Data Solutions</h4>
+        <p style="font-size: 0.95rem;">Developing Python and VBA tools to automate workflows, process data, and generate insightful reports.</p>
+      </div>
+    </div>
   </section>
 
   <section id="projects">
@@ -1221,33 +1372,33 @@
         <h3><i class="fas fa-file-alt"></i> Traffic Impact Assessments</h3>
         <div class="project-category-content">
           
-          <!-- START PROJECT CARD: Penang Mall TIA -->
+          <!-- START PROJECT CARD: Northen Region TIA -->
           <div class="project-card-enhanced">
             <!-- EDIT THIS CONTENT: Project Image -->
             <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1591160690555-5debfba289f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
               <!-- EDIT THIS CONTENT: Project Title -->
-              <h4>Traffic Impact Assessment – Penang Mall</h4>
+              <h4>Traffic Impact Assessment (TIA) - Northern Region</h4>
               <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
-                <i class="fas fa-building"></i> Client: Penang Development Corp
+                <i class="fas fa-building"></i> Client: Stakeholder across Malaysia
               </div>
             </div>
             <div class="project-content">
               <!-- EDIT THIS CONTENT: Project Short Description -->
-              <p class="project-description">Comprehensive Traffic Impact Assessment (TIA) for a new shopping mall development with 1,200 parking spaces. Included detailed SIDRA INTERSECTION modeling for 4 signalized intersections and proposed junction improvements to enhance traffic flow and safety.</p>
+              <p class="project-description">Directed comprehensive Traffic Impact Assessments (TIA) across Malaysia, including MBPP, MBSP, Kedah, and Sarawak. Leveraged SIDRA INTERSECTION to optimize critical junctions, achieving significant delay reductions and enhancing Level of Service, with recommendations adopted by local authorities. Ensured regulatory compliance and effective stakeholder coordination for sustainable urban development.</p>
               <div class="project-stats">
                 <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
-                  <div class="stat-value">32%</div>
+                  <div class="stat-value">32% - 99%</div>
                   <div class="stat-label">Delay Reduction</div>
                 </div>
                 <div class="project-stat">
-                  <div class="stat-value">4</div>
+                  <div class="stat-value">1 - 18</div>
                   <div class="stat-label">Junctions Optimized</div>
                 </div>
                 <div class="project-stat">
-                  <div class="stat-value">1200+</div>
+                  <div class="stat-value">5 - 500</div>
                   <div class="stat-label">Parking Spaces</div>
                 </div>
                 <div class="project-stat">
@@ -1262,62 +1413,118 @@
                 <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">AutoCAD</span>
-                <span class="tech-tag">GIS</span>
+                <span class="tech-tag">CORELDRAW</span>
                 <span class="tech-tag">VBA</span>
                 <span class="tech-tag">Traffic Analysis</span>
               </div>
             </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>Project Deep Dive: Penang Mall Traffic Impact Assessment (TIA)</h3>
-                <p>This project involved a detailed traffic impact assessment for a major retail development. Our analysis focused on predicting future traffic volumes and their impact on surrounding road networks. We utilized SIDRA INTERSECTION to model various scenarios, including the proposed access points and internal circulation, ensuring efficient traffic flow and minimizing congestion.</p>
-                <h4>Methodology:</h4>
+                <h3>Project Deep Dive: Traffic Impact Assessments – Northern Region, Malaysia</h3>
+                <p>Directed comprehensive Traffic Impact Assessment (TIA) studies across the Northern Region—including MBPP, MBSP, Kedah, and Perlis—for a wide range of developments such as residential townships, commercial centers, industrial zones, hospitals, and schools. These assessments addressed the growing mobility pressures in rapidly developing and congestion-prone areas.</p>
+                <h4>Scope & Methodology:</h4>
                 <ul>
-                    <li><strong>Traffic Surveys:</strong> Conducted extensive manual and automated traffic counts for comprehensive data collection.</li>
-                    <li><strong>Trip Generation & Distribution:</strong> Applied local and international trip generation rates to accurately forecast new traffic.</li>
-                    <li><strong>Capacity Analysis:</strong> Performed detailed capacity analysis using SIDRA INTERSECTION 9.0 for signalized and unsignalized junctions.</li>
-                    <li><strong>Swept Path Analysis:</strong> Ensured adequate maneuverability for delivery vehicles and emergency services within the site using specialized software.</li>
-                    <li><strong>Mitigation Strategies:</strong> Developed and evaluated traffic management plans, including signal timing adjustments and geometric improvements.</li>
+                    <li><strong>Traffic Data Collection:</strong> Executed detailed manual and automated traffic counts at strategic locations to capture real-world conditions.</li>
+                    <li><strong>Trip Generation & Distribution:</strong> Accurately estimated new traffic volumes utilizing local planning guidelines and established trip rate databases.</li>
+                    <li><strong>Network Capacity Analysis:</strong> Leveraged SIDRA INTERSECTION for rigorous junction-level performance assessments and VISSIM microscopic simulation for dynamic, corridor-wide traffic flow modeling, effectively capturing complex phenomena like queuing, spillback, and signal coordination impacts.</li>
+                    <li><strong>Geometric & Operational Assessment:</strong> Conducted thorough reviews of access design, internal circulation patterns, and turning movements, incorporating swept path analysis to ensure vehicle maneuverability.</li>
+                    <li><strong>Mitigation Planning:</strong> Developed and recommended strategic geometric upgrades, optimized signal timing adjustments, and implemented innovative traffic management strategies to significantly reduce delays, enhance road safety, and improve overall system efficiency.</li>
                 </ul>
-                <h4>Impact:</h4>
-                <p>Our recommendations were adopted by the client and approved by the local authorities, leading to a more efficient and safer traffic environment around the new mall. The project demonstrated Amir H. Rusli's ability to handle large-scale traffic consulting developments and deliver practical, data-driven transportation solutions.</p>
+                <h4>Outcome:</h4>
+                <p>Recommendations from these studies were rigorously adopted by project stakeholders and formally endorsed by local authorities, forming a critical component of the development approval process. These projects underscore the capability to deliver technically sound, data-driven traffic engineering solutions precisely tailored to the unique challenges of Northern Malaysia’s evolving transport landscape.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
-          <!-- END PROJECT CARD: Penang Mall TIA -->
+          <!-- END PROJECT CARD: Northern Region TIA -->
           
-          <!-- START PROJECT CARD: Industrial Park TIA -->
+          <!-- START PROJECT CARD: Jalan Sultan Ahmad Shah TIA -->
           <div class="project-card-enhanced">
-            <!-- EDIT THIS CONTENT: Project Image -->
-            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1532996122724-e3c3540b15b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1590650501144-389b397bfc8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
-              <!-- EDIT THIS CONTENT: Project Title -->
-              <h4>Industrial Park Access Study</h4>
-              <!-- EDIT THIS CONTENT: Client Name -->
+              <h4>Jalan Sultan Ahmad Shah Mixed-Use Development</h4>
               <div class="project-client">
-                <i class="fas fa-industry"></i> Client: National Industrial Authority
+                <i class="fas fa-building"></i> Client: Stakeholder in Penang
               </div>
             </div>
             <div class="project-content">
-              <!-- EDIT THIS CONTENT: Project Short Description -->
-              <p class="project-description">Traffic impact assessment for a new industrial park with heavy vehicle access requirements. Included comprehensive swept path analysis for 53' trailers and signal optimization to ensure smooth and safe operations.</p>
+              <p class="project-description">Conducted a pivotal Traffic Impact Assessment for a high-rise mixed-use development on Jalan Sultan Ahmad Shah, Penang. Developed multi-modal access strategies, optimized signal timings, and integrated pedestrian safety measures, significantly improving traffic flow and accessibility in a dense urban environment.</p>
               <div class="project-stats">
-                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
-                  <div class="stat-value">45%</div>
-                  <div class="stat-label">Safety Improvement</div>
+                  <div class="stat-value">35%</div>
+                  <div class="stat-label">Delay Reduction</div>
                 </div>
                 <div class="project-stat">
-                  <div class="stat-value">12</div>
+                  <div class="stat-value">6</div>
                   <div class="stat-label">Access Points</div>
                 </div>
                 <div class="project-stat">
-                  <div class="stat-value">1.2M</div>
-                  <div class="stat-label">Sq.Ft. Area</div>
+                  <div class="stat-value">850</div>
+                  <div class="stat-label">Parking Bays</div>
                 </div>
                 <div class="project-stat">
-                  <div class="stat-value">8</div>
-                  <div class="stat-label">Signal Designs</div>
+                  <div class="stat-value">4</div>
+                  <div class="stat-label">Signalized Intersections</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">SIDRA</span>
+                <span class="tech-tag">AutoCAD Vehicle Tracking</span>
+                <span class="tech-tag">VISSIM</span>
+                <span class="tech-tag">GIS</span>
+                <span class="tech-tag">Multi-Modal Planning</span>
+              </div>
+            </div>
+            <div class="card-detailed-content">
+                <h3>Project Deep Dive: Jalan Sultan Ahmad Shah Mixed-Use Development TIA</h3>
+                <p>This Traffic Impact Assessment (TIA) supported a proposed high-rise mixed-use commercial development strategically located along the bustling Jalan Sultan Ahmad Shah corridor in George Town, Penang. The project encompassed two office towers, a vibrant retail podium, and an extensive multi-storey basement car park—necessitating meticulous traffic planning within a high-density urban environment.</p>
+                <h4>Methodology:</h4>
+                <ul>
+                    <li><strong>Traffic Surveys & Forecasting:</strong> Executed comprehensive peak-hour volume counts and applied robust growth projections to accurately model future traffic conditions.</li>
+                    <li><strong>Junction Modeling:</strong> Utilized SIDRA and VISSIM to rigorously assess capacity and simulate dynamic interactions with adjacent signalized junctions, identifying potential bottlenecks.</li>
+                    <li><strong>Access & Parking Design:</strong> Proposed optimized and safe ingress/egress locations, implemented effective driveway controls, and designed efficient parking circulation plans to maximize throughput and minimize internal congestion.</li>
+                    <li><strong>Vehicle Maneuvering:</strong> Conducted precise swept path assessments leveraging <strong>AutoCAD Vehicle Tracking</strong> to guarantee seamless maneuverability for critical service and emergency vehicles within the constrained site.</li>
+                    <li><strong>Pedestrian & Transit Integration:</strong> Strategically integrated pedestrian crossings and optimized bus stop relocations to enhance multi-modal accessibility and promote sustainable transportation options.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>The comprehensive study was instrumental in securing prompt approval from Majlis Bandaraya Pulau Pinang (MBPP), demonstrating a projected 35% reduction in anticipated traffic delay through expertly optimized signal timing and strategic geometric improvements. This project exemplifies the capability to navigate complex urban conditions and deliver impactful mobility solutions that effectively balance ambitious development needs with public interest and regulatory requirements.</p>
+            </div>
+          </div>
+          <!-- END PROJECT CARD: Jalan Sultan Ahmad Shah TIA -->
+
+          <!-- START PROJECT CARD: Swept Path Analysis for Penang High-Density Housing & Shop Lots -->
+          <div class="project-card-enhanced">
+            <!-- EDIT THIS CONTENT: Project Image -->
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1578637734185-1815124976c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <!-- EDIT THIS CONTENT: Project Title -->
+              <h4>Swept Path Analysis for Penang High-Density Housing & Shop Lots</h4>
+              <!-- EDIT THIS CONTENT: Client Name -->
+              <div class="project-client">
+                <i class="fas fa-home"></i> Client: Penang Residential Developer
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">Executed critical swept path analysis for a high-density housing and shop lot development in Penang, guaranteeing safe and efficient vehicle maneuverability for essential Malaysian design vehicles (e.g., JBPM fire engines, refuse trucks, delivery vans) within challenging access points and internal circulation paths, ensuring regulatory compliance and operational safety.</p>
+              <div class="project-stats">
+                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
+                <div class="project-stat">
+                  <div class="stat-value">100%</div>
+                  <div class="stat-label">Access Compliance</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">4+</div>
+                  <div class="stat-label">Malaysian Vehicle Types</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">10</div>
+                  <div class="stat-label">Design Revisions</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">Optimized</div>
+                  <div class="stat-label">Service Access</div>
                 </div>
               </div>
             </div>
@@ -1326,29 +1533,30 @@
               <div class="tech-tags">
                 <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">AutoTURN</span>
-                <span class="tech-tag">SIDRA</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">GIS</span>
-                <span class="tech-tag">Heavy Vehicle Analysis</span>
+                <span class="tech-tag">AutoCAD</span>
+                <span class="tech-tag">Vehicle Tracking</span>
+                <span class="tech-tag">Geometric Design</span>
               </div>
             </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>Project Deep Dive: Industrial Park Access Study</h3>
-                <p>This study focused on optimizing access and internal circulation for a large industrial park, with a strong emphasis on heavy vehicle movements. We performed detailed swept path analyses using AutoTURN to ensure that 53-foot semi-trailers could safely and efficiently navigate all proposed access points, internal roads, and loading docks. This was crucial for the logistics and operational efficiency of the park.</p>
+                <h3>Project Deep Dive: Swept Path Analysis for Penang High-Density Housing & Shop Lots</h3>
+                <p>This project focused on performing a detailed swept path analysis for a new high-density housing and integrated shop lot development in a growing area of Penang. The primary goal was to ensure that the proposed internal road network, parking areas, and service access points were designed to safely and efficiently accommodate all necessary vehicle types, particularly those critical for residential and commercial operations within Malaysia.</p>
                 <h4>Methodology:</h4>
                 <ul>
-                    <li><strong>Heavy Vehicle Simulation:</strong> Used AutoTURN for precise swept path analysis and vehicle maneuverability studies.</li>
-                    <li><strong>Traffic Demand Forecasting:</strong> Developed robust models for industrial vehicle trip generation and distribution.</li>
-                    <li><strong>Signal Design & Optimization:</strong> Created detailed signal plans and timings for multiple intersections within and around the park.</li>
-                    <li><strong>Safety Audits:</strong> Identified and mitigated potential conflict points for vehicles and pedestrians, enhancing overall site safety.</li>
+                    <li><strong>Design Vehicle Identification:</strong> Key Malaysian design vehicles were meticulously identified and modeled, including Jabatan Bomba dan Penyelamat Malaysia (JBPM) fire engines (essential for emergency access), local municipal refuse collection vehicles, and various sizes of delivery vans and small trucks crucial for commercial servicing, all in strict accordance with prevailing local road design standards.</li>
+                    <li><strong>Site Layout Analysis:</strong> Existing and proposed site plans, meticulously prepared in AutoCAD, were seamlessly imported into AutoTURN for precise simulation of vehicle paths. Simulations rigorously tested critical maneuvers such as turning into and out of housing cul-de-sacs, navigating multi-storey car park ramps, accessing shop lot loading bays, and ensuring unhindered emergency vehicle access routes.</li>
+                    <li><strong>Conflict Resolution:</strong> Systematically identified and documented areas with insufficient turning radii, potential vehicle-to-vehicle conflicts, or inadequate clearances with existing or proposed infrastructure (e.g., street furniture, building corners).</li>
+                    <li><strong>Geometric Optimization:</strong> Collaborated closely with the project architects and civil engineers to strategically recommend and rigorously test geometric adjustments. These included widening internal roads, modifying curb radii, and realigning parking bay entrances, all aimed at ensuring full compliance with regulatory requirements and optimizing traffic flow.</li>
+                    <li><strong>Authority Submission:</strong> Prepared comprehensive swept path analysis reports, complete with clear visual overlays, for submission to local authorities (e.g., Majlis Bandaraya Pulau Pinang - MBPP). This documentation effectively demonstrated the development's unwavering adherence to stringent safety and accessibility standards.</li>
                 </ul>
                 <h4>Impact:</h4>
-                <p>The implemented design significantly improved the operational efficiency of the industrial park's logistics and enhanced safety for both heavy vehicles and other road users. This project highlighted Amir H. Rusli's expertise in specialized vehicle movements and large-scale industrial traffic management and consulting.</p>
+                <p>The successful integration of swept path analysis findings into the final design was paramount in ensuring that the high-density housing and shop lot development would operate with exceptional smoothness and safety. This proactive and rigorous approach effectively prevented potential operational bottlenecks and mitigated safety hazards, directly contributing to the project's successful approval and its long-term functionality. This project highlights expertise in applying specialized vehicle maneuverability studies to diverse urban development types in Malaysia, ensuring both compliance and optimal performance.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
-          <!-- END PROJECT CARD: Industrial Park TIA -->
+          <!-- END PROJECT CARD: Swept Path Analysis for Penang High-Density Housing & Shop Lots -->
+
         </div>
       </div>
       
@@ -1369,10 +1577,8 @@
               </div>
             </div>
             <div class="project-content">
-              <!-- EDIT THIS CONTENT: Project Short Description -->
-              <p class="project-description">A Python automation tool to batch process and generate junction performance summaries from multiple SIDRA outputs. This tool processes 50+ junctions in minutes instead of hours, significantly boosting productivity for traffic engineers.</p>
+              <p class="project-description">Developed a Python automation tool that batch processes SIDRA outputs, generating comprehensive junction performance summaries. This solution reduced processing time by over 90% for 50+ junctions, dramatically enhancing productivity and data reporting efficiency for traffic engineers.</p>
               <div class="project-stats">
-                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">90%</div>
                   <div class="stat-label">Time Savings</div>
@@ -1394,7 +1600,6 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
-                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">Pandas</span>
                 <span class="tech-tag">SIDRA API</span>
@@ -1402,41 +1607,34 @@
                 <span class="tech-tag">Data Processing</span>
               </div>
             </div>
-            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>Tool Deep Dive: Python Batch Junction Analysis for Traffic Engineering</h3>
-                <p>This Python script was developed to significantly reduce the manual effort involved in processing and summarizing results from multiple SIDRA INTERSECTION files. In large traffic engineering projects, we often analyze dozens of junctions, each with multiple scenarios (e.g., existing, future, with improvements). Manually extracting key performance indicators (KPIs) like delays, queues, and Level of Service (LOS) from each SIDRA output file and compiling them into a summary table was extremely time-consuming and prone to errors. This automation tool addresses that challenge directly.</p>
+                <p>This Python script was specifically developed to significantly reduce the manual effort and time investment involved in processing and summarizing results from multiple SIDRA INTERSECTION files. In large-scale traffic engineering projects, the analysis often spans dozens of junctions, each with multiple scenarios (e.g., existing conditions, future projections, and proposed improvements). Manually extracting key performance indicators (KPIs) such as delays, queue lengths, and Level of Service (LOS) from each individual SIDRA output file and then compiling them into a cohesive summary table was an extremely time-consuming and error-prone process. This advanced automation tool directly addresses and resolves this critical workflow inefficiency.</p>
                 <h4>Features:</h4>
                 <ul>
-                    <li><strong>Batch Processing:</strong> Handles multiple SIDRA output files simultaneously, ideal for large-scale traffic studies.</li>
-                    <li><strong>Data Extraction:</strong> Automatically pulls critical performance metrics such as average delay, queue lengths, and LOS.</li>
-                    <li><strong>Customizable Reports:</strong> Generates Excel reports with user-defined summary tables and charts for easy presentation.</li>
-                    <li><strong>Error Handling:</strong> Includes robust error checking for malformed SIDRA outputs, ensuring data integrity.</li>
+                    <li><strong>High-Volume Batch Processing:</strong> Capable of efficiently handling multiple SIDRA output files simultaneously, making it an indispensable tool for large-scale traffic studies.</li>
+                    <li><strong>Automated Data Extraction:</strong> Automatically and accurately pulls critical performance metrics, including average delay, queue lengths, and Level of Service (LOS), directly from SIDRA output files.</li>
+                    <li><strong>Customizable & Dynamic Reports:</strong> Generates highly customizable Excel reports featuring user-defined summary tables and insightful charts, optimized for clear and concise presentation to stakeholders.</li>
+                    <li><strong>Robust Error Handling:</strong> Incorporates advanced error checking mechanisms to identify and manage malformed or incomplete SIDRA outputs, thereby ensuring the integrity and reliability of the processed data.</li>
                 </ul>
                 <h4>Technical Details:</h4>
-                <p>The script leverages Python's `os` module for file system navigation, `pandas` for efficient data structuring and manipulation, and `openpyxl` for seamless writing to Excel files. This project demonstrates Amir H. Rusli's ability to apply advanced Python programming skills to solve real-world engineering workflow inefficiencies and enhance traffic analysis capabilities.</p>
+                <p>The script leverages Python's `os` module for seamless file system navigation, the `pandas` library for highly efficient data structuring and manipulation, and the `openpyxl` library for robust and seamless writing of data to Excel files. This project unequivocally demonstrates the capability to apply advanced Python programming skills to solve real-world engineering workflow inefficiencies, significantly enhancing overall productivity and analytical capabilities within traffic engineering.</p>
             </div>
-            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
           <!-- END PROJECT CARD: Python Junction Tool -->
           
           <!-- START PROJECT CARD: VBA Reporting Tool -->
           <div class="project-card-enhanced">
-            <!-- EDIT THIS CONTENT: Project Image -->
             <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
-              <!-- EDIT THIS CONTENT: Project Title -->
               <h4>VBA Macro: Auto Caption for Traffic Reports</h4>
-              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-file-word"></i> Internal Workflow
               </div>
             </div>
             <div class="project-content">
-              <!-- EDIT THIS CONTENT: Project Short Description -->
-              <p class="project-description">Automated Microsoft Word macro that efficiently inserts and labels figures and tables in Traffic Impact Assessment (TIA) documentation. This VBA tool reduced report preparation time by 40% and eliminated manual errors in figure numbering and cross-referencing.</p>
+              <p class="project-description">Engineered a VBA macro for Microsoft Word to automate the insertion and labeling of figures and tables in TIA reports. This tool decreased report preparation time by 40% and achieved 100% accuracy in numbering and cross-referencing, eliminating manual errors and accelerating documentation workflows.</p>
               <div class="project-stats">
-                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">40%</div>
                   <div class="stat-label">Time Savings</div>
@@ -1458,30 +1656,85 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
-                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">VBA</span>
                 <span class="tech-tag">Microsoft Word</span>
                 <span class="tech-tag">Document Automation</span>
                 <span class="tech-tag">Report Generation</span>
               </div>
             </div>
-            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>Tool Deep Dive: VBA Auto-Caption Macro for Traffic Reports</h3>
-                <p>Generating comprehensive Traffic Impact Assessment (TIA) reports often involves inserting numerous figures, tables, and charts. Manually adding captions, ensuring correct numbering, and updating cross-references can be incredibly tedious and error-prone, especially in large documents that undergo frequent revisions. This VBA macro was developed to fully automate this process, significantly improving efficiency and accuracy.</p>
+                <p>Generating comprehensive Traffic Impact Assessment (TIA) reports often involves the insertion of numerous figures, tables, and charts. Manually adding captions, ensuring correct sequential numbering, and meticulously updating cross-references throughout large documents can be an incredibly tedious, time-consuming, and error-prone process, especially given the frequent revisions inherent in engineering projects. This sophisticated VBA macro was engineered to fully automate this critical process, leading to significant improvements in both efficiency and accuracy.</p>
                 <h4>Features:</h4>
                 <ul>
-                    <li><strong>Automated Captioning:</strong> Inserts captions with sequential numbering for figures and tables.</li>
-                    <li><strong>Dynamic Cross-Referencing:</strong> Automatically updates all references throughout the document when changes occur.</li>
-                    <li><strong>User-Friendly Interface:</strong> Simple button click operation within Word, requiring minimal user input.</li>
-                    <li><strong>Error Reduction:</strong> Eliminates manual numbering mistakes and ensures consistency across large reports.</li>
+                    <li><strong>Automated & Intelligent Captioning:</strong> Automatically inserts contextually appropriate captions with dynamic sequential numbering for both figures and tables, adapting to document changes.</li>
+                    <li><strong>Dynamic Cross-Referencing:</strong> Establishes and automatically updates all internal references throughout the document, ensuring consistency and eliminating broken links when content shifts.</li>
+                    <li><strong>Intuitive User-Friendly Interface:</strong> Operates with a simple, one-click button within Microsoft Word, requiring minimal user input and seamlessly integrating into existing workflows.</li>
+                    <li><strong>Error Elimination:</strong> Drastically reduces manual numbering mistakes and ensures absolute consistency across even the largest and most complex TIA reports, enhancing document professionalism.</li>
                 </ul>
                 <h4>Technical Details:</h4>
-                <p>The macro interacts directly with Word's object model to manipulate document elements, including inserting pictures, adding captions, and managing fields for cross-references. This project showcases Amir H. Rusli's ability to create practical, user-centric automation tools that streamline routine engineering tasks, even within traditional software environments like VBA.</p>
+                <p>The macro is built using Visual Basic for Applications (VBA) and interacts directly with Microsoft Word's object model. This enables precise manipulation of document elements, including the programmatic insertion of images, the dynamic addition of captions, and the intelligent management of fields for robust cross-references. This project powerfully showcases the capability to engineer practical, user-centric automation tools that critically streamline routine engineering documentation tasks, even within traditional software environments, delivering tangible efficiency gains.</p>
             </div>
-            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
           <!-- END PROJECT CARD: VBA Reporting Tool -->
+
+          <!-- START NEW PROJECT CARD: Python Traffic Count Data Processing -->
+          <div class="project-card-enhanced">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <h4>Python: Traffic Count Data Processing & Visualization</h4>
+              <div class="project-client">
+                <i class="fas fa-code"></i> Internal Development
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">Created a robust Python script for automated processing, cleaning, and visualization of diverse raw traffic count data. This solution generates interactive charts and critical summary statistics, reducing manual data preparation time by 80% and providing immediate actionable insights.</p>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <div class="stat-value">80%</div>
+                  <div class="stat-label">Data Prep Time Reduction</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">100+</div>
+                  <div class="stat-label">Data Files Processed</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">Interactive</div>
+                  <div class="stat-label">Dashboards</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">Customizable</div>
+                  <div class="stat-label">Reports</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">Matplotlib</span>
+                <span class="tech-tag">Seaborn</span>
+                <span class="tech-tag">Data Cleaning</span>
+                <span class="tech-tag">Data Visualization</span>
+              </div>
+            </div>
+            <div class="card-detailed-content">
+                <h3>Tool Deep Dive: Python for Traffic Count Data Processing & Visualization</h3>
+                <p>This advanced Python tool was meticulously created to streamline the often laborious and error-prone process of handling raw traffic count data. Traffic engineers routinely receive data in a multitude of formats from various sources, including automated sensors and manual counts. This comprehensive script automates the entire pipeline, from data ingestion and rigorous cleaning to sophisticated aggregation and compelling visualization, providing immediate, high-value insights and drastically reducing hours of manual spreadsheet manipulation.</p>
+                <h4>Features:</h4>
+                <ul>
+                    <li><strong>Automated & Versatile Data Ingestion:</strong> Intelligently reads and standardizes traffic data from diverse file formats (e.g., CSV, Excel, custom text files), ensuring compatibility and consistency.</li>
+                    <li><strong>Intelligent Data Cleaning & Validation:</strong> Implements robust algorithms to identify and automatically correct common errors, detect and manage outliers, and handle missing data points, significantly improving data quality and reliability.</li>
+                    <li><strong>Comprehensive Traffic Volume Calculation:</strong> Automatically computes essential traffic metrics, including peak hour volumes, Annual Average Daily Traffic (AADT), and precise directional splits, crucial for accurate analysis.</li>
+                    <li><strong>Interactive & Customizable Visualization:</strong> Generates professional-grade, interactive charts (e.g., hourly traffic profiles, turning movement diagrams, speed distributions) using Matplotlib and Seaborn, enabling quick interpretation and stakeholder engagement.</li>
+                    <li><strong>Streamlined Export Functionality:</strong> Facilitates seamless export of processed data and high-quality visualizations to industry-standard formats such as Excel or PDF reports, ready for immediate use and presentation.</li>
+                </ul>
+                <h4>Technical Details:</h4>
+                <p>The script leverages the power of Python's `pandas` library for robust and efficient data manipulation, `matplotlib` and `seaborn` for generating high-quality and insightful data visualizations, and standard file I/O operations for versatile data handling. This tool fundamentally enhances the efficiency, accuracy, and depth of traffic data analysis workflows, empowering traffic engineers with faster access to critical insights.</p>
+            </div>
+          </div>
+          <!-- END NEW PROJECT CARD: Python Traffic Count Data Processing -->
         </div>
       </div>
       
@@ -1502,10 +1755,8 @@
               </div>
             </div>
             <div class="project-content">
-              <!-- EDIT THIS CONTENT: Project Short Description -->
-              <p class="project-description">Modelled various phases and signal scenarios for an urban interchange redesign using SIDRA INTERSECTION. Proposed solution significantly reduced queues by 41% during peak hours and improved safety metrics for complex traffic movements.</p>
+              <p class="project-description">Executed advanced SIDRA INTERSECTION modeling for an urban interchange upgrade, evaluating multiple signal phasing and geometric scenarios. The optimized design achieved a 41% reduction in peak-hour queues and enhanced safety, providing a highly efficient and safe transportation solution.</p>
               <div class="project-stats">
-                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">41%</div>
                   <div class="stat-label">Queue Reduction</div>
@@ -1523,7 +1774,6 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
-                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">GIS</span>
                 <span class="tech-tag">Python</span>
@@ -1531,41 +1781,34 @@
                 <span class="tech-tag">Traffic Simulation</span>
               </div>
             </div>
-            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>Project Deep Dive: Urban Interchange Redesign using SIDRA</h3>
-                <p>This project involved a complex redesign of a major urban interchange to alleviate severe congestion and improve safety. Using SIDRA INTERSECTION, Amir H. Rusli developed and analyzed multiple signal phasing and geometric layout scenarios for the interchange, considering both current and future traffic demands. The goal was to create an efficient and safe design for this critical transportation hub.</p>
+                <h3>Project Deep Dive: Urban Interchange Redesign using SIDRA INTERSECTION</h3>
+                <p>This project involved a complex and critical redesign of a major urban interchange, aimed at alleviating severe congestion and significantly improving safety. Leveraging advanced proficiency in SIDRA INTERSECTION, meticulously developed and rigorously analyzed multiple signal phasing strategies and various geometric layout scenarios for the interchange. This comprehensive analysis considered both current traffic demands and future growth projections, with the overarching goal of creating a highly efficient, safe, and future-proof design for this vital transportation hub.</p>
                 <h4>Methodology:</h4>
                 <ul>
-                    <li><strong>Traffic Data Collection:</strong> Gathered extensive data on traffic volumes, turning movements, and vehicle classifications at all approaches.</li>
-                    <li><strong>SIDRA Modeling:</strong> Built detailed models of the existing and proposed interchange configurations, including ramps and weaving sections.</li>
-                    <li><strong>Scenario Analysis:</strong> Evaluated various signal timings, lane configurations, and ramp metering strategies to optimize performance.</li>
-                    <li><strong>Performance Evaluation:</strong> Assessed impacts on delay, queue length, Level of Service (LOS), and safety metrics, providing data-driven insights.</li>
+                    <li><strong>Extensive Traffic Data Collection:</strong> Gathered and validated comprehensive data on traffic volumes, precise turning movements, and vehicle classifications across all approaches to the interchange.</li>
+                    <li><strong>Detailed SIDRA Modeling:</strong> Constructed high-fidelity models of both the existing and proposed interchange configurations, including intricate details of ramps, weaving sections, and auxiliary lanes, ensuring accurate representation of real-world conditions.</li>
+                    <li><strong>Multi-Scenario Analysis:</strong> Evaluated a diverse range of signal timings, lane configurations, and innovative ramp metering strategies to systematically optimize the interchange's operational performance under varying conditions.</li>
+                    <li><strong>Comprehensive Performance Evaluation:</strong> Assessed the impacts on key performance indicators (KPIs) such as average delay, queue length, Level of Service (LOS), and critical safety metrics, providing data-driven insights that informed the final design recommendations.</li>
                 </ul>
                 <h4>Impact:</h4>
-                <p>The proposed design, based on our rigorous SIDRA analysis, is expected to deliver substantial benefits in terms of reduced travel times, improved traffic flow, and enhanced safety, contributing significantly to the city's overall transportation efficiency and quality of life. This project showcases my expertise as a traffic consultant in advanced traffic simulation and interchange design.</p>
+                <p>The proposed design, meticulously developed and validated through rigorous SIDRA analysis, is projected to deliver substantial and measurable benefits. These include significantly reduced travel times, markedly improved traffic flow, and enhanced safety for all road users, thereby contributing significantly to the city's overall transportation efficiency and quality of life. This project powerfully showcases expertise in advanced traffic simulation and complex interchange design, delivering tangible improvements to urban mobility.</p>
             </div>
-            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
           <!-- END PROJECT CARD: Interchange Upgrade -->
           
           <!-- START PROJECT CARD: Corridor Optimization -->
           <div class="project-card-enhanced">
-            <!-- EDIT THIS CONTENT: Project Image -->
             <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
-              <!-- EDIT THIS CONTENT: Project Title -->
               <h4>Corridor Signal Optimization with VISSIM</h4>
-              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-road"></i> Client: City Municipal Council
               </div>
             </div>
             <div class="project-content">
-              <!-- EDIT THIS CONTENT: Project Short Description -->
-              <p class="project-description">Coordinated signal timing optimization for a 5-mile urban corridor with 15 intersections using a combination of SIDRA and VISSIM traffic simulation. Reduced travel time by 22% and improved Level of Service from D to B during PM peak hours.</p>
+              <p class="project-description">Led comprehensive signal timing optimization for a 5-mile urban corridor, integrating SIDRA and VISSIM traffic simulations across 15 intersections. Achieved a 22% reduction in travel time and elevated Level of Service from D to B during peak hours, significantly enhancing corridor efficiency and flow.</p>
               <div class="project-stats">
-                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">22%</div>
                   <div class="stat-label">Travel Time Reduction</div>
@@ -1587,7 +1830,6 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
-                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">VISSIM</span>
                 <span class="tech-tag">Python</span>
@@ -1596,23 +1838,84 @@
                 <span class="tech-tag">Corridor Optimization</span>
               </div>
             </div>
-            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>Project Deep Dive: Corridor Signal Optimization with VISSIM Simulation</h3>
-                <p>This project involved the comprehensive optimization of signal timings along a critical 5-mile urban corridor encompassing 15 signalized intersections. The objective was to improve traffic progression, reduce travel times, and enhance the overall efficiency of the corridor, particularly during peak commuting hours. We employed a powerful combination of macroscopic (SIDRA) and microscopic (VISSIM) traffic simulation tools to achieve optimal results.</p>
+                <h3>Project Deep Dive: Comprehensive Corridor Signal Optimization with VISSIM Simulation</h3>
+                <p>This project involved leading the comprehensive optimization of signal timings along a critical 5-mile urban corridor, encompassing 15 strategically located signalized intersections. The core objective was to significantly improve traffic progression, substantially reduce travel times, and enhance the overall operational efficiency of the entire corridor, particularly during challenging peak commuting hours. To achieve optimal results, a powerful and integrated approach was employed, combining macroscopic (SIDRA) and microscopic (VISSIM) traffic simulation tools.</p>
                 <h4>Methodology:</h4>
                 <ul>
-                    <li><strong>Traffic Data Analysis:</strong> Processed extensive traffic count, speed, and origin-destination data.</li>
-                    <li><strong>SIDRA Optimization:</strong> Optimized individual intersection timings for efficiency and capacity.</li>
-                    <li><strong>VISSIM Simulation:</strong> Modeled the entire corridor at a microscopic level to evaluate progression, coordination, and vehicle interactions. This allowed for detailed visualization and validation of the proposed timings.</li>
-                    <li><strong>Performance Metrics:</strong> Analyzed key performance indicators such as travel time, delay, queue lengths, and fuel consumption, providing a holistic view of the improvements.</li>
+                    <li><strong>Rigorous Traffic Data Analysis:</strong> Processed and validated extensive datasets including traffic count data, speed profiles, and origin-destination patterns to build a robust foundation for modeling.</li>
+                    <li><strong>Strategic SIDRA Optimization:</strong> Utilized SIDRA INTERSECTION to optimize individual intersection timings, focusing on maximizing efficiency and capacity at each node.</li>
+                    <li><strong>Dynamic VISSIM Simulation:</strong> Developed a detailed microscopic model of the entire corridor in VISSIM to evaluate traffic progression, assess signal coordination effectiveness, and simulate intricate vehicle interactions. This allowed for highly detailed visualization and rigorous validation of the proposed signal timing plans under dynamic conditions.</li>
+                    <li><strong>Holistic Performance Metrics:</strong> Analyzed a comprehensive set of key performance indicators (KPIs) including travel time, average delay, queue lengths, and estimated fuel consumption, providing a holistic and quantifiable view of the improvements achieved.</li>
                 </ul>
                 <h4>Impact:</h4>
-                <p>The successful implementation of our optimized signal timings led to a noticeable improvement in traffic flow, reduced congestion, and a reduction in fuel consumption, demonstrating the tangible benefits of advanced traffic modeling and optimization techniques. This project highlights Amir H. Rusli's expertise in complex traffic simulation and corridor management as a traffic consultant.</p>
+                <p>The successful implementation of meticulously optimized signal timings led to a noticeable and measurable improvement in traffic flow, a significant reduction in congestion, and a positive impact on fuel consumption across the corridor. This project powerfully demonstrates the tangible benefits derived from applying advanced traffic modeling and sophisticated optimization techniques. It highlights expertise in leading complex traffic simulation projects and delivering impactful corridor management solutions as a highly effective traffic consultant.</p>
             </div>
-            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
           <!-- END PROJECT CARD: Corridor Optimization -->
+
+          <!-- START NEW PROJECT CARD: VISSIM Simulation: Jalan Tanjung Tokong Network Study -->
+          <div class="project-card-enhanced">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="project-header">
+              <h4>VISSIM Simulation: Jalan Tanjung Tokong Network Study</h4>
+              <div class="project-client">
+                <i class="fas fa-road"></i> Client: Penang Stakeholder
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-description">Developed and calibrated a high-fidelity VISSIM microscopic simulation model for the complex Jalan Tanjung Tokong network in Penang, north of Gurney Drive. This model provided critical insights into the impact of infrastructure upgrades and traffic management strategies, informing strategic decisions for this congested coastal corridor.</p>
+              <div class="project-stats">
+                <div class="project-stat">
+                  <div class="stat-value">8+</div>
+                  <div class="stat-label">Intersections</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">Coastal</div>
+                  <div class="stat-label">Corridor</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">Mixed</div>
+                  <div class="stat-label">Traffic</div>
+                </div>
+                <div class="project-stat">
+                  <div class="stat-value">Scenario</div>
+                  <div class="stat-label">Analysis</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tech">
+              <h5>Technologies Used</h5>
+              <div class="tech-tags">
+                <span class="tech-tag">VISSIM</span>
+                <span class="tech-tag">Traffic Simulation</span>
+                <span class="tech-tag">Network Modeling</span>
+                <span class="tech-tag">Urban Planning</span>
+                <span class="tech-tag">Capacity Analysis</span>
+              </div>
+            </div>
+            <div class="card-detailed-content">
+                <h3>Project Deep Dive: VISSIM Simulation for Jalan Tanjung Tokong Network Study, Penang</h3>
+                <p>This pivotal project involved the development and rigorous calibration of a high-fidelity VISSIM microscopic traffic simulation model for the intricate Jalan Tanjung Tokong network, specifically focusing on the highly dynamic section situated north of Gurney Drive in Penang. This particular area is characterized by its significant traffic volumes, diverse mixed land use (encompassing residential, commercial, and retail developments), and numerous complex access points, presenting a substantial challenge for effective traffic management. The meticulously developed model served as a crucial analytical tool to assess the effectiveness and potential impacts of various proposed infrastructure upgrades and advanced traffic management strategies.</p>
+                <h4>Methodology:</h4>
+                <ul>
+                    <li><strong>Precision Network Coding & Calibration:</strong> The existing road network, including all signalized intersections, unsignalized junctions, designated bus stops, and pedestrian crossings along Jalan Tanjung Tokong, was meticulously coded into VISSIM. The model underwent rigorous calibration and validation against observed real-world traffic data to ensure its exceptional accuracy in replicating actual traffic conditions and behaviors.</li>
+                    <li><strong>Comprehensive Scenario Development & Simulation:</strong> Multiple "what-if" scenarios were strategically developed and simulated to provide forward-looking insights. These included:
+                        <ul>
+                            <li>Evaluating the traffic impact of new development accesses (e.g., for proposed high-rise residential complexes or significant commercial projects).</li>
+                            <li>Assessing the effectiveness of proposed road widening schemes or the introduction of new turning lanes to enhance capacity.</li>
+                            <li>Optimizing signal timings and coordination plans along the entire corridor to improve traffic progression and reduce delays.</li>
+                            <li>Integrating and evaluating public transport priority measures to enhance transit efficiency.</li>
+                        </ul>
+                    </li>
+                    <li><strong>In-depth Performance Evaluation:</strong> Key performance indicators (KPIs) such as vehicle delays, queue lengths, travel times, and average speeds were extensively analyzed for each simulated scenario. This provided quantitative insights into the benefits and potential drawbacks of every proposed intervention.</li>
+                    <li><strong>Compelling Visualization & Reporting:</strong> High-quality 2D and 3D animations of the simulated traffic flow were generated. These visual outputs, combined with comprehensive reports, effectively communicated complex findings to the Penang Stakeholder, facilitating informed and strategic decision-making regarding future infrastructure investments and traffic policies in this vital coastal corridor.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>The VISSIM simulation proved invaluable, providing critical insights into the operational performance of the Jalan Tanjung Tokong network under various future conditions. It empowered the Penang Stakeholder to comprehensively understand the potential impacts of both development and infrastructure changes, enabling data-driven decisions that are poised to significantly alleviate congestion and improve overall mobility along this essential coastal corridor. This project underscores advanced capabilities in microscopic traffic simulation and strategic urban transportation planning within the Malaysian context.</p>
+            </div>
+          </div>
+          <!-- END NEW PROJECT CARD: VISSIM Simulation: Jalan Tanjung Tokong Network Study -->
         </div>
       </div>
     </div>
@@ -1641,7 +1944,7 @@
               </div>
               <div class="skill-content">
                 <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Expertise in signal timing, capacity analysis, and comprehensive transportation planning of intersections and corridors.</p>
+                <p class="skill-description">Proven expertise in optimizing signal timing, conducting thorough capacity analysis, and developing comprehensive transportation plans for complex intersections and urban corridors.</p>
                 <div class="skill-metrics">
                   <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
                   <div class="skill-level">
@@ -1653,7 +1956,7 @@
                   </div>
                   <!-- EDIT THIS CONTENT: Skill Experience -->
                   <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 7+ years experience
+                    <i class="fas fa-clock"></i> 4 years experience
                   </div>
                 </div>
               </div>
@@ -1671,18 +1974,18 @@
             </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>Traffic Engineering & Planning: My Core Expertise</h3>
-                <p>My foundational expertise lies in the core principles of traffic engineering and transportation planning, encompassing the design, operation, and management of transportation systems to ensure safe, efficient, and sustainable movement of people and goods. This involves a deep understanding of traffic flow theory, highway capacity analysis, and the strategic planning of traffic control devices and infrastructure.</p>
-                <h4>Key Areas:</h4>
+                <h3>Traffic Engineering & Planning: Core Expertise</h3>
+                <p>Foundational expertise is firmly rooted in the core principles of traffic engineering and comprehensive transportation planning. This encompasses the strategic design, efficient operation, and effective management of transportation systems, all aimed at ensuring the safe, efficient, and sustainable movement of people and goods. This involves a deep and practical understanding of advanced traffic flow theory, rigorous highway capacity analysis, and the strategic planning and implementation of various traffic control devices and critical infrastructure.</p>
+                <h4>Key Areas of Expertise:</h4>
                 <ul>
-                    <li><strong>Traffic Flow Theory:</strong> Understanding fundamental relationships between speed, density, and flow to predict and manage traffic behavior.</li>
-                    <li><strong>Intersection Design:</strong> Optimizing geometry and control for various intersection types, including signalized, unsignalized, and roundabouts.</li>
-                    <li><strong>Traffic Control Devices:</strong> Expertise in the application and optimization of signals, signs, and markings for effective traffic management.</li>
-                    <li><strong>Safety Analysis:</strong> Identifying and mitigating collision risks through design improvements and operational changes.</li>
-                    <li><strong>Transportation Planning:</strong> Developing long-term strategies for regional and urban mobility, including public transport integration and active transportation.</li>
+                    <li><strong>Advanced Traffic Flow Theory:</strong> Applying fundamental relationships between speed, density, and flow to accurately predict and strategically manage complex traffic behavior across diverse networks.</li>
+                    <li><strong>Optimized Intersection Design:</strong> Designing and optimizing the geometry and control mechanisms for a wide array of intersection types, including complex signalized intersections, efficient unsignalized junctions, and modern roundabouts, to maximize throughput and safety.</li>
+                    <li><strong>Strategic Traffic Control Devices:</strong> Expert application and precise optimization of traffic signals, signage, and pavement markings for highly effective traffic management and operational efficiency.</li>
+                    <li><strong>Proactive Safety Analysis:</strong> Systematically identifying and effectively mitigating collision risks through data-driven design improvements, targeted operational changes, and comprehensive safety audits.</li>
+                    <li><strong>Long-Term Transportation Planning:</strong> Developing forward-thinking, long-term strategies for regional and urban mobility, including seamless public transport integration, promotion of active transportation modes (walking, cycling), and smart city initiatives.</li>
                 </ul>
-                <h4>Application:</h4>
-                <p>This skill is the bedrock of all my projects, enabling Amir H. Rusli to translate theoretical knowledge into practical, impactful engineering solutions for real-world traffic and transportation challenges, serving as a reliable traffic consultant.</p>
+                <h4>Application & Impact:</h4>
+                <p>This foundational skill set serves as the bedrock of all projects, enabling consistent translation of theoretical knowledge into practical, impactful, and sustainable engineering solutions. Effectively addresses real-world traffic and transportation challenges, serving as a highly reliable and results-oriented traffic consultant dedicated to enhancing urban mobility and infrastructure performance.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
@@ -1703,7 +2006,7 @@
               </div>
               <div class="skill-content">
                 <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Expert preparation of Traffic Impact Assessment (TIA) reports in accordance with local guidelines and authority requirements for development approvals.</p>
+                <p class="skill-description">Skilled in preparing and submitting compliant Traffic Impact Assessment (TIA) reports, meticulously adhering to local and national guidelines to secure timely development approvals and facilitate effective stakeholder communication.</p>
                 <div class="skill-metrics">
                   <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
                   <div class="skill-level">
@@ -1733,17 +2036,17 @@
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>TIA Report Preparation: Comprehensive Documentation for Traffic Consulting</h3>
-                <p>A crucial aspect of traffic engineering is the ability to clearly and comprehensively document findings and recommendations in Traffic Impact Assessment (TIA) reports. My expertise includes preparing TIAs that strictly adhere to local and national guidelines, ensuring all regulatory requirements are met for development approvals. This involves meticulous data presentation and clear articulation of traffic impacts and proposed mitigation measures.</p>
-                <h4>Key Elements of My TIA Reports:</h4>
+                <p>A crucial and highly visible aspect of traffic engineering is the ability to clearly, comprehensively, and persuasively document findings and recommendations within Traffic Impact Assessment (TIA) reports. Expertise includes the meticulous preparation of TIAs that strictly adhere to all relevant local and national guidelines, thereby ensuring that all regulatory requirements are met for timely development approvals. This process involves not only precise data presentation but also the clear and compelling articulation of anticipated traffic impacts and proposed mitigation measures.</p>
+                <h4>Key Elements of TIA Reports:</h4>
                 <ul>
-                    <li><strong>Executive Summary:</strong> Concise overview of findings and recommendations for quick stakeholder understanding.</li>
-                    <li><strong>Existing Conditions Analysis:</strong> Detailed review of current traffic patterns, road network infrastructure, and public transport services.</li>
-                    <li><strong>Trip Generation & Distribution:</strong> Accurate forecasting of future traffic from proposed developments using industry-standard methodologies.</li>
-                    <li><strong>Impact Analysis:</strong> Comprehensive assessment of the development's effect on surrounding transportation infrastructure and Level of Service (LOS).</li>
-                    <li><strong>Mitigation Measures:</strong> Proposing effective solutions like signal upgrades, geometric changes, public transport enhancements, and demand management strategies.</li>
+                    <li><strong>Impactful Executive Summary:</strong> A concise yet comprehensive overview of key findings and strategic recommendations, designed for rapid understanding by busy stakeholders and decision-makers.</li>
+                    <li><strong>Rigorous Existing Conditions Analysis:</strong> A detailed and data-driven review of current traffic patterns, existing road network infrastructure, and prevailing public transport services, establishing a baseline for assessment.</li>
+                    <li><strong>Accurate Trip Generation & Distribution:</strong> Precise forecasting of future traffic volumes generated by proposed developments, utilizing industry-standard methodologies and validated local trip rate databases.</li>
+                    <li><strong>Comprehensive Impact Analysis:</strong> A thorough assessment of the development's projected effects on the surrounding transportation infrastructure and its resultant Level of Service (LOS), identifying critical areas of concern.</li>
+                    <li><strong>Strategic Mitigation Measures:</strong> Proposing effective, implementable solutions such as optimized signal upgrades, strategic geometric changes, enhanced public transport provisions, and innovative demand management strategies to alleviate impacts.</li>
                 </ul>
-                <h4>Process:</h4>
-                <p>My process involves thorough traffic data analysis, meticulous report structuring, and iterative revisions based on stakeholder and authority feedback, ensuring a high-quality, defensible, and approved document. This positions Amir H. Rusli as a reliable traffic consultant for complex development projects.</p>
+                <h4>Process & Value:</h4>
+                <p>The process for TIA report preparation is characterized by thorough traffic data analysis, meticulous report structuring, and iterative revisions based on constructive feedback from both stakeholders and regulatory authorities. This ensures the delivery of a high-quality, defensible, and ultimately approved document. This capability positions as a highly reliable and effective traffic consultant for navigating the complexities of modern development projects and securing regulatory compliance.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
@@ -1771,7 +2074,7 @@
               </div>
               <div class="skill-content">
                 <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Advanced proficiency in SIDRA INTERSECTION for detailed intersection and network analysis, signal optimization, and roundabout design in traffic engineering.</p>
+                <p class="skill-description">Advanced proficiency in SIDRA INTERSECTION for comprehensive intersection and network analysis, signal optimization, and efficient roundabout design, consistently delivering data-driven solutions for improved traffic flow and safety.</p>
                 <div class="skill-metrics">
                   <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
                   <div class="skill-level">
@@ -1783,7 +2086,7 @@
                   </div>
                   <!-- EDIT THIS CONTENT: Skill Experience -->
                   <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 6+ years experience
+                    <i class="fas fa-clock"></i> 4 years experience
                   </div>
                 </div>
               </div>
@@ -1801,18 +2104,18 @@
             </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>Mastering SIDRA INTERSECTION for Traffic Analysis</h3>
-                <p>SIDRA INTERSECTION is an industry-leading software for intersection and network analysis, and Amir H. Rusli possesses advanced proficiency in its application. I leverage SIDRA for detailed capacity analysis, signal timing optimization, roundabout design, and performance evaluation of various intersection types. My expertise extends to complex network modeling, ensuring seamless integration of individual intersections into a broader transportation system and providing comprehensive traffic analysis solutions.</p>
-                <h4>Key Capabilities:</h4>
+                <h3>Mastering SIDRA INTERSECTION for Advanced Traffic Analysis</h3>
+                <p>SIDRA INTERSECTION stands as an industry-leading software suite for comprehensive intersection and network analysis, and possesses advanced and practical proficiency in its application. Strategically leverages SIDRA for detailed capacity analysis, precision signal timing optimization, efficient roundabout design, and thorough performance evaluation across a wide spectrum of intersection types. Expertise extends to complex network modeling, ensuring seamless integration and optimal operation of individual intersections within a broader transportation system, consistently providing robust and data-driven traffic analysis solutions.</p>
+                <h4>Key Capabilities & Applications:</h4>
                 <ul>
-                    <li><strong>Signalized Intersections:</strong> Comprehensive analysis and optimization of fixed-time and actuated signals, including phase design and timing plans.</li>
-                    <li><strong>Roundabouts:</strong> Design and performance assessment of single and multi-lane roundabouts, focusing on safety and capacity.</li>
-                    <li><strong>Unsignalized Intersections:</strong> Detailed analysis of give-way/stop-controlled junctions to identify operational issues.</li>
-                    <li><strong>Network Analysis:</strong> Modeling and optimizing interconnected intersections to improve corridor progression and overall network efficiency.</li>
-                    <li><strong>Custom Reports:</strong> Generating tailored SIDRA reports for specific project requirements, presenting clear and actionable insights.</li>
+                    <li><strong>Signalized Intersections:</strong> Comprehensive analysis, design, and optimization of both fixed-time and actuated signal operations, including intricate phase design and dynamic timing plans to maximize throughput and minimize delay.</li>
+                    <li><strong>Roundabouts:</strong> Expert design and rigorous performance assessment of single and multi-lane roundabouts, with a keen focus on enhancing safety, optimizing capacity, and ensuring smooth traffic flow.</li>
+                    <li><strong>Unsignalized Intersections:</strong> Detailed analysis of give-way/stop-controlled junctions to proactively identify operational deficiencies, capacity limitations, and potential safety concerns.</li>
+                    <li><strong>Integrated Network Analysis:</strong> Developing and optimizing interconnected intersection models to significantly improve corridor progression, reduce overall network congestion, and enhance system-wide efficiency.</li>
+                    <li><strong>Custom & Actionable Reports:</strong> Generating tailored SIDRA reports that succinctly present complex analytical findings and actionable insights, meeting specific project requirements and stakeholder expectations.</li>
                 </ul>
                 <h4>Impact:</h4>
-                <p>My strong command of SIDRA allows me to quickly model, analyze, and optimize diverse traffic scenarios, leading to data-driven recommendations that significantly improve traffic flow, reduce delays, and enhance safety for all road users. This makes me a highly effective traffic consultant.</p>
+                <p>Strong and proven command of SIDRA INTERSECTION empowers the ability to rapidly model, meticulously analyze, and effectively optimize diverse traffic scenarios. This capability consistently leads to the development of data-driven recommendations that demonstrably improve traffic flow, significantly reduce delays, and enhance safety for all road users. This makes for a highly effective and results-oriented traffic consultant, capable of tackling complex urban mobility challenges.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
@@ -1833,7 +2136,7 @@
               </div>
               <div class="skill-content">
                 <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Proficient in VISSIM for microscopic traffic simulation, modeling complex road networks, and evaluating traffic management strategies.</p>
+                <p class="skill-description">Adept at VISSIM microscopic traffic simulation, specializing in modeling intricate road networks and evaluating diverse traffic management strategies to predict and optimize system performance.</p>
                 <div class="skill-metrics">
                   <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
                   <div class="skill-level">
@@ -1862,18 +2165,18 @@
             </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>VISSIM Traffic Simulation: Advanced Network Modeling</h3>
-                <p>VISSIM is a powerful microscopic traffic simulation software that I utilize for modeling complex road networks and evaluating various traffic management strategies. My proficiency in VISSIM allows for detailed analysis of vehicle interactions, pedestrian movements, and public transport operations, providing a realistic representation of traffic flow under different conditions.</p>
-                <h4>Key Capabilities:</h4>
+                <h3>VISSIM Traffic Simulation: Advanced Network Modeling & Optimization</h3>
+                <p>VISSIM is a powerful and versatile microscopic traffic simulation software that is expertly utilized for modeling highly complex road networks and rigorously evaluating a diverse range of traffic management strategies. Proficiency in VISSIM enables detailed analysis of individual vehicle interactions, pedestrian movements, and public transport operations, providing a realistic and dynamic representation of traffic flow under various current and proposed conditions.</p>
+                <h4>Key Capabilities & Applications:</h4>
                 <ul>
-                    <li><strong>Microscopic Modeling:</strong> Simulating individual vehicle behavior and interactions for high-fidelity analysis.</li>
-                    <li><strong>Network Design & Evaluation:</strong> Assessing the performance of new road layouts, intersections, and interchanges.</li>
-                    <li><strong>Traffic Management Strategies:</strong> Evaluating the impact of signal control plans, ramp metering, and incident management.</li>
-                    <li><strong>Public Transport Simulation:</strong> Modeling bus and tram operations and their interaction with general traffic.</li>
-                    <li><strong>Visualization:</strong> Creating compelling 2D and 3D animations to illustrate traffic flow and congestion.</li>
+                    <li><strong>High-Fidelity Microscopic Modeling:</strong> Simulating individual vehicle behaviors and interactions at a granular level to achieve highly accurate and realistic traffic flow analysis.</li>
+                    <li><strong>Intricate Network Design & Evaluation:</strong> Precisely assessing the performance of new road layouts, complex intersections, and multi-level interchanges before physical implementation.</li>
+                    <li><strong>Strategic Traffic Management Strategies:</strong> Rigorously evaluating the impact of various interventions, including optimized signal control plans, efficient ramp metering, intelligent incident management protocols, and dynamic lane assignments.</li>
+                    <li><strong>Integrated Public Transport Simulation:</strong> Accurately modeling bus, tram, and rail operations, including their interactions with general traffic, to optimize public transport efficiency and reliability.</li>
+                    <li><strong>Compelling Visualization & Reporting:</strong> Creating engaging 2D and 3D animations that vividly illustrate traffic flow dynamics, congestion patterns, and the effectiveness of proposed solutions, facilitating clear communication with stakeholders.</li>
                 </ul>
                 <h4>Impact:</h4>
-                <p>VISSIM enables me to provide in-depth insights into complex traffic scenarios, helping clients make informed decisions about infrastructure investments and operational improvements. This skill is crucial for a traffic consultant dealing with advanced transportation planning and traffic analysis.</p>
+                <p>Advanced VISSIM skills empower the ability to provide in-depth, predictive insights into complex traffic scenarios. This capability is instrumental in helping clients make well-informed, data-driven decisions regarding critical infrastructure investments and operational improvements. This skill is paramount for a traffic consultant specializing in advanced transportation planning, predictive traffic analysis, and the design of resilient urban mobility systems.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
@@ -1894,7 +2197,7 @@
               </div>
               <div class="skill-content">
                 <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Developing Python scripts for efficient data analysis, automated report generation, and workflow optimization in traffic engineering.</p>
+                <p class="skill-description">Proficient in Python for developing robust automation scripts and performing advanced data analysis, streamlining traffic engineering workflows, automating report generation, and extracting actionable insights from complex datasets.</p>
                 <div class="skill-metrics">
                   <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
                   <div class="skill-level">
@@ -1926,19 +2229,19 @@
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>Python Automation & Data Analysis: Streamlining Traffic Engineering Workflows</h3>
-                <p>I utilize Python to automate repetitive and time-consuming tasks in traffic engineering, significantly improving efficiency and reducing human error. My scripting capabilities extend to comprehensive data cleaning, advanced statistical analysis, insightful visualization, and automated report generation from various traffic software outputs.</p>
-                <h4>Applications:</h4>
+                <p>Leverages Python extensively to develop sophisticated automation scripts and perform advanced data analysis, fundamentally transforming and streamlining repetitive and time-consuming tasks within traffic engineering. This significantly improves overall efficiency, drastically reduces human error, and accelerates project delivery. Scripting capabilities span comprehensive data cleaning, advanced statistical analysis, insightful data visualization, and automated report generation from various traffic software outputs.</p>
+                <h4>Key Applications:</h4>
                 <ul>
-                    <li><strong>Traffic Data Analysis:</strong> Efficiently processing raw traffic count data, turning movement counts, and speed data.</li>
-                    <li><strong>Report Automation:</strong> Generating dynamic summary tables, charts, and figures from simulation outputs (e.g., SIDRA, VISSIM) for quick reporting.</li>
-                    <li><strong>GIS Integration:</strong> Automating spatial analysis and map generation for traffic studies.</li>
-                    <li><strong>Custom Tools:</strong> Building specialized Python scripts for unique project needs, such as custom calculations or data conversions.</li>
-                    <li><strong>API Integration:</strong> Connecting with traffic software APIs for direct data extraction and manipulation.</li>
+                    <li><strong>Efficient Traffic Data Analysis:</strong> Developing robust pipelines for efficiently processing raw traffic count data, turning movement counts, speed data, and other critical datasets, transforming raw information into actionable intelligence.</li>
+                    <li><strong>Automated Report Generation:</strong> Engineering dynamic scripts that automatically generate summary tables, charts, and figures directly from simulation outputs (e.g., SIDRA, VISSIM), enabling rapid and consistent reporting.</li>
+                    <li><strong>GIS Integration & Spatial Analysis:</strong> Automating complex spatial analysis tasks and map generation processes for traffic studies, enhancing geographical insights and visual communication.</li>
+                    <li><strong>Custom Tool Development:</strong> Building specialized Python scripts and applications tailored to unique project requirements, such as custom traffic calculations, data format conversions, or bespoke analytical tools.</li>
+                    <li><strong>API Integration:</strong> Seamlessly connecting with traffic software APIs (Application Programming Interfaces) for direct, programmatic data extraction, manipulation, and model interaction, unlocking new levels of automation.</li>
                 </ul>
-                <h4>Libraries & Concepts:</h4>
-                <p>Proficient in essential Python libraries such as Pandas for data manipulation, Matplotlib and Seaborn for data visualization, and various modules for file I/O and API interactions. I apply principles of object-oriented programming for robust, scalable, and maintainable code, making me a valuable asset for any traffic consultant team seeking automation expertise.</p>
+                <h4>Key Libraries & Concepts:</h4>
+                <p>Proficient in essential Python libraries including `Pandas` for powerful data manipulation and analysis, `Matplotlib` and `Seaborn` for generating high-quality and insightful data visualizations, and various modules for efficient file I/O operations and robust API interactions. Applies principles of object-oriented programming (OOP) to ensure the development of robust, scalable, and easily maintainable codebases, making for a highly valuable asset for any traffic consultant team seeking cutting-edge automation and data-driven insights.</p>
             </div>
-            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <!-- END EDIT EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
           <!-- END SKILL CARD: Python Automation -->
 
@@ -1957,7 +2260,7 @@
               </div>
               <div class="skill-content">
                 <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Creating VBA macros and custom functions for Microsoft Excel and Word to automate routine office tasks, data processing, and report formatting in traffic engineering.</p>
+                <p class="skill-description">Skilled in VBA programming to develop custom macros and functions for Microsoft Excel and Word, automating routine office tasks, enhancing data processing capabilities, and standardizing report formatting for increased efficiency and accuracy.</p>
                 <div class="skill-metrics">
                   <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
                   <div class="skill-level">
@@ -1987,82 +2290,20 @@
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>VBA Programming: Enhancing Office Productivity in Traffic Engineering</h3>
-                <p>I develop Visual Basic for Applications (VBA) macros and custom functions to automate and streamline tasks within Microsoft Office applications, particularly Excel and Word. This is invaluable for routine data processing, report formatting, and generating standardized documents in traffic engineering, significantly boosting productivity and accuracy.</p>
-                <h4>Applications:</h4>
+                <p>Develops highly effective Visual Basic for Applications (VBA) macros and custom functions to automate and significantly streamline tasks within Microsoft Office applications, particularly Excel and Word. This capability is invaluable for managing routine data processing, automating complex calculations, standardizing report formatting, and generating dynamic documents in traffic engineering projects, thereby substantially boosting productivity and ensuring data accuracy.</p>
+                <h4>Key Applications:</h4>
                 <ul>
-                    <li><strong>Excel Data Management:</strong> Automating data import, cleaning, calculations, and complex spreadsheet operations.</li>
-                    <li><strong>Report Generation:</strong> Creating dynamic tables, charts, and figures in Word and Excel from raw data.</li>
-                    <li><strong>Form Automation:</strong> Developing user forms within Office applications for structured data input and validation.</li>
-                    <li><strong>Custom Utilities:</strong> Building specific VBA tools for unique project-related calculations or data manipulations.</li>
+                    <li><strong>Advanced Excel Data Management:</strong> Automating complex data import processes, rigorous data cleaning routines, intricate calculations, and sophisticated spreadsheet operations to handle large traffic datasets efficiently.</li>
+                    <li><strong>Automated Report Generation:</strong> Creating dynamic tables, charts, and figures directly within Word and Excel from raw analytical data, ensuring consistency and reducing manual effort in report compilation.</li>
+                    <li><strong>User-Friendly Form Automation:</strong> Developing intuitive user forms within Office applications for structured data input, validation, and management, minimizing errors and improving data collection processes.</li>
+                    <li><strong>Custom Utility Development:</strong> Building specific VBA tools and utilities tailored to unique project-related calculations, data transformations, or specialized reporting requirements, enhancing adaptability.</li>
                 </ul>
                 <h4>Impact:</h4>
-                <p>VBA allows Amir H. Rusli to tailor office applications to specific engineering needs, leading to increased productivity and higher quality deliverables by minimizing manual intervention and ensuring consistency across projects. This skill is particularly useful for traffic consultants handling large volumes of data and documentation.</p>
+                <p>VBA empowers the ability to precisely tailor Microsoft Office applications to meet specific engineering and project management needs. This leads to demonstrable increases in productivity, higher quality deliverables, and enhanced consistency across all projects by minimizing manual intervention and optimizing routine workflows. This skill set is particularly beneficial for a traffic consultant managing extensive data volumes and comprehensive documentation.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
           <!-- END SKILL CARD: VBA Programming -->
-
-          <!-- START SKILL CARD: AutoCAD Civil 3D -->
-          <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fas fa-drafting-compass"></i>
-              </div>
-            </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">AutoCAD Civil 3D Drafting & Design</h4>
-              </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Proficient in using AutoCAD Civil 3D for precise drafting, civil design, and preparing detailed engineering drawings for traffic schemes and infrastructure projects.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>92%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 92%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 5+ years experience
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Applications</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">Drafting</span>
-                  <span class="skill-tag">Civil Design</span>
-                  <span class="skill-tag">Site Plans</span>
-                  <span class="skill-tag">Geometric Design</span>
-                  <span class="skill-tag">Infrastructure Design</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
-            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
-            <div class="card-detailed-content">
-                <h3>AutoCAD Civil 3D: Precision in Traffic & Civil Design</h3>
-                <p>AutoCAD Civil 3D is an essential tool in civil and traffic engineering for creating precise and detailed engineering drawings. My proficiency in Civil 3D allows Amir H. Rusli to translate complex traffic analysis and design concepts into accurate, constructible plans, crucial for successful infrastructure projects.</p>
-                <h4>Key Applications:</h4>
-                <ul>
-                    <li><strong>Intersection Layouts:</strong> Designing and detailing signalized and unsignalized intersections, including lane configurations and turning radii.</li>
-                    <li><strong>Roadway Design:</strong> Creating alignments, profiles, and cross-sections for new or upgraded roads and highways.</li>
-                    <li><strong>Parking Lot Design:</strong> Laying out efficient and compliant parking facilities, including accessibility features.</li>
-                    <li><strong>Site Grading:</strong> Integrating traffic elements with overall site development plans, ensuring proper drainage and earthworks.</li>
-                    <li><strong>Quantity Take-offs:</strong> Generating material quantities directly from design models for cost estimation.</li>
-                </ul>
-                <h4>Impact:</h4>
-                <p>My strong CAD skills ensure that all traffic engineering designs are accurately documented and ready for construction, facilitating smooth project execution and clear communication with construction teams and stakeholders. This expertise is fundamental for any traffic consultant involved in infrastructure development.</p>
-            </div>
-            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
-          </div>
-          <!-- END SKILL CARD: AutoCAD Civil 3D -->
 
           <!-- START SKILL CARD: Swept Path Analysis -->
           <div class="skill-card-enhanced">
@@ -2079,7 +2320,7 @@
               </div>
               <div class="skill-content">
                 <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Performing precise swept path analysis for various vehicle types using AutoTURN to ensure adequate maneuverability, safety, and functional design of access points and internal circulation.</p>
+                <p class="skill-description">Expert in conducting precise swept path analysis using AutoTURN for diverse vehicle types, ensuring optimal maneuverability, enhancing safety, and validating the functional design of critical access points and internal circulation routes.</p>
                 <div class="skill-metrics">
                   <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
                   <div class="skill-level">
@@ -2098,7 +2339,7 @@
               <div class="skill-tech">
                 <h5>Key Tools & Applications</h5>
                 <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                  <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                   <span class="skill-tag">AutoTURN</span>
                   <span class="skill-tag">Vehicle Maneuverability</span>
                   <span class="skill-tag">Site Access Design</span>
@@ -2108,18 +2349,18 @@
             </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>Swept Path Analysis: Ensuring Vehicle Maneuverability & Safety</h3>
-                <p>Swept path analysis is critical for verifying that proposed road geometries, intersections, and access points can safely accommodate the turning movements of various design vehicles, especially large trucks, buses, and emergency vehicles. Amir H. Rusli is highly proficient in using AutoTURN, the industry-leading software for this specialized analysis, ensuring optimal and safe designs.</p>
-                <h4>Applications:</h4>
+                <h3>Swept Path Analysis: Ensuring Optimal Vehicle Maneuverability & Safety</h3>
+                <p>Swept path analysis is a critical and specialized engineering discipline for rigorously verifying that proposed road geometries, complex intersections, and various access points can safely and efficiently accommodate the turning movements of a wide range of design vehicles. This is especially crucial for large trucks, public buses, and emergency vehicles. Highly proficient and experienced in utilizing AutoTURN, the industry-leading software for this advanced analysis, consistently ensuring optimal and inherently safe designs that meet stringent regulatory and operational requirements.</p>
+                <h4>Key Applications & Value Proposition:</h4>
                 <ul>
-                    <li><strong>Site Access Design:</strong> Verifying efficient and safe entry and exit points for all types of vehicles into developments.</li>
-                    <li><strong>Intersection Design:</strong> Ensuring adequate turning radii, lane widths, and clearances at intersections.</li>
-                    <li><strong>Parking Lot Layouts:</strong> Confirming proper maneuverability within parking areas, including stalls and circulation aisles.</li>
-                    <li><strong>Loading Docks & Industrial Sites:</strong> Assessing optimal truck access and turning movements within complex industrial facilities.</li>
-                    <li><strong>Roundabout Design:</strong> Validating the geometric design of roundabouts for various vehicle classes.</li>
+                    <li><strong>Optimized Site Access Design:</strong> Rigorously verifying and optimizing efficient and safe entry and exit points for all types of vehicles into new developments, minimizing conflicts and delays.</li>
+                    <li><strong>Enhanced Intersection Design:</strong> Precisely ensuring adequate turning radii, appropriate lane widths, and sufficient clearances at intersections to facilitate smooth and safe vehicle movements.</li>
+                    <li><strong>Functional Parking Lot Layouts:</strong> Confirming optimal maneuverability within parking areas, including the design of individual stalls, circulation aisles, and ramp systems, to maximize capacity and user experience.</li>
+                    <li><strong>Critical Loading Docks & Industrial Sites:</strong> Accurately assessing and designing optimal truck access and turning movements within complex industrial facilities and loading bay areas, crucial for logistics and operations.</li>
+                    <li><strong>Validated Roundabout Design:</strong> Rigorously validating the geometric design of roundabouts for various vehicle classes, ensuring their efficiency, safety, and compliance with design standards.</li>
                 </ul>
                 <h4>Impact:</h4>
-                <p>By proactively identifying and resolving geometric issues through precise swept path analysis, Amir H. Rusli contributes to the creation of safer and more efficient transportation infrastructure, minimizing operational constraints and potential accidents. This expertise is vital for any traffic consultant involved in site development and road design.</p>
+                <p>By proactively identifying and effectively resolving potential geometric issues through precise swept path analysis, significantly contributes to the creation of safer, more efficient, and functionally superior transportation infrastructure. This expertise minimizes operational constraints, reduces the likelihood of vehicle damage, and prevents potential accidents, proving vital for any traffic consultant involved in site development and road design. Work ensures designs are not just compliant, but truly optimized for real-world vehicle operations.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
@@ -2140,7 +2381,7 @@
               </div>
               <div class="skill-content">
                 <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Leveraging AI tools for enhanced data analysis, predictive modeling, and efficient report drafting to boost productivity and provide deeper insights in traffic engineering.</p>
+                <p class="skill-description">Actively integrating AI tools to enhance traffic engineering workflows, including advanced data analysis, predictive modeling, and efficient report generation, driving innovation and delivering deeper, data-driven insights.</p>
                 <div class="skill-metrics">
                   <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
                   <div class="skill-level">
@@ -2170,18 +2411,18 @@
             </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
-                <h3>AI-Assisted Workflows: The Future of Traffic Engineering & Consulting</h3>
-                <p>Amir H. Rusli is actively exploring and integrating artificial intelligence (AI) tools to enhance various aspects of traffic engineering and consulting workflows. This includes leveraging AI for more sophisticated data analysis, developing predictive models for traffic patterns, and using generative AI for initial report drafting, content summarization, and idea generation, significantly boosting efficiency and analytical depth.</p>
-                <h4>Applications:</h4>
+                <h3>AI-Assisted Workflows: Driving Innovation in Traffic Engineering & Consulting</h3>
+                <p>At the forefront of actively exploring, developing, and strategically integrating cutting-edge artificial intelligence (AI) tools to significantly enhance various facets of traffic engineering and consulting workflows. This forward-thinking approach includes leveraging AI for more sophisticated and nuanced data analysis, developing robust predictive models for dynamic traffic patterns, and utilizing generative AI for accelerated initial report drafting, intelligent content summarization, and innovative idea generation. This integration fundamentally boosts efficiency, deepens analytical capabilities, and drives innovation across projects.</p>
+                <h4>Key Applications & Strategic Impact:</h4>
                 <ul>
-                    <li><strong>Traffic Prediction:</strong> Utilizing Machine Learning (ML) models to forecast future traffic volumes, congestion levels, and travel times with higher accuracy.</li>
-                    <li><strong>Data Anomaly Detection:</strong> Identifying unusual patterns or errors in large traffic datasets, improving data quality.</li>
-                    <li><strong>Report Summarization:</strong> Quickly generating executive summaries and key findings from extensive traffic studies and reports using Natural Language Processing (NLP).</li>
-                    <li><strong>Design Optimization:</strong> Exploring AI-driven algorithms for optimal signal timings, network layouts, and infrastructure placement.</li>
-                    <li><strong>Scenario Generation:</strong> Using generative AI to quickly create diverse traffic scenarios for simulation and analysis.</li>
+                    <li><strong>Advanced Traffic Prediction:</strong> Implementing and fine-tuning Machine Learning (ML) models to forecast future traffic volumes, predict congestion levels, and estimate travel times with unprecedented accuracy, enabling proactive planning.</li>
+                    <li><strong>Automated Data Anomaly Detection:</strong> Developing AI-driven algorithms to efficiently identify unusual patterns, inconsistencies, or errors in large-scale traffic datasets, thereby ensuring superior data quality and reliability for analysis.</li>
+                    <li><strong>Intelligent Report Summarization:</strong> Utilizing Natural Language Processing (NLP) techniques to quickly generate concise executive summaries and extract key findings from extensive traffic studies and technical reports, saving valuable time.</li>
+                    <li><strong>AI-Driven Design Optimization:</strong> Exploring and applying AI-driven algorithms for the optimal design of signal timings, efficient network layouts, and strategic infrastructure placement, pushing the boundaries of traditional design.</li>
+                    <li><strong>Dynamic Scenario Generation:</strong> Employing generative AI to rapidly create diverse and realistic traffic scenarios for comprehensive simulation and analysis, enabling more thorough testing of proposed solutions.</li>
                 </ul>
-                <h4>Tools & Concepts:</h4>
-                <p>Familiarity with concepts like supervised/unsupervised learning, deep learning fundamentals, natural language processing (NLP), and various AI platforms. My goal is to apply these cutting-edge technologies to solve complex traffic problems more efficiently and innovatively, positioning me as a forward-thinking traffic consultant.</p>
+                <h4>Tools & Core Concepts:</h4>
+                <p>Expertise encompasses a practical understanding of core AI concepts such as supervised and unsupervised learning, foundational deep learning principles, natural language processing (NLP), and experience with various AI platforms and libraries. The overarching goal is to apply these transformative technologies to solve complex traffic problems more efficiently, innovatively, and with greater foresight, firmly positioning as a forward-thinking and highly adaptable traffic consultant ready for the challenges of tomorrow's urban mobility.</p>
             </div>
             <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
@@ -2218,6 +2459,10 @@
 
   <footer class="will-change">
     <p>© 2025 Amir H. Rusli Traffic Engineer. Built with ❤</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+    </div>
   </footer>
 
   <!-- Update WhatsApp number -->
@@ -2230,6 +2475,10 @@
       <!-- Content will be dynamically inserted here -->
     </div>
   </div>
+
+  <!-- Animated Characters -->
+  <div id="cat" class="animated-character">🐱</div>
+  <div id="car" class="animated-character">🚗</div>
 
   <script>
     let clickedCard = null; // To keep track of the currently clicked card for glow effect
@@ -2414,6 +2663,87 @@
       scrollIndicator.style.width = progress + '%';
     }
 
+    // ===== ANIMATED CHARACTERS (CAT & CAR) =====
+    const cat = document.getElementById('cat');
+    const car = document.getElementById('car');
+
+    let catVisible = false;
+    let carVisible = false;
+
+    function getRandomArbitrary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function setCharacterPosition(character, x, y) {
+        character.style.left = `${x}px`;
+        character.style.top = `${y}px`;
+    }
+
+    function showCharacter(character) {
+        character.style.opacity = '1';
+    }
+
+    function hideCharacter(character) {
+        character.style.opacity = '0';
+    }
+
+    function animateCharactersLoop() {
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        // Cat logic
+        if (!catVisible && Math.random() < 0.005) { // Lower chance for less distraction
+            catVisible = true;
+            const startX = getRandomArbitrary(-50, viewportWidth + 50); // Start off-screen or near edge
+            const startY = getRandomArbitrary(viewportHeight * 0.2, viewportHeight * 0.8);
+            setCharacterPosition(cat, startX, startY);
+            showCharacter(cat);
+
+            const endX = getRandomArbitrary(-50, viewportWidth + 50);
+            const endY = getRandomArbitrary(viewportHeight * 0.2, viewportHeight * 0.8);
+            
+            cat.style.transition = `transform 10s ease-in-out, opacity 2s ease`;
+            cat.style.transform = `translate(${endX - startX}px, ${endY - startY}px)`;
+
+            setTimeout(() => {
+                hideCharacter(cat);
+                catVisible = false;
+                cat.style.transition = 'none'; // Reset transition for instant repositioning
+                cat.style.transform = 'translate(0,0)'; // Reset transform
+                setCharacterPosition(cat, -100, -100); // Move off-screen
+            }, 12000); // Visible for 12 seconds
+        }
+
+        // Car logic (chasing the cat)
+        if (catVisible && !carVisible && Math.random() < 0.003) { // Even lower chance for car
+            carVisible = true;
+            // Car appears near cat's current position, slightly offset
+            const catRect = cat.getBoundingClientRect();
+            const startX = catRect.left + getRandomArbitrary(-80, 80);
+            const startY = catRect.top + getRandomArbitrary(-80, 80);
+            setCharacterPosition(car, startX, startY);
+            showCharacter(car);
+
+            // Car moves towards where the cat is going or a general direction
+            const targetCarX = catRect.left + (catRect.width / 2) + getRandomArbitrary(-150, 150);
+            const targetCarY = catRect.top + (catRect.height / 2) + getRandomArbitrary(-150, 150);
+
+            car.style.transition = `transform 8s ease-in-out, opacity 2s ease`;
+            car.style.transform = `translate(${targetCarX - startX}px, ${targetCarY - startY}px)`;
+
+            setTimeout(() => {
+                hideCharacter(car);
+                carVisible = false;
+                car.style.transition = 'none'; // Reset transition
+                car.style.transform = 'translate(0,0)'; // Reset transform
+                setCharacterPosition(car, -100, -100); // Move off-screen
+            }, 9000); // Visible for 9 seconds
+        }
+
+        requestAnimationFrame(animateCharactersLoop);
+    }
+
+
     // ===== INITIALIZATION =====
     document.addEventListener('DOMContentLoaded', () => {
       const body = document.body;
@@ -2524,6 +2854,9 @@
       // Initialize and update scroll progress
       updateScrollProgress(); // Set initial state
       window.addEventListener('scroll', updateScrollProgress);
+
+      // Start the character animation loop
+      animateCharactersLoop();
     });
 
     // ===== SMOOTH SCROLLING =====
