@@ -25,18 +25,24 @@
     /* ===== VARIABLES ===== */
     :root {
       --bg-light: #fefefe;
-      --bg-dark: #121212;
+      --bg-dark: #1A1A1A; /* Softer dark background */
       --text-light: #111;
-      --text-dark: #f5f5f5;
+      --text-dark: #E0E0E0; /* Slightly darker off-white for softer contrast */
       --accent: #00b4d8; /* Blue */
       --accent-dark: #0077b6; /* Darker blue */
       --accent-secondary: #90e0ef; /* Lighter blue */
-      --dark-mode-hover-accent: #FF6347; /* Orangey Red for dark mode hovers/clicks */
+
+      /* New Dark Mode Accent Colors */
+      --dark-mode-accent: #80CBC4; /* Muted Teal/Green */
+      --dark-mode-accent-dark: #4DB6AC; /* Darker Teal/Green */
+      --dark-mode-accent-secondary: #B2DFDB; /* Lighter Teal/Green */
+
       --header-height: 80px;
       --border-radius: 16px;
       --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       --glow-shadow: 0 0 20px rgba(0, 180, 216, 0.6), 0 0 40px rgba(0, 180, 216, 0.4);
-      --dark-mode-glow-shadow: 0 0 20px rgba(255, 99, 71, 0.6), 0 0 40px rgba(255, 99, 71, 0.4);
+      /* Updated dark mode glow shadow */
+      --dark-mode-glow-shadow: 0 0 20px rgba(128, 203, 196, 0.6), 0 0 40px rgba(128, 203, 196, 0.4);
     }
     
     /* ===== BASE STYLES ===== */
@@ -66,9 +72,10 @@
     }
     
     body.dark {
-      background-color: var(--bg-dark);
+      background-color: var(--bg-dark); /* Solid dark background */
       color: var(--text-dark);
-      background: linear-gradient(45deg, rgba(255,99,71,0.02), rgba(255,69,0,0.02)); /* Very subtle */
+      /* Animated gradient is now an overlay on the solid background */
+      background: var(--bg-dark) linear-gradient(45deg, rgba(128, 203, 196, 0.02), rgba(77, 182, 172, 0.02));
       background-size: 300% 300%;
       animation: gradientBackground 25s ease infinite;
     }
@@ -118,7 +125,7 @@
     }
     
     body.dark header {
-      background: rgba(18, 18, 18, 0.92);
+      background: rgba(26, 26, 26, 0.92); /* Updated to new bg-dark */
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -170,10 +177,10 @@
     }
     
     body.dark nav a:hover {
-      color: var(--dark-mode-hover-accent); /* Orangey red text color */
+      color: var(--dark-mode-accent); /* Updated dark mode hover color */
     }
     body.dark nav a::after {
-      background: linear-gradient(90deg, var(--dark-mode-hover-accent), #FF4500); /* Orangey red gradient */
+      background: linear-gradient(90deg, var(--dark-mode-accent), var(--dark-mode-accent-dark)); /* Updated dark mode gradient */
     }
 
     /* ===== HERO SECTION ===== */
@@ -242,7 +249,7 @@
     }
     
     body.dark .hero .cta-button:hover {
-      box-shadow: 0 12px 36px rgba(255, 99, 71, 0.4); /* Orangey red shadow */
+      box-shadow: 0 12px 36px rgba(128, 203, 196, 0.4); /* Updated dark mode shadow */
     }
 
     /* Secondary CTA button style */
@@ -254,8 +261,8 @@
     }
 
     body.dark .hero .cta-button.secondary {
-      border-color: var(--dark-mode-hover-accent);
-      color: var(--dark-mode-hover-accent);
+      border-color: var(--dark-mode-accent); /* Updated dark mode accent */
+      color: var(--dark-mode-accent); /* Updated dark mode accent */
     }
 
     .hero .cta-button.secondary:hover {
@@ -265,9 +272,9 @@
     }
 
     body.dark .hero .cta-button.secondary:hover {
-      background: var(--dark-mode-hover-accent);
-      color: white;
-      box-shadow: 0 8px 24px rgba(255, 99, 71, 0.2);
+      background: var(--dark-mode-accent); /* Updated dark mode accent */
+      color: var(--bg-dark); /* Text color should contrast with the new accent */
+      box-shadow: 0 8px 24px rgba(128, 203, 196, 0.2); /* Updated dark mode shadow */
     }
 
 
@@ -327,7 +334,7 @@
     
     body.dark .project-category h3,
     body.dark .skill-category h3 {
-      color: var(--accent-secondary);
+      color: var(--dark-mode-accent-secondary); /* Updated dark mode accent */
     }
     
     .project-category-content,
@@ -356,7 +363,7 @@
     
     body.dark .project-card-enhanced,
     body.dark .skill-card-enhanced {
-      background: #1e1e1e; /* Darker background for dark mode cards */
+      background: #212121; /* Slightly lighter dark card background */
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.03);
     }
@@ -369,7 +376,7 @@
     
     body.dark .project-card-enhanced:hover,
     body.dark .skill-card-enhanced:hover {
-      box-shadow: 0 12px 36px rgba(255, 99, 71, 0.3); /* Orangey red shadow */
+      box-shadow: 0 12px 36px rgba(128, 203, 196, 0.3); /* Updated dark mode shadow */
     }
 
     /* Clicked (Glow) State */
@@ -445,19 +452,21 @@
       border-top: 1px solid rgba(255, 255, 255, 0.03);
     }
     .project-card-enhanced .project-stat {
-      text-align: center;
       padding: 0.5rem;
       background-color: rgba(0, 180, 216, 0.05); /* Light accent background */
       border-radius: 8px;
     }
     body.dark .project-card-enhanced .project-stat {
-      background-color: rgba(0, 180, 216, 0.1);
+      background-color: rgba(128, 203, 196, 0.1); /* Updated dark mode accent */
     }
     .project-card-enhanced .stat-value {
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--accent-dark);
       margin-bottom: 0.2rem;
+    }
+    body.dark .project-card-enhanced .stat-value {
+      color: var(--dark-mode-accent-dark); /* Updated dark mode accent */
     }
     .project-card-enhanced .stat-label {
       font-size: 0.75rem;
@@ -502,9 +511,9 @@
       border: 1px solid rgba(0, 180, 216, 0.1); /* Subtle border for tags */
     }
     body.dark .project-card-enhanced .tech-tag {
-      background-color: rgba(0, 180, 216, 0.15);
-      color: var(--accent-secondary);
-      border: 1px solid rgba(0, 180, 216, 0.2);
+      background-color: rgba(128, 203, 196, 0.15); /* Updated dark mode accent */
+      color: var(--dark-mode-accent-secondary); /* Updated dark mode accent */
+      border: 1px solid rgba(128, 203, 196, 0.2); /* Updated dark mode accent */
     }
 
 
@@ -528,13 +537,16 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for the icon circle */
     }
     body.dark .skill-card-enhanced .skill-visual {
-      background-color: rgba(0, 180, 216, 0.1);
+      background-color: rgba(128, 203, 196, 0.1); /* Updated dark mode accent */
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
     .skill-card-enhanced .skill-visual .skill-icon {
       font-size: 2.8rem; /* Smaller icon size for card view */
       color: var(--accent);
       opacity: 0.8;
+    }
+    body.dark .skill-card-enhanced .skill-visual .skill-icon {
+      color: var(--dark-mode-accent); /* Updated dark mode accent */
     }
 
     .skill-card-enhanced .skill-info-wrapper { /* NEW WRAPPER FOR TEXT CONTENT */
@@ -603,6 +615,9 @@
       font-weight: 700;
       color: var(--accent-dark);
     }
+    body.dark .skill-card-enhanced .skill-level span:last-child {
+      color: var(--dark-mode-accent-dark); /* Updated dark mode accent */
+    }
 
     .skill-card-enhanced .skill-bar {
       background-color: rgba(0,0,0,0.08);
@@ -620,6 +635,9 @@
       border-radius: 5px;
       width: 0;
       transition: width 1s ease-out;
+    }
+    body.dark .skill-card-enhanced .skill-progress {
+      background: linear-gradient(90deg, var(--dark-mode-accent), var(--dark-mode-accent-dark)); /* Updated dark mode gradient */
     }
     .skill-card-enhanced .skill-experience {
       font-size: 0.75rem;
@@ -667,9 +685,9 @@
       border: 1px solid rgba(0, 180, 216, 0.1);
     }
     body.dark .skill-card-enhanced .skill-tag {
-      background-color: rgba(0, 180, 216, 0.15);
-      color: var(--accent-secondary);
-      border: 1px solid rgba(0, 180, 216, 0.2);
+      background-color: rgba(128, 203, 196, 0.15); /* Updated dark mode accent */
+      color: var(--dark-mode-accent-secondary); /* Updated dark mode accent */
+      border: 1px solid rgba(128, 203, 196, 0.2); /* Updated dark mode accent */
     }
     
     /* Detailed content styles (for modal) */
@@ -722,11 +740,6 @@
       box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
     }
 
-    .modal-overlay.active .modal-content {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
     .modal-close {
       position: absolute;
       top: 15px;
@@ -749,7 +762,7 @@
       transform: rotate(90deg);
     }
     body.dark .modal-close:hover {
-      color: var(--dark-mode-hover-accent); /* Orangey red color */
+      color: var(--dark-mode-accent); /* Updated dark mode accent */
     }
 
     .modal-content h3 {
@@ -758,11 +771,17 @@
         text-align: center;
         color: var(--accent);
     }
+    body.dark .modal-content h3 {
+      color: var(--dark-mode-accent); /* Updated dark mode accent */
+    }
     .modal-content h4 {
         font-size: 1.5rem;
         margin-top: 1.5rem;
         margin-bottom: 0.8rem;
         color: var(--accent-dark);
+    }
+    body.dark .modal-content h4 {
+      color: var(--dark-mode-accent-dark); /* Updated dark mode accent */
     }
     .modal-content p, .modal-content ul {
         margin-bottom: 1rem;
@@ -786,12 +805,15 @@
         background-color: rgba(0, 180, 216, 0.05); /* Light background for skill visual in modal */
     }
     body.dark .modal-content .skill-visual {
-        background-color: rgba(0, 180, 216, 0.1);
+        background-color: rgba(128, 203, 196, 0.1); /* Updated dark mode accent */
     }
     .modal-content .skill-visual .skill-icon { /* Larger icon in modal visual */
         font-size: 5rem;
         color: var(--accent);
         opacity: 0.8;
+    }
+    body.dark .modal-content .skill-visual .skill-icon {
+      color: var(--dark-mode-accent); /* Updated dark mode accent */
     }
 
     .modal-content .project-client,
@@ -828,6 +850,10 @@
         font-weight: 600;
         color: var(--accent-dark);
     }
+    body.dark .modal-content .stat-value,
+    body.dark .modal-content .skill-level span:last-child {
+      color: var(--dark-mode-accent-dark); /* Updated dark mode accent */
+    }
     .modal-content .stat-label,
     .modal-content .skill-level span:first-child,
     .modal-content .skill-experience {
@@ -858,6 +884,9 @@
         width: 0; /* Animated on load */
         transition: width 1s ease-out;
     }
+    body.dark .modal-content .skill-progress {
+      background: linear-gradient(90deg, var(--dark-mode-accent), var(--dark-mode-accent-dark)); /* Updated dark mode gradient */
+    }
     .modal-content .tech-tags,
     .modal-content .skill-tags {
         display: flex;
@@ -884,8 +913,8 @@
     }
     body.dark .modal-content .tech-tag,
     body.dark .modal-content .skill-tag {
-        background-color: rgba(0, 180, 216, 0.2);
-        color: var(--accent-secondary);
+        background-color: rgba(128, 203, 196, 0.2); /* Updated dark mode accent */
+        color: var(--dark-mode-accent-secondary); /* Updated dark mode accent */
     }
 
 
@@ -914,8 +943,8 @@
       border-bottom: 2px solid var(--accent-dark);
     }
     body.dark #contact a:hover {
-      color: var(--dark-mode-hover-accent); /* Orangey red color */
-      border-bottom-color: var(--dark-mode-hover-accent);
+      color: var(--dark-mode-accent); /* Updated dark mode accent */
+      border-bottom-color: var(--dark-mode-accent); /* Updated dark mode accent */
     }
 
     /* Contact Form Styling */
@@ -935,7 +964,7 @@
     }
 
     body.dark .contact-form {
-        background: #1e1e1e;
+        background: #212121; /* Updated to new dark card background */
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
@@ -979,6 +1008,12 @@
         box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.2);
         outline: none;
     }
+    body.dark .contact-form input[type="text"]:focus,
+    body.dark .contact-form input[type="email"]:focus,
+    body.dark .contact-form textarea:focus {
+      border-color: var(--dark-mode-accent); /* Updated dark mode accent */
+      box-shadow: 0 0 0 3px rgba(128, 203, 196, 0.2); /* Updated dark mode accent */
+    }
 
     .contact-form textarea {
         min-height: 120px;
@@ -1003,7 +1038,7 @@
         box-shadow: 0 8px 20px rgba(0, 180, 216, 0.3);
     }
     body.dark .contact-form button[type="submit"]:hover {
-        box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3); /* Orangey red shadow */
+        box-shadow: 0 8px 20px rgba(128, 203, 196, 0.3); /* Updated dark mode shadow */
     }
 
     /* ===== FOOTER ===== */
@@ -1044,7 +1079,7 @@
     }
 
     body.dark .social-links a:hover {
-      color: var(--dark-mode-hover-accent);
+      color: var(--dark-mode-accent); /* Updated dark mode accent */
     }
     
     /* ===== UTILITY BUTTONS ===== */
@@ -1073,7 +1108,7 @@
     }
     
     body.dark .theme-toggle:hover {
-        box-shadow: 0 0 25px rgba(255, 99, 71, 0.7), 0 0 40px rgba(255, 99, 71, 0.5); /* Orangey red glow */
+        box-shadow: 0 0 25px rgba(128, 203, 196, 0.7), 0 0 40px rgba(128, 203, 196, 0.5); /* Updated dark mode glow */
     }
 
     .theme-toggle #theme-icon {
@@ -1117,6 +1152,9 @@
         background: linear-gradient(90deg, var(--accent), var(--accent-dark));
         z-index: 1001; /* Above header but below modal */
         transition: background 0.3s ease; /* Smooth color transition on theme change */
+    }
+    body.dark #scroll-progress-indicator {
+      background: linear-gradient(90deg, var(--dark-mode-accent), var(--dark-mode-accent-dark)); /* Updated dark mode gradient */
     }
 
     /* Animated Characters */
@@ -2294,7 +2332,7 @@
                 <h4>Key Applications:</h4>
                 <ul>
                     <li><strong>Advanced Excel Data Management:</strong> Automating complex data import processes, rigorous data cleaning routines, intricate calculations, and sophisticated spreadsheet operations to handle large traffic datasets efficiently.</li>
-                    <li><strong>Automated Report Generation:</strong> Creating dynamic tables, charts, and figures directly within Word and Excel from raw analytical data, ensuring consistency and reducing manual effort in report compilation.</li>
+                    <li><strong>Automated Report Generation:</strong> Engineering dynamic scripts that automatically generate summary tables, charts, and figures directly within Word and Excel from raw analytical data, ensuring consistency and reducing manual effort in report compilation.</li>
                     <li><strong>User-Friendly Form Automation:</strong> Developing intuitive user forms within Office applications for structured data input, validation, and management, minimizing errors and improving data collection processes.</li>
                     <li><strong>Custom Utility Development:</strong> Building specific VBA tools and utilities tailored to unique project-related calculations, data transformations, or specialized reporting requirements, enhancing adaptability.</li>
                 </ul>
