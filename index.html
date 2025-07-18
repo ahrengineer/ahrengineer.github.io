@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AHR Traffic Engineer Portfolio</title>
-  <meta name="description" content="AHR – Traffic Engineering Portfolio: Showcasing TIA, SIDRA, Python/VBA automation, AI-assisted workflows, and swept path analysis.">
-  <meta name="keywords" content="Traffic Engineering, TIA, SIDRA, Swept Path, Python, VBA, AI, AutoCAD, Portfolio">
+  <meta name="description" content="Traffic Engineering Portfolio: TIA, SIDRA, Python/VBA automation, AI workflows, swept path analysis">
+  <meta name="keywords" content="Traffic Engineering, TIA, SIDRA, Python, VBA, AI, AutoCAD">
   <meta name="author" content="AHR">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* ===== VARIABLES ===== */
     :root {
       --bg-light: #fefefe;
       --bg-dark: #121212;
@@ -22,8 +23,11 @@
       --accent-secondary: #90e0ef;
       --header-height: 80px;
       --border-radius: 16px;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --glow-shadow: 0 0 20px rgba(0, 180, 216, 0.6), 0 0 40px rgba(0, 180, 216, 0.4);
     }
     
+    /* ===== BASE STYLES ===== */
     * {
       margin: 0;
       padding: 0;
@@ -49,8 +53,13 @@
       background-color: var(--bg-dark);
       color: var(--text-dark);
     }
+
+    /* Prevent body scroll when modal is open */
+    body.modal-open {
+      overflow: hidden;
+    }
     
-    /* Typography improvements */
+    /* ===== TYPOGRAPHY ===== */
     h1, h2, h3, h4 {
       font-weight: 600;
       line-height: 1.2;
@@ -71,7 +80,7 @@
       font-size: 0.9em;
     }
     
-    /* Header styling */
+    /* ===== HEADER ===== */
     header {
       position: fixed;
       top: 0;
@@ -86,7 +95,7 @@
       justify-content: center;
       align-items: center;
       z-index: 1000;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: var(--transition);
     }
     
     body.dark header {
@@ -129,7 +138,7 @@
       color: var(--accent);
     }
     
-    /* Hero section */
+    /* ===== HERO SECTION ===== */
     .hero {
       min-height: 100vh;
       padding: calc(var(--header-height) + 2rem) 2rem 4rem;
@@ -161,8 +170,32 @@
       transform: translateY(20px);
       animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
     }
+
+    .hero .cta-button {
+        background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: var(--border-radius);
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none; /* For anchor tag button */
+        display: inline-block; /* For anchor tag button */
+        margin-top: 1rem;
+        box-shadow: 0 8px 24px rgba(0, 180, 216, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards; /* Delayed animation */
+    }
+
+    .hero .cta-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 36px rgba(0, 180, 216, 0.4);
+    }
     
-    /* Section styling */
+    /* ===== SECTIONS ===== */
     section {
       padding: 6rem 2rem;
       max-width: 1200px;
@@ -193,28 +226,569 @@
       border-radius: 2px;
     }
     
-    /* Updated theme toggle */
-    .theme-toggle {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: white;
+    /* ===== PROJECT CARDS ===== */
+    .projects-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+    
+    .project-category {
+      margin-bottom: 2rem;
+    }
+    
+    .project-category h3,
+    .skill-category h3 { /* Apply consistent styling to both category headers */
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(0, 180, 216, 0.2);
+    }
+    
+    body.dark .project-category h3,
+    body.dark .skill-category h3 {
+      color: var(--accent-secondary);
+    }
+    
+    .project-category-content,
+    .skill-category-content { /* Apply to both for consistent grid behavior */
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    /* --- Card Base Styling --- */
+    .project-card-enhanced,
+    .skill-card-enhanced {
+      background: var(--bg-light); /* Use light background for cards */
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05); /* Softer shadow */
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.03); /* Very subtle border */
+      height: 100%;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+    
+    body.dark .project-card-enhanced,
+    body.dark .skill-card-enhanced {
+      background: #1e1e1e; /* Darker background for dark mode cards */
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    
+    .project-card-enhanced:hover,
+    .skill-card-enhanced:hover {
+      transform: translateY(-5px); /* Slightly less lift */
+      box-shadow: 0 12px 36px rgba(0, 180, 216, 0.15); /* More subtle hover glow */
+    }
+    
+    /* Clicked (Glow) State */
+    .project-card-enhanced.clicked,
+    .skill-card-enhanced.clicked {
+      box-shadow: var(--glow-shadow);
+      transform: scale(1.01); /* Even slighter scale for emphasis */
+    }
+    
+    /* --- Project Card Specifics --- */
+    .project-card-enhanced .project-image {
+      width: 100%;
+      height: 200px; /* Consistent image height */
+      background-size: cover;
+      background-position: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03); /* Separator below image */
+    }
+    body.dark .project-card-enhanced .project-image {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .project-card-enhanced .project-header {
+      padding: 1.5rem 1.5rem 0.5rem; /* More top padding, less bottom */
+    }
+    .project-card-enhanced .project-header h4 {
+      font-size: 1.4rem; /* Clear title */
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+    body.dark .project-card-enhanced .project-header h4 {
+      color: var(--text-dark);
+    }
+    .project-card-enhanced .project-client {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      opacity: 0.7;
+    }
+    body.dark .project-card-enhanced .project-client {
+      color: var(--text-dark);
+    }
+
+    .project-card-enhanced .project-content {
+      padding: 0.5rem 1.5rem 1rem; /* Adjust padding */
+      flex-grow: 1; /* Allows content to push tech tags to bottom */
+    }
+    .project-card-enhanced .project-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+      opacity: 0.9;
+    }
+    body.dark .project-card-enhanced .project-description {
+      color: var(--text-dark);
+    }
+
+    .project-card-enhanced .project-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* More flexible stats layout */
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.03); /* Subtle separator */
+    }
+    body.dark .project-card-enhanced .project-stats {
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .project-card-enhanced .project-stat {
+      text-align: center;
+      padding: 0.5rem;
+      background-color: rgba(0, 180, 216, 0.05); /* Light accent background */
+      border-radius: 8px;
+    }
+    body.dark .project-card-enhanced .project-stat {
+      background-color: rgba(0, 180, 216, 0.1);
+    }
+    .project-card-enhanced .stat-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin-bottom: 0.2rem;
+    }
+    .project-card-enhanced .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      opacity: 0.7;
+    }
+    body.dark .project-card-enhanced .stat-label {
+      color: var(--text-dark);
+    }
+
+    .project-card-enhanced .project-tech {
+      padding: 1rem 1.5rem 1.5rem; /* Consistent padding */
+      border-top: 1px solid rgba(0, 0, 0, 0.03); /* Subtle separator */
+    }
+    body.dark .project-card-enhanced .project-tech {
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .project-card-enhanced .project-tech h5 {
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      color: var(--text-light);
+      opacity: 0.8;
+    }
+    body.dark .project-card-enhanced .project-tech h5 {
+      color: var(--text-dark);
+    }
+    .project-card-enhanced .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px; /* Tighter spacing for tags */
+      justify-content: center;
+    }
+    .project-card-enhanced .tech-tag {
+      background-color: var(--accent-secondary);
+      color: var(--accent-dark);
+      padding: 4px 10px; /* Smaller tags */
+      border-radius: 6px; /* Softer corners */
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border: 1px solid rgba(0, 180, 216, 0.1); /* Subtle border for tags */
+    }
+    body.dark .project-card-enhanced .tech-tag {
+      background-color: rgba(0, 180, 216, 0.15);
+      color: var(--accent-secondary);
+      border: 1px solid rgba(0, 180, 216, 0.2);
+    }
+
+
+    /* --- Skill Card Specifics (Unified with Project Card Format) --- */
+    .skill-card-enhanced .skill-visual {
+      width: 100%;
+      height: 200px; /* Match project image height */
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      z-index: 1000;
-      border: none;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      font-size: 1.25rem;
+      background-color: rgba(0, 180, 216, 0.03); /* Very light background for visual area */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03); /* Separator below visual area */
+    }
+    body.dark .skill-card-enhanced .skill-visual {
+      background-color: rgba(0, 180, 216, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .skill-card-enhanced .skill-visual .skill-icon {
+      font-size: 4rem; /* Larger icon in visual area */
+      color: var(--accent);
+      opacity: 0.8;
+    }
+
+    .skill-card-enhanced .skill-header {
+      padding: 1.5rem 1.5rem 0.5rem; /* Match project header padding */
+      text-align: center; /* Center title */
+    }
+    .skill-card-enhanced .skill-header .skill-title {
+      font-size: 1.4rem; /* Match project title size */
+      margin-bottom: 0; /* No bottom margin here, handled by content wrapper */
+      color: var(--text-light);
+    }
+    body.dark .skill-card-enhanced .skill-header .skill-title {
+      color: var(--text-dark);
+    }
+
+    .skill-card-enhanced .skill-content { /* New wrapper for description and metrics */
+      padding: 0.5rem 1.5rem 1rem; /* Match project content padding */
+      flex-grow: 1; /* Allows content to push tech tags to bottom */
+    }
+    .skill-card-enhanced .skill-description {
+      font-size: 0.95rem; /* Match project description size */
+      line-height: 1.6;
+      text-align: center; /* Center description */
+      margin-bottom: 1rem;
+      color: var(--text-light);
+      opacity: 0.9;
+    }
+    body.dark .skill-card-enhanced .skill-description {
+      color: var(--text-dark);
+    }
+
+    .skill-card-enhanced .skill-metrics {
+      margin-bottom: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.03); /* Match project stats separator */
+    }
+    body.dark .skill-card-enhanced .skill-metrics {
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    /* Redefine skill-level and skill-bar for better visual separation */
+    .skill-card-enhanced .skill-level {
+      display: flex; /* Use flexbox for horizontal alignment */
+      justify-content: space-between; /* Space out "Expertise" and percentage */
+      align-items: baseline; /* Align text baselines */
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem; /* Space between label/value and bar */
+      color: var(--text-light);
+      opacity: 0.8;
+    }
+    body.dark .skill-card-enhanced .skill-level {
+      color: var(--text-dark);
+    }
+    .skill-card-enhanced .skill-level span:first-child { /* Expertise label */
+      font-weight: 600;
+      /* No display: block; needed anymore as flex handles layout */
+      margin-bottom: 0; /* Remove previous margin */
+    }
+    .skill-card-enhanced .skill-level span:last-child { /* Percentage value */
+      font-size: 1.2rem; /* Make percentage more prominent */
+      font-weight: 700;
+      color: var(--accent-dark);
+      /* No display: block; needed anymore as flex handles layout */
+      margin-top: 0; /* Remove previous margin */
+    }
+
+    .skill-card-enhanced .skill-bar {
+      background-color: rgba(0,0,0,0.08);
+      border-radius: 5px;
+      height: 8px; /* Slightly thicker bar for better visibility */
+      overflow: hidden;
+      margin-top: 0.5rem; /* Space from skill-level */
+    }
+    body.dark .skill-card-enhanced .skill-bar {
+      background-color: rgba(255,255,255,0.08);
+    }
+    .skill-card-enhanced .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      border-radius: 5px;
+      width: 0;
+      transition: width 1s ease-out;
+    }
+    .skill-card-enhanced .skill-experience {
+      font-size: 0.75rem; /* Match project stat label size */
+      text-align: left; /* Align to the left */
+      margin-top: 1rem;
+      color: var(--text-light);
+      opacity: 0.7;
+    }
+    body.dark .skill-card-enhanced .skill-experience {
+      color: var(--text-dark);
+    }
+
+    .skill-card-enhanced .skill-tech { /* Renamed from .skill-tags for consistency */
+      padding: 1rem 1.5rem 1.5rem; /* Match project tech padding */
+      border-top: 1px solid rgba(0, 0, 0, 0.03); /* Match project tech separator */
+    }
+    body.dark .skill-card-enhanced .skill-tech {
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .skill-card-enhanced .skill-tech h5 { /* Added for consistency */
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      color: var(--text-light);
+      opacity: 0.8;
+    }
+    body.dark .skill-card-enhanced .skill-tech h5 {
+      color: var(--text-dark);
+    }
+    .skill-card-enhanced .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px; /* Match project tech tags gap */
+      justify-content: center;
+    }
+    .skill-card-enhanced .skill-tag {
+      background-color: var(--accent-secondary);
+      color: var(--accent-dark);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border: 1px solid rgba(0, 180, 216, 0.1);
+    }
+    body.dark .skill-card-enhanced .skill-tag {
+      background-color: rgba(0, 180, 216, 0.15);
+      color: var(--accent-secondary);
+      border: 1px solid rgba(0, 180, 216, 0.2);
     }
     
-    /* Updated contact section */
+    /* Detailed content styles (for modal) */
+    .card-detailed-content {
+        display: none; /* Hidden by default in the card, shown in modal */
+    }
+
+    /* ===== MODAL STYLES ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000; /* Higher than header */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      backdrop-filter: blur(8px); /* Blur effect for background */
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--bg-light);
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+      color: var(--text-light); /* Ensure text color is correct in modal */
+    }
+
+    body.dark .modal-content {
+      background: #282828;
+      color: var(--text-dark);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.2s ease;
+      line-height: 1;
+    }
+
+    body.dark .modal-close {
+      color: var(--text-dark);
+    }
+
+    .modal-close:hover {
+      color: var(--accent);
+      transform: rotate(90deg);
+    }
+
+    .modal-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: var(--accent);
+    }
+    .modal-content h4 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: var(--accent-dark);
+    }
+    .modal-content p, .modal-content ul {
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+    .modal-content ul {
+        list-style: disc inside;
+        padding-left: 1.5rem;
+    }
+    .modal-content .project-image,
+    .modal-content .skill-visual { /* Apply to both for modal consistency */
+        width: 100%;
+        height: 250px; /* Adjust height for modal */
+        background-size: cover;
+        background-position: center;
+        border-radius: var(--border-radius);
+        margin-bottom: 1.5rem;
+        display: flex; /* For centering icon in skill-visual */
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 180, 216, 0.05); /* Light background for skill visual in modal */
+    }
+    body.dark .modal-content .skill-visual {
+        background-color: rgba(0, 180, 216, 0.1);
+    }
+    .modal-content .skill-visual .skill-icon { /* Larger icon in modal visual */
+        font-size: 5rem;
+        color: var(--accent);
+        opacity: 0.8;
+    }
+
+    .modal-content .project-client,
+    .modal-content .skill-header { /* Skill header in modal now matches project client */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+    .modal-content .project-stats,
+    .modal-content .skill-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        padding-top: 1.5rem;
+    }
+    body.dark .modal-content .project-stats,
+    body.dark .modal-content .skill-metrics {
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .modal-content .project-stat,
+    .modal-content .skill-level,
+    .modal-content .skill-experience {
+        text-align: center;
+    }
+    .modal-content .stat-value,
+    .modal-content .skill-level span:last-child { /* Skill percentage is the value */
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--accent-dark);
+    }
+    .modal-content .stat-label,
+    .modal-content .skill-level span:first-child,
+    .modal-content .skill-experience {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        opacity: 0.8;
+    }
+    body.dark .modal-content .stat-label,
+    body.dark .modal-content .skill-level span:first-child,
+    body.dark .modal-content .skill-experience {
+        color: var(--text-dark);
+    }
+
+    .modal-content .skill-bar {
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 5px;
+        height: 8px;
+        margin-top: 5px;
+        overflow: hidden;
+    }
+    body.dark .modal-content .skill-bar {
+        background-color: rgba(255,255,255,0.1);
+    }
+    .modal-content .skill-progress {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+        border-radius: 5px;
+        width: 0; /* Animated on load */
+        transition: width 1s ease-out;
+    }
+    .modal-content .tech-tags,
+    .modal-content .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 1.5rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        padding-top: 1.5rem;
+    }
+    body.dark .modal-content .tech-tags,
+    body.dark .modal-content .skill-tags {
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .modal-content .tech-tag,
+    .modal-content .skill-tag {
+        background-color: var(--accent-secondary);
+        color: var(--accent-dark);
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+    body.dark .modal-content .tech-tag,
+    body.dark .modal-content .skill-tag {
+        background-color: rgba(0, 180, 216, 0.2);
+        color: var(--accent-secondary);
+    }
+
+
+    /* ===== CONTACT SECTION ===== */
     #contact {
       text-align: center;
     }
@@ -238,8 +812,93 @@
       color: var(--accent-dark);
       border-bottom: 2px solid var(--accent-dark);
     }
-    
-    /* Updated footer */
+
+    /* Contact Form Styling */
+    .contact-form {
+        max-width: 600px;
+        margin: 2rem auto 0;
+        padding: 2rem;
+        background: var(--bg-light);
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        opacity: 0;
+        animation: fadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    }
+
+    body.dark .contact-form {
+        background: #1e1e1e;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-form label {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-light);
+        opacity: 0.8;
+    }
+
+    body.dark .contact-form label {
+        color: var(--text-dark);
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.02);
+        color: var(--text-light);
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    body.dark .contact-form input[type="text"],
+    body.dark .contact-form input[type="email"],
+    body.dark .contact-form textarea {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--text-dark);
+    }
+
+    .contact-form input[type="text"]:focus,
+    .contact-form input[type="email"]:focus,
+    .contact-form textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.2);
+        outline: none;
+    }
+
+    .contact-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .contact-form button[type="submit"] {
+        background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+        color: white;
+        padding: 1rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        align-self: flex-end; /* Align button to the right */
+    }
+
+    .contact-form button[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 180, 216, 0.3);
+    }
+
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 4rem 2rem;
@@ -254,7 +913,39 @@
       gap: 0.5rem;
     }
     
-    /* WhatsApp button */
+    /* ===== UTILITY BUTTONS ===== */
+    .theme-toggle {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      border: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      transition: var(--transition), box-shadow 0.3s ease; /* Added box-shadow transition */
+      font-size: 1.25rem;
+    }
+
+    .theme-toggle:hover {
+        box-shadow: 0 0 25px rgba(0, 180, 216, 0.7), 0 0 40px rgba(0, 180, 216, 0.5); /* Subtle glow on hover */
+    }
+    
+    .theme-toggle #theme-icon {
+        transition: transform 0.5s ease-in-out; /* Icon rotation transition */
+    }
+
+    .theme-toggle #theme-icon.rotating {
+        transform: rotate(360deg);
+    }
+
     .whatsapp-button {
       position: fixed;
       bottom: 24px;
@@ -277,8 +968,20 @@
     .whatsapp-button:hover {
       transform: scale(1.1);
     }
+
+    /* Scroll Progress Indicator */
+    #scroll-progress-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%; /* Initial width */
+        height: 4px; /* Thin bar */
+        background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+        z-index: 1001; /* Above header but below modal */
+        transition: background 0.3s ease; /* Smooth color transition on theme change */
+    }
     
-    /* Animations */
+    /* ===== ANIMATIONS ===== */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -300,370 +1003,7 @@
       100% { background-position: 200% center; }
     }
     
-    /* ENHANCED PROJECTS SECTION */
-    #projects {
-      position: relative;
-    }
-    
-    .projects-container {
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
-    }
-    
-    .project-category {
-      margin-bottom: 2rem;
-    }
-    
-    .project-category h3 {
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid rgba(0, 180, 216, 0.2);
-    }
-    
-    body.dark .project-category h3 {
-      color: var(--accent-secondary);
-    }
-    
-    .project-category-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-    
-    .project-card-enhanced {
-      background: white;
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      height: 100%;
-    }
-    
-    body.dark .project-card-enhanced {
-      background: #1e1e1e;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .project-card-enhanced:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 48px rgba(0, 180, 216, 0.2);
-    }
-    
-    .project-image {
-      height: 200px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-    
-    .project-image::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
-    }
-    
-    .project-header {
-      padding: 1.5rem 1.5rem 1rem;
-    }
-    
-    .project-header h4 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      color: var(--accent);
-    }
-    
-    body.dark .project-header h4 {
-      color: var(--accent-secondary);
-    }
-    
-    .project-client {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 0.5rem;
-    }
-    
-    body.dark .project-client {
-      color: #aaa;
-    }
-    
-    .project-content {
-      padding: 0 1.5rem 1.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .project-description {
-      color: #666;
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    
-    body.dark .project-description {
-      color: #aaa;
-    }
-    
-    .project-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      margin-top: auto;
-    }
-    
-    .project-stat {
-      background: rgba(0, 180, 216, 0.08);
-      border-radius: 8px;
-      padding: 0.8rem;
-      text-align: center;
-    }
-    
-    body.dark .project-stat {
-      background: rgba(0, 180, 216, 0.12);
-    }
-    
-    .stat-value {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
-    }
-    
-    body.dark .stat-value {
-      color: var(--accent-secondary);
-    }
-    
-    .stat-label {
-      font-size: 0.85rem;
-      color: #666;
-    }
-    
-    body.dark .stat-label {
-      color: #aaa;
-    }
-    
-    .project-tech {
-      padding: 1.5rem;
-      background: #f8f9fa;
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    body.dark .project-tech {
-      background: #1a1a1a;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .project-tech h5 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.8rem;
-      color: #666;
-    }
-    
-    body.dark .project-tech h5 {
-      color: #aaa;
-    }
-    
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    
-    .tech-tag {
-      background: rgba(0, 180, 216, 0.1);
-      color: var(--accent);
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-    
-    body.dark .tech-tag {
-      background: rgba(0, 180, 216, 0.15);
-      color: var(--accent-secondary);
-    }
-    
-    /* ENHANCED SKILLS SECTION */
-    #skills {
-      position: relative;
-    }
-    
-    .skills-container {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-    }
-    
-    .skill-category {
-      margin-bottom: 2rem;
-    }
-    
-    .skill-category h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid rgba(0, 180, 216, 0.2);
-    }
-    
-    body.dark .skill-category h3 {
-      color: var(--accent-secondary);
-    }
-    
-    .skill-category-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .skill-card-enhanced {
-      background: white;
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    body.dark .skill-card-enhanced {
-      background: #1e1e1e;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .skill-card-enhanced:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0, 180, 216, 0.15);
-    }
-    
-    .skill-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.2rem;
-    }
-    
-    .skill-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      background: rgba(0, 180, 216, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: var(--accent);
-    }
-    
-    body.dark .skill-icon {
-      background: rgba(0, 180, 216, 0.15);
-      color: var(--accent-secondary);
-    }
-    
-    .skill-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-    }
-    
-    .skill-description {
-      color: #666;
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-    
-    body.dark .skill-description {
-      color: #aaa;
-    }
-    
-    .skill-metrics {
-      margin-top: auto;
-    }
-    
-    .skill-level {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-    
-    .skill-bar {
-      height: 8px;
-      background: #e9ecef;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    
-    body.dark .skill-bar {
-      background: #333;
-    }
-    
-    .skill-progress {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
-      border-radius: 4px;
-      transition: width 1s ease-in-out;
-    }
-    
-    .skill-experience {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.8rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    
-    body.dark .skill-experience {
-      color: #aaa;
-    }
-    
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    
-    .skill-tag {
-      background: rgba(0, 180, 216, 0.1);
-      color: var(--accent);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-    
-    body.dark .skill-tag {
-      background: rgba(0, 180, 216, 0.15);
-      color: var(--accent-secondary);
-    }
-    
-    /* Responsive adjustments */
+    /* ===== RESPONSIVE ADJUSTMENTS ===== */
     @media (max-width: 768px) {
       nav {
         gap: 1.25rem;
@@ -683,18 +1023,55 @@
         font-size: 1.1rem;
       }
       
-      .project-category-content, 
-      .skill-category-content {
+      .project-category-content,
+      .skill-category-content { /* Both become single column on mobile */
         grid-template-columns: 1fr;
       }
       
       .project-stats {
         grid-template-columns: 1fr;
       }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+      .modal-close {
+        font-size: 1.5rem;
+        top: 10px;
+        right: 10px;
+      }
+
+      /* Card specific responsive adjustments */
+      .project-card-enhanced .project-header,
+      .project-card-enhanced .project-content,
+      .project-card-enhanced .project-tech,
+      .skill-card-enhanced .skill-header,
+      .skill-card-enhanced .skill-content,
+      .skill-card-enhanced .skill-tech {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .project-card-enhanced .project-header,
+      .skill-card-enhanced .skill-header {
+        padding-top: 1rem;
+      }
+      .project-card-enhanced .project-content,
+      .skill-card-enhanced .skill-content {
+        padding-bottom: 0.5rem;
+      }
+      .project-card-enhanced .project-tech,
+      .skill-card-enhanced .skill-tech {
+        padding-bottom: 1rem;
+      }
+
+      .contact-form {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body class="no-tap-highlight">
+  <div id="scroll-progress-indicator"></div>
   <header>
     <nav>
       <a href="#intro">Home</a>
@@ -711,28 +1088,35 @@
   <section id="intro" class="hero">
     <h1 class="will-change">Hello, I'm AHR</h1>
     <p class="will-change">Traffic Engineer | Specializing in TIA, SIDRA, Python Automation, VBA Tools, Swept Path Analysis & AI-Enhanced Workflows.</p>
+    <a href="#projects" class="cta-button will-change">View My Projects <i class="fas fa-arrow-right"></i></a>
   </section>
 
   <section id="projects">
     <h2 class="will-change">My Projects</h2>
     
     <div class="projects-container">
-      <!-- Traffic Impact Assessments -->
+      <!-- ===== PROJECT CATEGORY: Traffic Impact Assessments ===== -->
       <div class="project-category">
         <h3><i class="fas fa-file-alt"></i> Traffic Impact Assessments</h3>
         <div class="project-category-content">
-          <!-- Penang Mall TIA -->
+          
+          <!-- START PROJECT CARD: Penang Mall TIA -->
           <div class="project-card-enhanced">
+            <!-- EDIT THIS CONTENT: Project Image -->
             <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1591160690555-5debfba289f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
+              <!-- EDIT THIS CONTENT: Project Title -->
               <h4>Traffic Impact Assessment – Penang Mall</h4>
+              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-building"></i> Client: Penang Development Corp
               </div>
             </div>
             <div class="project-content">
+              <!-- EDIT THIS CONTENT: Project Short Description -->
               <p class="project-description">Comprehensive TIA for a new shopping mall development with 1,200 parking spaces. Included SIDRA modeling for 4 signalized intersections and proposed junction improvements.</p>
               <div class="project-stats">
+                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">32%</div>
                   <div class="stat-label">Delay Reduction</div>
@@ -754,26 +1138,48 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
+                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">AutoCAD</span>
                 <span class="tech-tag">GIS</span>
                 <span class="tech-tag">VBA</span>
               </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Project Deep Dive: Penang Mall TIA</h3>
+                <p>This project involved a detailed traffic impact assessment for a major retail development. Our analysis focused on predicting future traffic volumes and their impact on surrounding road networks. We utilized SIDRA INTERSECTION to model various scenarios, including the proposed access points and internal circulation.</p>
+                <h4>Methodology:</h4>
+                <ul>
+                    <li><strong>Traffic Surveys:</strong> Conducted extensive manual and automated traffic counts.</li>
+                    <li><strong>Trip Generation & Distribution:</strong> Applied local and international trip generation rates.</li>
+                    <li><strong>Capacity Analysis:</strong> Performed detailed capacity analysis using SIDRA INTERSECTION 9.0.</li>
+                    <li><strong>Swept Path Analysis:</strong> Ensured adequate maneuverability for delivery vehicles and emergency services within the site.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>Our recommendations were adopted by the client and approved by the local authorities, leading to a more efficient and safer traffic environment around the new mall. The project demonstrated our ability to handle large-scale developments and deliver practical, data-driven solutions.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
+          <!-- END PROJECT CARD: Penang Mall TIA -->
           
-          <!-- Industrial Park TIA -->
+          <!-- START PROJECT CARD: Industrial Park TIA -->
           <div class="project-card-enhanced">
-            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
+            <!-- EDIT THIS CONTENT: Project Image -->
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1532996122724-e3c3540b15b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
+              <!-- EDIT THIS CONTENT: Project Title -->
               <h4>Industrial Park Access Study</h4>
+              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-industry"></i> Client: National Industrial Authority
               </div>
             </div>
             <div class="project-content">
+              <!-- EDIT THIS CONTENT: Project Short Description -->
               <p class="project-description">Traffic impact assessment for a new industrial park with heavy vehicle access requirements. Included swept path analysis for 53' trailers and signal optimization.</p>
               <div class="project-stats">
+                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">45%</div>
                   <div class="stat-label">Safety Improvement</div>
@@ -795,32 +1201,54 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
+                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">AutoTURN</span>
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">GIS</span>
               </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Project Deep Dive: Industrial Park Access Study</h3>
+                <p>This study focused on optimizing access and internal circulation for a large industrial park, with a strong emphasis on heavy vehicle movements. We performed detailed swept path analyses using AutoTURN to ensure that 53-foot semi-trailers could safely and efficiently navigate all proposed access points, internal roads, and loading docks.</p>
+                <h4>Methodology:</h4>
+                <ul>
+                    <li><strong>Heavy Vehicle Simulation:</strong> Used AutoTURN for precise swept path analysis.</li>
+                    <li><strong>Traffic Demand Forecasting:</strong> Developed models for industrial vehicle trip generation.</li>
+                    <li><strong>Signal Design & Optimization:</strong> Created signal plans and timings for multiple intersections.</li>
+                    <li><strong>Safety Audits:</strong> Identified and mitigated potential conflict points for vehicles and pedestrians.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>The implemented design significantly improved the operational efficiency of the industrial park's logistics and enhanced safety for both heavy vehicles and other road users. This project highlighted my expertise in specialized vehicle movements and large-scale industrial traffic management.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
+          <!-- END PROJECT CARD: Industrial Park TIA -->
         </div>
       </div>
       
-      <!-- Automation & Tools -->
+      <!-- ===== PROJECT CATEGORY: Automation & Tools ===== -->
       <div class="project-category">
         <h3><i class="fas fa-cogs"></i> Automation & Tools</h3>
         <div class="project-category-content">
-          <!-- Python Junction Tool -->
+          <!-- START PROJECT CARD: Python Junction Tool -->
           <div class="project-card-enhanced">
+            <!-- EDIT THIS CONTENT: Project Image -->
             <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
+              <!-- EDIT THIS CONTENT: Project Title -->
               <h4>Python: Batch Junction Analysis Tool</h4>
+              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-code"></i> Internal Development
               </div>
             </div>
             <div class="project-content">
+              <!-- EDIT THIS CONTENT: Project Short Description -->
               <p class="project-description">A Python automation tool to batch process and generate junction performance summaries from multiple SIDRA outputs. Processes 50+ junctions in minutes instead of hours.</p>
               <div class="project-stats">
+                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">90%</div>
                   <div class="stat-label">Time Savings</div>
@@ -842,26 +1270,48 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
+                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">Pandas</span>
                 <span class="tech-tag">SIDRA API</span>
                 <span class="tech-tag">Excel</span>
               </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Tool Deep Dive: Python Batch Junction Analysis</h3>
+                <p>This Python script was developed to significantly reduce the manual effort involved in processing and summarizing results from multiple SIDRA INTERSECTION files. In large projects, we often analyze dozens of junctions, each with multiple scenarios (e.g., existing, future, with improvements). Manually extracting key performance indicators (KPIs) like delays, queues, and Level of Service (LOS) from each SIDRA output file and compiling them into a summary table was extremely time-consuming and prone to errors.</p>
+                <h4>Features:</h4>
+                <ul>
+                    <li><strong>Batch Processing:</strong> Handles multiple SIDRA output files simultaneously.</li>
+                    <li><strong>Data Extraction:</strong> Automatically pulls critical performance metrics.</li>
+                    <li><strong>Customizable Reports:</strong> Generates Excel reports with user-defined summary tables.</li>
+                    <li><strong>Error Handling:</strong> Includes robust error checking for malformed SIDRA outputs.</li>
+                </ul>
+                <h4>Technical Details:</h4>
+                <p>The script leverages Python's `os` module for file system navigation, `pandas` for data structuring and manipulation, and `openpyxl` for writing to Excel files. It demonstrates my ability to apply programming skills to solve real-world engineering workflow inefficiencies.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
+          <!-- END PROJECT CARD: Python Junction Tool -->
           
-          <!-- VBA Reporting Tool -->
+          <!-- START PROJECT CARD: VBA Reporting Tool -->
           <div class="project-card-enhanced">
+            <!-- EDIT THIS CONTENT: Project Image -->
             <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
+              <!-- EDIT THIS CONTENT: Project Title -->
               <h4>VBA Macro: Auto Caption for Traffic Reports</h4>
+              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-file-word"></i> Internal Workflow
               </div>
             </div>
             <div class="project-content">
+              <!-- EDIT THIS CONTENT: Project Short Description -->
               <p class="project-description">Automated Word macro that inserts and labels figures in TIA documentation. Reduced report preparation time by 40% and eliminated manual errors in figure numbering.</p>
               <div class="project-stats">
+                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">40%</div>
                   <div class="stat-label">Time Savings</div>
@@ -883,39 +1333,57 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
+                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">VBA</span>
                 <span class="tech-tag">Microsoft Word</span>
                 <span class="tech-tag">Automation</span>
                 <span class="tech-tag">Documentation</span>
               </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Tool Deep Dive: VBA Auto-Caption Macro</h3>
+                <p>Generating comprehensive Traffic Impact Assessment (TIA) reports often involves inserting numerous figures, tables, and charts. Manually adding captions, ensuring correct numbering, and updating cross-references can be incredibly tedious and error-prone, especially in large documents that undergo frequent revisions.</p>
+                <h4>Features:</h4>
+                <ul>
+                    <li><strong>Automated Captioning:</strong> Inserts captions with sequential numbering.</li>
+                    <li><strong>Dynamic Cross-Referencing:</strong> Updates all references automatically.</li>
+                    <li><strong>User-Friendly Interface:</strong> Simple button click operation within Word.</li>
+                    <li><strong>Error Reduction:</strong> Eliminates manual numbering mistakes.</li>
+                </ul>
+                <h4>Technical Details:</h4>
+                <p>The macro interacts directly with Word's object model to manipulate document elements. This project showcases my ability to create practical, user-centric tools that streamline routine engineering tasks, even with legacy software environments like VBA.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
+          <!-- END PROJECT CARD: VBA Reporting Tool -->
         </div>
       </div>
       
-      <!-- SIDRA Modeling -->
+      <!-- ===== PROJECT CATEGORY: SIDRA Modeling ===== -->
       <div class="project-category">
         <h3><i class="fas fa-chart-line"></i> SIDRA Modeling</h3>
         <div class="project-category-content">
-          <!-- Interchange Upgrade -->
+          <!-- START PROJECT CARD: Interchange Upgrade -->
           <div class="project-card-enhanced">
+            <!-- EDIT THIS CONTENT: Project Image -->
             <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
+              <!-- EDIT THIS CONTENT: Project Title -->
               <h4>SIDRA Modelling: Interchange Upgrade</h4>
+              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-road"></i> Client: Highway Authority
               </div>
             </div>
             <div class="project-content">
+              <!-- EDIT THIS CONTENT: Project Short Description -->
               <p class="project-description">Modelled various phases and signal scenarios for an urban interchange redesign. Proposed solution reduced queues by 41% during peak hours and improved safety metrics.</p>
               <div class="project-stats">
+                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">41%</div>
                   <div class="stat-label">Queue Reduction</div>
-                </div>
-                <div class="project-stat">
-                  <div class="stat-value">18%</div>
-                  <div class="stat-label">Travel Time Savings</div>
                 </div>
                 <div class="project-stat">
                   <div class="stat-value">5</div>
@@ -930,26 +1398,48 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
+                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">GIS</span>
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">AutoCAD</span>
               </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Project Deep Dive: Urban Interchange Redesign</h3>
+                <p>This project involved a complex redesign of a major urban interchange to alleviate severe congestion and improve safety. Using SIDRA INTERSECTION, I developed and analyzed multiple signal phasing and geometric layout scenarios for the interchange, considering both current and future traffic demands.</p>
+                <h4>Methodology:</h4>
+                <ul>
+                    <li><strong>Traffic Data Collection:</strong> Gathered extensive data on traffic volumes, turning movements, and vehicle classifications.</li>
+                    <li><strong>SIDRA Modeling:</strong> Built detailed models of the existing and proposed interchange configurations.</li>
+                    <li><strong>Scenario Analysis:</strong> Evaluated various signal timings, lane configurations, and ramp metering strategies.</li>
+                    <li><strong>Performance Evaluation:</strong> Assessed impacts on delay, queue length, LOS, and safety.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>The proposed design, based on our SIDRA analysis, is expected to deliver substantial benefits in terms of reduced travel times and improved safety, contributing to the city's overall transportation efficiency and quality of life.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
+          <!-- END PROJECT CARD: Interchange Upgrade -->
           
-          <!-- Corridor Optimization -->
+          <!-- START PROJECT CARD: Corridor Optimization -->
           <div class="project-card-enhanced">
+            <!-- EDIT THIS CONTENT: Project Image -->
             <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')"></div>
             <div class="project-header">
+              <!-- EDIT THIS CONTENT: Project Title -->
               <h4>Corridor Signal Optimization</h4>
+              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-road"></i> Client: City Municipal Council
               </div>
             </div>
             <div class="project-content">
+              <!-- EDIT THIS CONTENT: Project Short Description -->
               <p class="project-description">Coordinated signal timing optimization for a 5-mile corridor with 15 intersections. Reduced travel time by 22% and improved Level of Service from D to B during PM peak.</p>
               <div class="project-stats">
+                <!-- EDIT THIS CONTENT: Project Statistics (Value and Label) -->
                 <div class="project-stat">
                   <div class="stat-value">22%</div>
                   <div class="stat-label">Travel Time Reduction</div>
@@ -971,13 +1461,30 @@
             <div class="project-tech">
               <h5>Technologies Used</h5>
               <div class="tech-tags">
+                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">VISSIM</span>
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">GIS</span>
               </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Project Deep Dive: Corridor Signal Optimization</h3>
+                <p>This project involved the comprehensive optimization of signal timings along a critical 5-mile urban corridor encompassing 15 signalized intersections. The objective was to improve traffic progression, reduce travel times, and enhance the overall efficiency of the corridor, particularly during peak commuting hours.</p>
+                <h4>Methodology:</h4>
+                <ul>
+                    <li><strong>Traffic Data Analysis:</strong> Processed extensive traffic count and speed data.</li>
+                    <li><strong>SIDRA Optimization:</strong> Optimized individual intersection timings for efficiency.</li>
+                    <li><strong>VISSIM Simulation:</strong> Modeled the entire corridor to evaluate progression and coordination.</li>
+                    <li><strong>Performance Metrics:</strong> Analyzed travel time, delay, queue lengths, and fuel consumption.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>The successful implementation of our optimized signal timings led to a noticeable improvement in traffic flow and a reduction in fuel consumption, demonstrating the tangible benefits of advanced traffic modeling and optimization techniques.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
+          <!-- END PROJECT CARD: Corridor Optimization -->
         </div>
       </div>
     </div>
@@ -987,239 +1494,481 @@
     <h2 class="will-change">My Skills</h2>
     
     <div class="skills-container">
-      <!-- Core Traffic Engineering Skills -->
+      <!-- ===== SKILL CATEGORY: Core Traffic Engineering Skills ===== -->
       <div class="skill-category">
         <h3><i class="fas fa-traffic-light"></i> Core Traffic Engineering</h3>
         <div class="skill-category-content">
-          <!-- Traffic Engineering -->
+          <!-- START SKILL CARD: Traffic Engineering -->
           <div class="skill-card-enhanced">
-            <div class="skill-header">
+            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+            <div class="skill-visual">
               <div class="skill-icon">
                 <i class="fas fa-road"></i>
               </div>
+            </div>
+            <div class="skill-header">
+              <!-- EDIT THIS CONTENT: Skill Title -->
               <h4 class="skill-title">Traffic Engineering</h4>
             </div>
-            <p class="skill-description">Expertise in signal timing, capacity analysis, and planning of intersections and corridors.</p>
-            <div class="skill-metrics">
-              <div class="skill-level">
-                <span>Expertise</span>
-                <span>95%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" style="width: 95%"></div>
-              </div>
-              <div class="skill-experience">
-                <i class="fas fa-clock"></i> 7+ years experience
+            <div class="skill-content">
+              <!-- EDIT THIS CONTENT: Skill Short Description -->
+              <p class="skill-description">Expertise in signal timing, capacity analysis, and planning of intersections and corridors.</p>
+              <div class="skill-metrics">
+                <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+                <div class="skill-level">
+                  <span>Expertise</span>
+                  <span>95%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: 95%"></div>
+                </div>
+                <!-- EDIT THIS CONTENT: Skill Experience -->
+                <div class="skill-experience">
+                  <i class="fas fa-clock"></i> 7+ years experience
+                </div>
               </div>
             </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Signal Timing</span>
-              <span class="skill-tag">Capacity Analysis</span>
-              <span class="skill-tag">Corridor Planning</span>
+            <div class="skill-tech">
+              <h5>Technologies Used</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Signal Timing</span>
+                <span class="skill-tag">Capacity Analysis</span>
+                <span class="skill-tag">Corridor Planning</span>
+              </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Traffic Engineering: My Core Expertise</h3>
+                <p>My foundational expertise lies in the core principles of traffic engineering, encompassing the design, operation, and management of transportation systems to ensure safe, efficient, and sustainable movement of people and goods. This involves a deep understanding of traffic flow theory, highway capacity, and traffic control devices.</p>
+                <h4>Key Areas:</h4>
+                <ul>
+                    <li><strong>Traffic Flow Theory:</strong> Understanding fundamental relationships between speed, density, and flow.</li>
+                    <li><strong>Intersection Design:</strong> Optimizing geometry and control for various intersection types.</li>
+                    <li><strong>Traffic Control Devices:</strong> Expertise in signals, signs, and markings.</li>
+                    <li><strong>Safety Analysis:</strong> Identifying and mitigating collision risks.</li>
+                </ul>
+                <h4>Application:</h4>
+                <p>This skill is the bedrock of all my projects, enabling me to translate theoretical knowledge into practical, impactful engineering solutions for real-world traffic challenges.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
+          <!-- END SKILL CARD: Traffic Engineering -->
           
-          <!-- TIA Report -->
+          <!-- START SKILL CARD: TIA Report -->
           <div class="skill-card-enhanced">
-            <div class="skill-header">
+            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+            <div class="skill-visual">
               <div class="skill-icon">
                 <i class="fas fa-file-alt"></i>
               </div>
-              <h4 class="skill-title">TIA Report</h4>
             </div>
-            <p class="skill-description">Preparation of TIA in accordance with local guidelines and authority requirements.</p>
-            <div class="skill-metrics">
-              <div class="skill-level">
-                <span>Expertise</span>
-                <span>90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" style="width: 90%"></div>
-              </div>
-              <div class="skill-experience">
-                <i class="fas fa-clock"></i> 50+ reports completed
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Compliance</span>
-              <span class="skill-tag">Analysis</span>
-              <span class="skill-tag">Documentation</span>
-            </div>
-          </div>
-          
-          <!-- SIDRA -->
-          <div class="skill-card-enhanced">
             <div class="skill-header">
-              <div class="skill-icon">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <h4 class="skill-title">SIDRA</h4>
+              <!-- EDIT THIS CONTENT: Skill Title -->
+              <h4 class="skill-title">TIA Report Preparation</h4>
             </div>
-            <p class="skill-description">Experienced in SIDRA Intersection modelling including calibration and optimization.</p>
-            <div class="skill-metrics">
-              <div class="skill-level">
-                <span>Expertise</span>
-                <span>98%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" style="width: 98%"></div>
-              </div>
-              <div class="skill-experience">
-                <i class="fas fa-clock"></i> 200+ projects
+            <div class="skill-content">
+              <!-- EDIT THIS CONTENT: Skill Short Description -->
+              <p class="skill-description">Preparation of TIA in accordance with local guidelines and authority requirements.</p>
+              <div class="skill-metrics">
+                <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+                <div class="skill-level">
+                  <span>Expertise</span>
+                  <span>90%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: 90%"></div>
+                </div>
+                <!-- EDIT THIS CONTENT: Skill Experience -->
+                <div class="skill-experience">
+                  <i class="fas fa-clock"></i> 50+ reports completed
+                </div>
               </div>
             </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Modelling</span>
-              <span class="skill-tag">Calibration</span>
-              <span class="skill-tag">Optimization</span>
+            <div class="skill-tech">
+              <h5>Technologies Used</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Report Writing</span>
+                <span class="skill-tag">Guidelines Adherence</span>
+                <span class="skill-tag">Authority Liaison</span>
+              </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>TIA Report Preparation: Comprehensive Documentation</h3>
+                <p>A crucial aspect of traffic engineering is the ability to clearly and comprehensively document findings and recommendations in Traffic Impact Assessment (TIA) reports. My expertise includes preparing TIAs that strictly adhere to local and national guidelines, ensuring all regulatory requirements are met for development approvals.</p>
+                <h4>Key Elements of My TIA Reports:</h4>
+                <ul>
+                    <li><strong>Executive Summary:</strong> Concise overview of findings and recommendations.</li>
+                    <li><strong>Existing Conditions Analysis:</strong> Detailed review of current traffic, road network, and public transport.</li>
+                    <li><strong>Trip Generation & Distribution:</strong> Forecasting future traffic from proposed developments.</li>
+                    <li><strong>Impact Analysis:</strong> Assessing the development's effect on surrounding infrastructure.</li>
+                    <li><strong>Mitigation Measures:</strong> Proposing solutions like signal upgrades, geometric changes, or public transport enhancements.</li>
+                </ul>
+                <h4>Process:</h4>
+                <p>My process involves thorough data analysis, meticulous report structuring, and iterative revisions based on stakeholder feedback, ensuring a high-quality and defensible document.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
-          
-          <!-- Swept Path -->
-          <div class="skill-card-enhanced">
-            <div class="skill-header">
-              <div class="skill-icon">
-                <i class="fas fa-car"></i>
-              </div>
-              <h4 class="skill-title">Swept Path Analysis</h4>
-            </div>
-            <p class="skill-description">Vehicle turning template checks using AutoTURN for site access and design validation.</p>
-            <div class="skill-metrics">
-              <div class="skill-level">
-                <span>Expertise</span>
-                <span>92%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" style="width: 92%"></div>
-              </div>
-              <div class="skill-experience">
-                <i class="fas fa-clock"></i> 5+ years experience
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">AutoTURN</span>
-              <span class="skill-tag">Vehicle Tracking</span>
-              <span class="skill-tag">Design Validation</span>
-            </div>
-          </div>
+          <!-- END SKILL CARD: TIA Report -->
         </div>
       </div>
-      
-      <!-- Technical & Software Skills -->
+
+      <!-- ===== SKILL CATEGORY: Technical & Software ===== -->
       <div class="skill-category">
         <h3><i class="fas fa-laptop-code"></i> Technical & Software</h3>
         <div class="skill-category-content">
-          <!-- Python -->
+          
+          <!-- START SKILL CARD: SIDRA INTERSECTION -->
           <div class="skill-card-enhanced">
+            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+            <div class="skill-visual">
+              <div class="skill-icon">
+                <i class="fas fa-chart-area"></i>
+              </div>
+            </div>
             <div class="skill-header">
+              <!-- EDIT THIS CONTENT: Skill Title -->
+              <h4 class="skill-title">SIDRA INTERSECTION</h4>
+            </div>
+            <div class="skill-content">
+              <!-- EDIT THIS CONTENT: Skill Short Description -->
+              <p class="skill-description">Advanced proficiency in SIDRA for intersection and network analysis, signal optimization, and roundabout design.</p>
+              <div class="skill-metrics">
+                <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+                <div class="skill-level">
+                  <span>Expertise</span>
+                  <span>98%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: 98%"></div>
+                </div>
+                <!-- EDIT THIS CONTENT: Skill Experience -->
+                <div class="skill-experience">
+                  <i class="fas fa-clock"></i> 6+ years experience
+                </div>
+              </div>
+            </div>
+            <div class="skill-tech">
+              <h5>Technologies Used</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Intersection Analysis</span>
+                <span class="skill-tag">Signal Optimization</span>
+                <span class="skill-tag">Roundabouts</span>
+                <span class="skill-tag">Network Modeling</span>
+              </div>
+            </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Mastering SIDRA INTERSECTION</h3>
+                <p>SIDRA INTERSECTION is an industry-leading software for intersection and network analysis, and I possess advanced proficiency in its application. I leverage SIDRA for detailed capacity analysis, signal timing optimization, roundabout design, and performance evaluation of various intersection types. My expertise extends to complex network modeling, ensuring seamless integration of individual intersections into a broader transportation system.</p>
+                <h4>Key Capabilities:</h4>
+                <ul>
+                    <li><strong>Signalized Intersections:</strong> Comprehensive analysis of fixed-time and actuated signals.</li>
+                    <li><strong>Roundabouts:</strong> Design and performance assessment of single and multi-lane roundabouts.</li>
+                    <li><strong>Unsignalized Intersections:</strong> Analysis of give-way/stop-controlled junctions.</li>
+                    <li><strong>Network Analysis:</strong> Modeling and optimizing interconnected intersections.</li>
+                    <li><strong>Custom Reports:</strong> Generating tailored reports for specific project requirements.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>My strong command of SIDRA allows me to quickly model, analyze, and optimize traffic scenarios, leading to data-driven recommendations that significantly improve traffic flow and reduce delays.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
+          </div>
+          <!-- END SKILL CARD: SIDRA INTERSECTION -->
+
+          <!-- START SKILL CARD: Python Automation -->
+          <div class="skill-card-enhanced">
+            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+            <div class="skill-visual">
               <div class="skill-icon">
                 <i class="fab fa-python"></i>
               </div>
-              <h4 class="skill-title">Python</h4>
             </div>
-            <p class="skill-description">Scripting tools for traffic analysis and automation of data handling/reporting.</p>
-            <div class="skill-metrics">
-              <div class="skill-level">
-                <span>Expertise</span>
-                <span>85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" style="width: 85%"></div>
-              </div>
-              <div class="skill-experience">
-                <i class="fas fa-clock"></i> 4+ years experience
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Pandas</span>
-              <span class="skill-tag">Automation</span>
-              <span class="skill-tag">Data Analysis</span>
-            </div>
-          </div>
-          
-          <!-- VBA -->
-          <div class="skill-card-enhanced">
             <div class="skill-header">
+              <!-- EDIT THIS CONTENT: Skill Title -->
+              <h4 class="skill-title">Python Automation</h4>
+            </div>
+            <div class="skill-content">
+              <!-- EDIT THIS CONTENT: Skill Short Description -->
+              <p class="skill-description">Developing scripts for data analysis, report generation, and workflow automation in traffic engineering.</p>
+              <div class="skill-metrics">
+                <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+                <div class="skill-level">
+                  <span>Expertise</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: 85%"></div>
+                </div>
+                <!-- EDIT THIS CONTENT: Skill Experience -->
+                <div class="skill-experience">
+                  <i class="fas fa-clock"></i> 3+ years experience
+                </div>
+              </div>
+            </div>
+            <div class="skill-tech">
+              <h5>Technologies Used</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Scripting</span>
+                <span class="skill-tag">Data Processing</span>
+                <span class="tech-tag">Workflow Optimization</span>
+                <span class="tech-tag">API Integration</span>
+              </div>
+            </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Python Automation: Streamlining Workflows</h3>
+                <p>I utilize Python to automate repetitive and time-consuming tasks in traffic engineering, significantly improving efficiency and reducing human error. My scripting capabilities extend to data cleaning, analysis, visualization, and automated report generation from various software outputs.</p>
+                <h4>Applications:</h4>
+                <ul>
+                    <li><strong>Traffic Data Analysis:</strong> Processing raw traffic count data, turning movement counts.</li>
+                    <li><strong>Report Automation:</strong> Generating summary tables and charts from simulation outputs.</li>
+                    <li><strong>GIS Integration:</strong> Automating spatial analysis and map generation.</li>
+                    <li><strong>Custom Tools:</strong> Building specialized scripts for unique project needs.</li>
+                </ul>
+                <h4>Libraries & Concepts:</h4>
+                <p>Proficient in libraries like Pandas for data manipulation, Matplotlib/Seaborn for visualization, and various modules for file I/O and API interactions. I apply concepts of object-oriented programming for robust and maintainable code.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
+          </div>
+          <!-- END SKILL CARD: Python Automation -->
+
+          <!-- START SKILL CARD: VBA Programming -->
+          <div class="skill-card-enhanced">
+            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+            <div class="skill-visual">
               <div class="skill-icon">
                 <i class="fas fa-file-excel"></i>
               </div>
-              <h4 class="skill-title">VBA</h4>
             </div>
-            <p class="skill-description">Created Excel/Word automation for reporting, graph generation, and data structuring.</p>
-            <div class="skill-metrics">
-              <div class="skill-level">
-                <span>Expertise</span>
-                <span>88%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" style="width: 88%"></div>
-              </div>
-              <div class="skill-experience">
-                <i class="fas fa-clock"></i> 25+ tools developed
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Excel</span>
-              <span class="skill-tag">Automation</span>
-              <span class="skill-tag">Reporting</span>
-            </div>
-          </div>
-          
-          <!-- AutoCAD -->
-          <div class="skill-card-enhanced">
             <div class="skill-header">
+              <!-- EDIT THIS CONTENT: Skill Title -->
+              <h4 class="skill-title">VBA Programming</h4>
+            </div>
+            <div class="skill-content">
+              <!-- EDIT THIS CONTENT: Skill Short Description -->
+              <p class="skill-description">Creating macros and custom functions for Excel and Word to automate routine office tasks and data processing.</p>
+              <div class="skill-metrics">
+                <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+                <div class="skill-level">
+                  <span>Expertise</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: 75%"></div>
+                </div>
+                <!-- EDIT THIS CONTENT: Skill Experience -->
+                <div class="skill-experience">
+                  <i class="fas fa-clock"></i> 4+ years experience
+                </div>
+              </div>
+            </div>
+            <div class="skill-tech">
+              <h5>Technologies Used</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Excel Macros</span>
+                <span class="skill-tag">Word Automation</span>
+                <span class="skill-tag">Data Entry Automation</span>
+                <span class="skill-tag">Custom Functions</span>
+              </div>
+            </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>VBA Programming: Enhancing Office Productivity</h3>
+                <p>I develop Visual Basic for Applications (VBA) macros and custom functions to automate and streamline tasks within Microsoft Office applications, particularly Excel and Word. This is invaluable for routine data processing, report formatting, and generating standardized documents in traffic engineering.</p>
+                <h4>Applications:</h4>
+                <ul>
+                    <li><strong>Excel Data Management:</strong> Automating data import, cleaning, and calculations.</li>
+                    <li><strong>Report Generation:</strong> Creating dynamic tables and charts in Word/Excel.</li>
+                    <li><strong>Form Automation:</strong> Developing user forms for structured data input.</li>
+                    <li><strong>Custom Utilities:</strong> Building specific tools for unique project-related calculations.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>VBA allows me to tailor office applications to specific engineering needs, leading to increased productivity and higher quality deliverables by minimizing manual intervention.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
+          </div>
+          <!-- END SKILL CARD: VBA Programming -->
+
+          <!-- START SKILL CARD: AutoCAD Civil 3D -->
+          <div class="skill-card-enhanced">
+            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+            <div class="skill-visual">
               <div class="skill-icon">
                 <i class="fas fa-drafting-compass"></i>
               </div>
-              <h4 class="skill-title">AutoCAD</h4>
             </div>
-            <p class="skill-description">Drafting traffic plans, road geometry, and swept path layouts.</p>
-            <div class="skill-metrics">
-              <div class="skill-level">
-                <span>Expertise</span>
-                <span>80%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" style="width: 80%"></div>
-              </div>
-              <div class="skill-experience">
-                <i class="fas fa-clock"></i> 6+ years experience
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Drafting</span>
-              <span class="skill-tag">Design</span>
-              <span class="skill-tag">Layouts</span>
-            </div>
-          </div>
-          
-          <!-- AI Workflows -->
-          <div class="skill-card-enhanced">
             <div class="skill-header">
-              <div class="skill-icon">
-                <i class="fas fa-robot"></i>
-              </div>
-              <h4 class="skill-title">AI Workflows</h4>
+              <!-- EDIT THIS CONTENT: Skill Title -->
+              <h4 class="skill-title">AutoCAD Civil 3D</h4>
             </div>
-            <p class="skill-description">Implemented AI-assisted workflows to streamline document generation and design review.</p>
-            <div class="skill-metrics">
-              <div class="skill-level">
-                <span>Expertise</span>
-                <span>75%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" style="width: 75%"></div>
-              </div>
-              <div class="skill-experience">
-                <i class="fas fa-clock"></i> 2+ years experience
+            <div class="skill-content">
+              <!-- EDIT THIS CONTENT: Skill Short Description -->
+              <p class="skill-description">Proficient in using AutoCAD Civil 3D for drafting, civil design, and preparing engineering drawings for traffic schemes.</p>
+              <div class="skill-metrics">
+                <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+                <div class="skill-level">
+                  <span>Expertise</span>
+                  <span>92%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: 92%"></div>
+                </div>
+                <!-- EDIT THIS CONTENT: Skill Experience -->
+                <div class="skill-experience">
+                  <i class="fas fa-clock"></i> 5+ years experience
+                </div>
               </div>
             </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Automation</span>
-              <span class="skill-tag">Documentation</span>
-              <span class="skill-tag">Efficiency</span>
+            <div class="skill-tech">
+              <h5>Technologies Used</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Drafting</span>
+                <span class="skill-tag">Civil Design</span>
+                <span class="skill-tag">Site Plans</span>
+                <span class="skill-tag">Geometric Design</span>
+              </div>
             </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>AutoCAD Civil 3D: Precision in Design</h3>
+                <p>AutoCAD Civil 3D is an essential tool in civil and traffic engineering for creating precise and detailed engineering drawings. My proficiency in Civil 3D allows me to translate traffic analysis and design concepts into accurate, constructible plans.</p>
+                <h4>Key Applications:</h4>
+                <ul>
+                    <li><strong>Intersection Layouts:</strong> Designing and detailing signalized and unsignalized intersections.</li>
+                    <li><strong>Roadway Design:</strong> Creating alignments, profiles, and cross-sections for new or upgraded roads.</li>
+                    <li><strong>Parking Lot Design:</strong> Laying out efficient and compliant parking facilities.</li>
+                    <li><strong>Site Grading:</strong> Integrating traffic elements with overall site development plans.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>My strong CAD skills ensure that all traffic engineering designs are accurately documented and ready for construction, facilitating smooth project execution and clear communication with construction teams.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
           </div>
+          <!-- END SKILL CARD: AutoCAD Civil 3D -->
+
+          <!-- START SKILL CARD: Swept Path Analysis -->
+          <div class="skill-card-enhanced">
+            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+            <div class="skill-visual">
+              <div class="skill-icon">
+                <i class="fas fa-truck"></i>
+              </div>
+            </div>
+            <div class="skill-header">
+              <!-- EDIT THIS CONTENT: Skill Title -->
+              <h4 class="skill-title">Swept Path Analysis</h4>
+            </div>
+            <div class="skill-content">
+              <!-- EDIT THIS CONTENT: Skill Short Description -->
+              <p class="skill-description">Performing swept path analysis for various vehicle types using AutoTURN to ensure adequate maneuverability and safety.</p>
+              <div class="skill-metrics">
+                <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+                <div class="skill-level">
+                  <span>Expertise</span>
+                  <span>90%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: 90%"></div>
+                </div>
+                <!-- EDIT THIS CONTENT: Skill Experience -->
+                <div class="skill-experience">
+                  <i class="fas fa-clock"></i> 4+ years experience
+                </div>
+              </div>
+            </div>
+            <div class="skill-tech">
+              <h5>Technologies Used</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">AutoTURN</span>
+                <span class="skill-tag">Vehicle Maneuverability</span>
+                <span class="skill-tag">Site Access</span>
+                <span class="skill-tag">Design Validation</span>
+              </div>
+            </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>Swept Path Analysis: Ensuring Vehicle Maneuverability</h3>
+                <p>Swept path analysis is critical for verifying that proposed road geometries, intersections, and access points can safely accommodate the turning movements of various design vehicles, especially large trucks, buses, and emergency vehicles. I am highly proficient in using AutoTURN, the leading software for this analysis.</p>
+                <h4>Applications:</h4>
+                <ul>
+                    <li><strong>Site Access Design:</strong> Verifying entry and exit points for large vehicles.</li>
+                    <li><strong>Intersection Design:</strong> Ensuring adequate turning radii and lane widths.</li>
+                    <li><strong>Parking Lot Layouts:</strong> Confirming maneuverability within parking areas.</li>
+                    <li><strong>Loading Docks:</strong> Assessing truck access and turning within industrial sites.</li>
+                </ul>
+                <h4>Impact:</h4>
+                <p>By proactively identifying and resolving geometric issues through swept path analysis, I contribute to the creation of safer and more efficient transportation infrastructure, minimizing operational constraints and potential accidents.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
+          </div>
+          <!-- END SKILL CARD: Swept Path Analysis -->
+
+          <!-- START SKILL CARD: AI-Assisted Workflows -->
+          <div class="skill-card-enhanced">
+            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+            <div class="skill-visual">
+              <div class="skill-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+            </div>
+            <div class="skill-header">
+              <!-- EDIT THIS CONTENT: Skill Title -->
+              <h4 class="skill-title">AI-Assisted Workflows</h4>
+            </div>
+            <div class="skill-content">
+              <!-- EDIT THIS CONTENT: Skill Short Description -->
+              <p class="skill-description">Leveraging AI tools for enhanced data analysis, predictive modeling, and report drafting to boost efficiency.</p>
+              <div class="skill-metrics">
+                <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+                <div class="skill-level">
+                  <span>Expertise</span>
+                  <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: 70%"></div>
+                </div>
+                <!-- EDIT THIS CONTENT: Skill Experience -->
+                <div class="skill-experience">
+                  <i class="fas fa-clock"></i> 1+ year experience
+                </div>
+              </div>
+            </div>
+            <div class="skill-tech">
+              <h5>Technologies Used</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">Data Science</span>
+                <span class="skill-tag">Predictive Analytics</span>
+                <span class="skill-tag">Natural Language Processing</span>
+              </div>
+            </div>
+            <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
+            <div class="card-detailed-content">
+                <h3>AI-Assisted Workflows: The Future of Traffic Engineering</h3>
+                <p>I am actively exploring and integrating artificial intelligence (AI) tools to enhance various aspects of traffic engineering workflows. This includes leveraging AI for more sophisticated data analysis, developing predictive models for traffic patterns, and using generative AI for initial report drafting and content summarization.</p>
+                <h4>Applications:</h4>
+                <ul>
+                    <li><strong>Traffic Prediction:</strong> Using ML models to forecast future traffic volumes and congestion.</li>
+                    <li><strong>Data Anomaly Detection:</strong> Identifying unusual patterns in traffic data.</li>
+                    <li><strong>Report Summarization:</strong> Quickly generating executive summaries and key findings.</li>
+                    <li><strong>Design Optimization:</strong> Exploring AI-driven algorithms for optimal signal timings or network layouts.</li>
+                </ul>
+                <h4>Tools & Concepts:</h4>
+                <p>Familiarity with concepts like supervised/unsupervised learning, natural language processing (NLP), and various AI platforms. My goal is to apply these technologies to solve complex traffic problems more efficiently.</p>
+            </div>
+            <!-- END EDIT THIS CONTENT: Detailed content for modal expansion -->
+          </div>
+          <!-- END SKILL CARD: AI-Assisted Workflows -->
+
         </div>
       </div>
     </div>
@@ -1231,16 +1980,130 @@
       <p style="margin-bottom: 1rem;">Email: <a href="mailto:ahr@example.com" style="color: var(--accent); text-decoration: none;">ahr@example.com</a></p>
       <p>Phone: <a href="tel:+60123456789" style="color: var(--accent); text-decoration: none;">+60 12-345 6789</a></p>
     </div>
+
+    <form class="contact-form" id="contactForm" action="mailto:ahr@example.com" method="post" enctype="text/plain">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="subject">Subject:</label>
+      <input type="text" id="subject" name="subject" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
   </section>
 
   <footer class="will-change">
     <p>© 2025 AHR Traffic Engineer. Built with ❤</p>
   </footer>
 
+  <!-- Update WhatsApp number -->
   <a class="whatsapp-button no-tap-highlight" href="https://wa.me/60123456789" target="_blank" aria-label="Contact via WhatsApp">💬</a>
 
+  <!-- Modal Structure -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div id="modal-content" class="modal-content">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <!-- Content will be dynamically inserted here -->
+    </div>
+  </div>
+
   <script>
-    // Performance optimized animations
+    let clickedCard = null; // To keep track of the currently clicked card for glow effect
+
+    // Function to open the modal
+    function openModal(card) {
+      const modalOverlay = document.getElementById('modal-overlay');
+      const modalContent = document.getElementById('modal-content');
+
+      // Clear previous content (except the close button)
+      modalContent.innerHTML = '<button class="modal-close" aria-label="Close modal">&times;</button>';
+
+      // Get content from the clicked card
+      const isProjectCard = card.classList.contains('project-card-enhanced');
+
+      if (isProjectCard) {
+        const projectImage = card.querySelector('.project-image');
+        const projectHeaderH4 = card.querySelector('.project-header h4');
+        const projectClient = card.querySelector('.project-client');
+        const projectDescription = card.querySelector('.project-description');
+        const projectStats = card.querySelector('.project-stats');
+        const projectTech = card.querySelector('.project-tech');
+        const detailedContent = card.querySelector('.card-detailed-content');
+
+        if (projectImage) {
+          const modalImage = document.createElement('div');
+          modalImage.className = 'project-image';
+          modalImage.style.backgroundImage = projectImage.style.backgroundImage;
+          modalContent.appendChild(modalImage);
+        }
+        if (projectHeaderH4) modalContent.appendChild(projectHeaderH4.cloneNode(true));
+        if (projectClient) modalContent.appendChild(projectClient.cloneNode(true));
+        if (projectDescription) modalContent.appendChild(projectDescription.cloneNode(true));
+        if (projectStats) modalContent.appendChild(projectStats.cloneNode(true));
+        if (projectTech) modalContent.appendChild(projectTech.cloneNode(true));
+        
+        // Append detailed content, make sure it's visible
+        if (detailedContent) {
+            const clonedDetailedContent = detailedContent.cloneNode(true);
+            clonedDetailedContent.style.display = 'block';
+            modalContent.appendChild(clonedDetailedContent);
+        }
+
+      } else { // Skill Card
+        // Clone the new skill card elements
+        const skillVisual = card.querySelector('.skill-visual');
+        const skillHeader = card.querySelector('.skill-header');
+        const skillContent = card.querySelector('.skill-content');
+        const skillTech = card.querySelector('.skill-tech');
+        const detailedContent = card.querySelector('.card-detailed-content');
+
+        // Append to modal content in the new order
+        if (skillVisual) modalContent.appendChild(skillVisual.cloneNode(true));
+        if (skillHeader) modalContent.appendChild(skillHeader.cloneNode(true));
+        if (skillContent) modalContent.appendChild(skillContent.cloneNode(true));
+        if (skillTech) modalContent.appendChild(skillTech.cloneNode(true));
+
+        // Append detailed content, make sure it's visible
+        if (detailedContent) {
+            const clonedDetailedContent = detailedContent.cloneNode(true);
+            clonedDetailedContent.style.display = 'block';
+            modalContent.appendChild(clonedDetailedContent);
+        }
+
+        // Re-animate skill bars within the modal
+        const modalSkillProgressBars = modalContent.querySelectorAll('.skill-progress');
+        modalSkillProgressBars.forEach(bar => {
+            // Reset width to 0 for re-animation
+            const originalWidth = bar.style.width;
+            bar.style.width = '0';
+            // Force reflow
+            void bar.offsetWidth; 
+            // Apply original width after a short delay
+            bar.style.width = originalWidth;
+        });
+      }
+
+      // Add close button listener to the new button in the modal
+      modalContent.querySelector('.modal-close').onclick = closeModal;
+
+      modalOverlay.classList.add('active');
+      document.body.classList.add('modal-open');
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      const modalOverlay = document.getElementById('modal-overlay');
+      modalOverlay.classList.remove('active');
+      document.body.classList.remove('modal-open');
+    }
+
+    // ===== ANIMATIONS =====
     function animateOnScroll() {
       const elements = document.querySelectorAll('.will-change');
       const observer = new IntersectionObserver((entries) => {
@@ -1249,63 +2112,172 @@
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
             observer.unobserve(entry.target);
-            
-            // Animate progress bars
+
+            // Animate progress bars on skills section entry
             if (entry.target.id === 'skills') {
               setTimeout(() => {
-                document.querySelectorAll('.skill-progress').forEach(bar => {
-                  bar.style.width = bar.style.width;
+                document.querySelectorAll('#skills .skill-progress').forEach(bar => {
+                  // Ensure initial width is set for animation
+                  bar.style.width = bar.getAttribute('style').match(/width:\s*(\d+)%/)[1] + '%';
                 });
               }, 300);
             }
           }
         });
       }, { threshold: 0.1 });
-      
+
       elements.forEach(el => observer.observe(el));
     }
-    
-    // Smooth theme toggle
+
+    // ===== THEME TOGGLE =====
     function toggleTheme() {
       const body = document.body;
       const icon = document.getElementById('theme-icon');
-      
-      // Start animation
+
+      // Start icon rotation animation
+      icon.classList.add('rotating');
+
+      // Start body background/color transition
       body.style.transition = 'background 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
-      
+
       body.classList.toggle('dark');
       const isDark = body.classList.contains('dark');
       icon.textContent = isDark ? '🌙' : '🌞';
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
       
-      // Reset transition after animation completes
+      // Update button title for accessibility
+      document.querySelector('.theme-toggle').title = isDark ? 'Toggle light mode' : 'Toggle dark mode';
+
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+      // Reset transition and remove rotating class after animation completes
       setTimeout(() => {
         body.style.transition = '';
+        icon.classList.remove('rotating');
       }, 600);
     }
-    
-    // Initialize
+
+    // ===== SCROLL PROGRESS INDICATOR =====
+    function updateScrollProgress() {
+      const scrollIndicator = document.getElementById('scroll-progress-indicator');
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPosition = window.scrollY;
+      const progress = (scrollPosition / totalHeight) * 100;
+      scrollIndicator.style.width = progress + '%';
+    }
+
+    // ===== INITIALIZATION =====
     document.addEventListener('DOMContentLoaded', () => {
-      // Set initial theme
+      const body = document.body;
+      const themeToggleBtn = document.querySelector('.theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+
+      // Set initial theme based on localStorage or system preference
       const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.body.classList.add('dark');
-        document.getElementById('theme-icon').textContent = '🌙';
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (savedTheme) {
+        if (savedTheme === 'dark') {
+          body.classList.add('dark');
+          themeIcon.textContent = '🌙';
+          themeToggleBtn.title = 'Toggle light mode';
+        } else {
+          themeIcon.textContent = '🌞';
+          themeToggleBtn.title = 'Toggle dark mode';
+        }
+      } else if (prefersDark) {
+        body.classList.add('dark');
+        themeIcon.textContent = ' ';
+        themeToggleBtn.title = 'Toggle light mode';
+      } else {
+        themeIcon.textContent = '🌞';
+        themeToggleBtn.title = 'Toggle dark mode';
       }
-      
+
       // Initialize animations
       animateOnScroll();
-      
+
       // Remove tap highlight on mobile
       document.body.classList.add('no-tap-highlight');
-      
+
       // Preload hover states
       document.querySelectorAll('.project-card-enhanced, .skill-card-enhanced, .theme-toggle, .whatsapp-button').forEach(el => {
         el.style.transform = 'translateZ(0)';
       });
+
+      // Add event listeners to all project and skill cards
+      document.querySelectorAll('.project-card-enhanced, .skill-card-enhanced').forEach(card => {
+        let lastCardTapTime = 0; // Local for each card
+
+        // Double-click to open modal (desktop)
+        card.addEventListener('dblclick', (e) => {
+          e.preventDefault(); // Prevent default double-click behavior (e.g., text selection)
+          e.stopPropagation(); // Stop event from bubbling up to body
+          openModal(card);
+          // After opening modal, remove glow if it was applied
+          if (clickedCard) {
+              clickedCard.classList.remove('clicked');
+              clickedCard = null;
+          }
+        });
+
+        // Single click for glow effect (desktop and mobile)
+        card.addEventListener('click', (e) => {
+          // If modal is open, do nothing (prevent glow on card behind modal)
+          if (document.body.classList.contains('modal-open')) {
+              return;
+          }
+
+          // Remove glow from previously clicked card
+          if (clickedCard && clickedCard !== card) {
+            clickedCard.classList.remove('clicked');
+          }
+          // Toggle glow on current card
+          card.classList.toggle('clicked');
+          clickedCard = card.classList.contains('clicked') ? card : null;
+        });
+
+        // Custom double-tap to open modal (mobile)
+        card.addEventListener('touchend', function(e) {
+          const currentTime = new Date().getTime();
+          const tapLength = currentTime - lastCardTapTime;
+          
+          // Check if it's a double tap (within 300ms) and modal is not open
+          if (tapLength < 300 && tapLength > 0 && !document.body.classList.contains('modal-open')) {
+            e.preventDefault(); // Prevent default click/zoom behavior
+            e.stopPropagation(); // Stop event from bubbling up to body
+            openModal(card);
+            // After opening modal, remove glow if it was applied
+            if (clickedCard) {
+                clickedCard.classList.remove('clicked');
+                clickedCard = null;
+            }
+            lastCardTapTime = 0; // Reset for next double tap
+          } else {
+            lastCardTapTime = currentTime;
+          }
+        });
+      });
+
+      // Close modal on overlay click (but not on modal content itself)
+      document.getElementById('modal-overlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) { // Only close if clicking the overlay, not its children
+          closeModal();
+        }
+      });
+
+      // Close modal on Escape key press
+      document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && document.body.classList.contains('modal-open')) {
+              closeModal();
+          }
+      });
+
+      // Initialize and update scroll progress
+      updateScrollProgress(); // Set initial state
+      window.addEventListener('scroll', updateScrollProgress);
     });
-    
-    // Smooth scrolling for anchor links
+
+    // ===== SMOOTH SCROLLING =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1321,3 +2293,4 @@
   </script>
 </body>
 </html>
+ 
