@@ -117,8 +117,8 @@
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.08);
       padding: 0 2rem;
-      display: flex; /* Changed to flex */
-      justify-content: space-between; /* Changed to space-between */
+      display: flex;
+      justify-content: space-between;
       align-items: center;
       z-index: 1000;
       transition: var(--transition);
@@ -139,6 +139,7 @@
         color: transparent;
         line-height: 1; /* Ensure proper vertical alignment */
         padding: 0.5rem 0; /* Align with nav links */
+        cursor: pointer; /* Indicate it's clickable */
     }
     
     nav {
@@ -309,6 +310,51 @@
       border-radius: 2px;
     }
     
+    /* ===== SERVICES SECTION ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .service-item {
+      background: var(--bg-light); /* Default light background */
+      color: var(--text-light); /* Default light text color */
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    body.dark .service-item {
+      background: #212121; /* Dark background for service items */
+      color: var(--text-dark); /* Dark text color for service items */
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-item i {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    body.dark .service-item i {
+      color: var(--dark-mode-accent);
+    }
+
+    .service-item h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-item p {
+      font-size: 0.95rem;
+    }
+
     /* ===== PROJECT CARDS ===== */
     .projects-container {
       display: flex;
@@ -355,7 +401,7 @@
       display: flex;
       flex-direction: column;
       border: 1px solid rgba(0, 0, 0, 0.03); /* Very subtle border */
-      height: 100%;
+      height: 100%; /* Ensure cards in a row have equal height */
       cursor: pointer;
       position: relative;
       z-index: 1;
@@ -447,6 +493,8 @@
       margin-top: 1rem;
       padding-top: 1rem;
       border-top: 1px solid rgba(0, 0, 0, 0.03); /* Subtle separator */
+      align-items: stretch; /* Ensure uniform height for all stat boxes in a row */
+      text-align: center; /* Center content within each stat */
     }
     body.dark .project-card-enhanced .project-stats {
       border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -455,6 +503,12 @@
       padding: 0.5rem;
       background-color: rgba(0, 180, 216, 0.05); /* Light accent background */
       border-radius: 8px;
+      /* Ensure content within project-stat is centered */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
     body.dark .project-card-enhanced .project-stat {
       background-color: rgba(128, 203, 196, 0.1); /* Updated dark mode accent */
@@ -464,6 +518,9 @@
       font-weight: 700;
       color: var(--accent-dark);
       margin-bottom: 0.2rem;
+      white-space: nowrap; /* Prevent value from wrapping */
+      overflow: hidden; /* Hide overflow */
+      text-overflow: ellipsis; /* Add ellipsis for overflow */
     }
     body.dark .project-card-enhanced .stat-value {
       color: var(--dark-mode-accent-dark); /* Updated dark mode accent */
@@ -472,6 +529,9 @@
       font-size: 0.75rem;
       color: var(--text-light);
       opacity: 0.7;
+      /* Removed white-space: nowrap to allow vertical stacking */
+      /* overflow: hidden; */ /* Keep if truncation is desired, but wrapping is preferred */
+      /* text-overflow: ellipsis; */ /* Keep if truncation is desired */
     }
     body.dark .project-card-enhanced .stat-label {
       color: var(--text-dark);
@@ -480,6 +540,8 @@
     .project-card-enhanced .project-tech {
       padding: 1rem 1.5rem 1.5rem; /* Consistent padding */
       border-top: 1px solid rgba(0, 0, 0, 0.03); /* Subtle separator */
+      /* Ensure vertical alignment of project-tech sections */
+      align-self: stretch; /* Stretch to fill available width */
     }
     body.dark .project-card-enhanced .project-tech {
       border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -520,12 +582,27 @@
     /* --- Skill Card Specifics (Unified with Project Card Format) --- */
     .skill-card-enhanced {
         display: flex;
-        flex-direction: column; /* Default for desktop: icon above text */
-        align-items: flex-start; /* Align content to the start (left) */
-        padding: 1.5rem; /* Unified padding for the card */
+        flex-direction: column; /* Stack all main elements vertically */
+        align-items: flex-start; /* Align all children to the left edge of the card's padding */
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        height: 100%;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
     }
 
-    .skill-card-enhanced .skill-visual {
+    .skill-first-line { /* New wrapper for icon and title */
+        display: flex;
+        align-items: center; /* Vertically align icon and title */
+        width: 100%; /* Allows flex-grow on skill-header */
+        margin-bottom: 1rem; /* Space below this line */
+    }
+
+    .skill-visual {
       width: 80px; /* Smaller width for icon */
       height: 80px; /* Smaller height for icon */
       border-radius: 50%; /* Make it circular */
@@ -533,7 +610,8 @@
       align-items: center;
       justify-content: center;
       background-color: rgba(0, 180, 216, 0.05); /* Very light background for visual area */
-      margin-bottom: 1rem; /* Margin below icon for column layout */
+      margin-right: 1.5rem; /* Space between icon and title */
+      flex-shrink: 0; /* Prevent icon from shrinking */
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for the icon circle */
     }
     body.dark .skill-card-enhanced .skill-visual {
@@ -549,15 +627,9 @@
       color: var(--dark-mode-accent); /* Updated dark mode accent */
     }
 
-    .skill-card-enhanced .skill-info-wrapper { /* NEW WRAPPER FOR TEXT CONTENT */
-        width: 100%; /* Take full width in column layout */
-        text-align: left; /* Ensure text inside is left-aligned */
-    }
-
-    .skill-card-enhanced .skill-header {
-      padding: 0; /* Remove previous padding, handled by wrapper */
-      text-align: left; /* Ensure title is left-aligned */
-      margin-bottom: 0.5rem; /* Space below title */
+    .skill-header {
+      flex-grow: 1; /* Allow title to take remaining space */
+      text-align: left; /* Ensure title is left-aligned within its space */
     }
     .skill-card-enhanced .skill-header .skill-title {
       font-size: 1.4rem;
@@ -568,11 +640,7 @@
       color: var(--text-dark);
     }
 
-    .skill-card-enhanced .skill-content {
-      padding: 0; /* Remove previous padding, handled by wrapper */
-      flex-grow: 1;
-      width: 100%; /* Ensure it takes full width for text alignment */
-    }
+    /* skill-description, skill-metrics, skill-tech are now direct children of skill-card-enhanced */
     .skill-card-enhanced .skill-description {
       font-size: 0.95rem;
       line-height: 1.6;
@@ -580,6 +648,7 @@
       margin-bottom: 1rem;
       color: var(--text-light);
       opacity: 0.9;
+      width: 100%; /* Ensure it takes full width */
     }
     body.dark .skill-card-enhanced .skill-description {
       color: var(--text-dark);
@@ -589,7 +658,7 @@
       margin-bottom: 1.5rem;
       padding-top: 1rem;
       border-top: 1px solid rgba(0, 0, 0, 0.03);
-      width: 100%;
+      width: 100%; /* Ensure it takes full width */
     }
     body.dark .skill-card-enhanced .skill-metrics {
       border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -653,7 +722,7 @@
     .skill-card-enhanced .skill-tech {
       padding-top: 1rem;
       border-top: 1px solid rgba(0, 0, 0, 0.03);
-      width: 100%;
+      width: 100%; /* Ensure it takes full width */
     }
     body.dark .skill-card-enhanced .skill-tech {
       border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -661,7 +730,7 @@
     .skill-card-enhanced .skill-tech h5 {
       font-size: 0.9rem;
       margin-bottom: 0.75rem;
-      text-align: center; /* Keep tags title centered */
+      text-align: left; /* Changed from center to left */
       color: var(--text-light);
       opacity: 0.8;
     }
@@ -672,7 +741,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      justify-content: center; /* Keep tags centered */
+      justify-content: flex-start; /* Changed from center to flex-start */
     }
     .skill-card-enhanced .skill-tag {
       background-color: var(--accent-secondary);
@@ -719,6 +788,12 @@
       visibility: visible;
     }
 
+    /* FIX FOR MODAL CONTENT NOT APPEARING / BLURRY */
+    .modal-overlay.active .modal-content {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     .modal-content {
       background: var(--bg-light);
       padding: 2.5rem;
@@ -727,7 +802,7 @@
       max-width: 90vw;
       max-height: 90vh;
       overflow-y: auto;
-      position: relative;
+      position: relative; /* Needed for sticky child */
       transform: translateY(20px);
       opacity: 0;
       transition: transform 0.3s ease-out, opacity 0.3s ease-out;
@@ -741,20 +816,25 @@
     }
 
     .modal-close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: none;
+      position: sticky; /* Changed to sticky */
+      top: 0; /* Sticks to the top of the scrollable modal-content */
+      float: right; /* Pushes it to the right */
+      background: var(--bg-light); /* Match modal background for smooth scroll */
+      padding: 0.5rem 0.75rem; /* Add padding to prevent text from going under it */
+      margin: -0.5rem -0.75rem 0.5rem auto; /* Adjust margin to align and push right */
       border: none;
       font-size: 2rem;
       color: var(--text-light);
       cursor: pointer;
       transition: color 0.3s ease, transform 0.2s ease;
       line-height: 1;
+      z-index: 10; /* Ensure it's above other content */
+      border-bottom-left-radius: var(--border-radius); /* Rounded corner for sticky effect */
     }
 
     body.dark .modal-close {
       color: var(--text-dark);
+      background: #282828; /* Match dark modal background */
     }
 
     .modal-close:hover {
@@ -1199,14 +1279,59 @@
     
     /* ===== RESPONSIVE ADJUSTMENTS ===== */
     @media (max-width: 768px) {
+      /* Mobile Header Alignment */
+      header {
+        flex-direction: row; /* Keep logo and nav horizontally */
+        justify-content: space-between; /* Space out logo and nav */
+        align-items: center; /* Center items vertically */
+        height: var(--header-height); /* Maintain fixed height */
+        padding: 0 1rem; /* Adjust padding for smaller screens */
+      }
+      
       nav {
-        gap: 1.25rem;
+        flex-direction: row; /* Keep nav links horizontal */
+        align-items: center; /* Center nav links vertically */
+        gap: 0.75rem; /* Reduce gap between links */
+        margin-top: 0; /* Remove top margin */
+        flex-wrap: wrap; /* Allow wrapping if space is tight */
+        justify-content: flex-end; /* Align links to the right */
       }
       
       nav a {
-        font-size: 0.9rem;
+        font-size: 0.85rem; /* Slightly smaller font for mobile nav links */
+        padding: 0.5rem 0.25rem; /* Adjust padding for smaller links */
       }
       
+      .header-logo {
+        font-size: 1.5rem; /* Smaller logo on mobile */
+      }
+
+      /* Hero Section Optimization for small screens (e.g., iPhone SE) */
+      .hero {
+        padding: calc(var(--header-height) + 1rem) 1rem 2rem; /* Reduced padding */
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 7vw, 3.5rem); /* Smaller min font size, slightly smaller vw */
+        margin-bottom: 1.5rem;
+      }
+      
+      .hero p {
+        font-size: clamp(0.95rem, 3.5vw, 1.2rem); /* Smaller min font size, slightly smaller vw */
+        margin-bottom: 2rem;
+      }
+
+      .hero .cta-buttons {
+        flex-direction: column;
+        gap: 0.75rem; /* Reduced gap between buttons */
+      }
+
+      .hero .cta-button {
+        padding: 0.8rem 1.5rem; /* Slightly smaller padding for buttons */
+        font-size: 1rem; /* Slightly smaller font for buttons */
+      }
+
+      /* General Mobile Adjustments */
       section {
         padding: 4rem 1.5rem;
       }
@@ -1224,11 +1349,6 @@
       
       .project-stats {
         grid-template-columns: 1fr;
-      }
-
-      .hero .cta-buttons {
-        flex-direction: column;
-        gap: 1rem;
       }
 
       .modal-content {
@@ -1260,55 +1380,6 @@
       .contact-form {
         padding: 1.5rem;
       }
-
-      /* Mobile-specific header layout */
-      header {
-        padding: 0 1rem; /* Adjust padding for smaller screens */
-      }
-
-      .header-logo {
-        font-size: 1.5rem; /* Smaller logo on mobile */
-      }
-    }
-
-    /* Mobile-specific styles for Skill Cards */
-    @media (max-width: 768px) {
-        .skill-card-enhanced {
-            flex-direction: row; /* Arrange children in a row */
-            align-items: flex-start; /* Align items to the top of the row */
-            padding: 1rem; /* Reduce padding for mobile card */
-        }
-
-        .skill-card-enhanced .skill-visual {
-            margin-right: 1rem; /* Space between icon and text */
-            margin-bottom: 0; /* Remove bottom margin in row layout */
-            flex-shrink: 0; /* Prevent icon from shrinking */
-            align-self: flex-start; /* Align icon to the top of the row */
-        }
-
-        .skill-card-enhanced .skill-info-wrapper {
-            flex-grow: 1; /* Allow text content to take remaining space */
-            padding-left: 0; /* Ensure no extra padding from previous rules */
-            padding-right: 0;
-        }
-
-        .skill-card-enhanced .skill-header {
-            margin-top: 0; /* Remove any top margin from header */
-        }
-
-        .skill-card-enhanced .skill-metrics,
-        .skill-card-enhanced .skill-tech {
-            padding-left: 0; /* Remove extra padding within the wrapper */
-            padding-right: 0;
-        }
-
-        /* Ensure modal visual remains large */
-        .modal-content .skill-visual {
-            width: 100%;
-            height: 250px;
-            border-radius: var(--border-radius); /* Back to rounded rectangle for modal */
-            margin-bottom: 1.5rem;
-        }
     }
   </style>
   <!-- SEO Enhancement: JSON-LD Structured Data for Person -->
@@ -1357,9 +1428,8 @@
 <body class="no-tap-highlight">
   <div id="scroll-progress-indicator"></div>
   <header>
-    <div class="header-logo">AHR</div>
+    <div class="header-logo" onclick="scrollToSection('intro')">AHR</div>
     <nav>
-      <a href="#intro">Home</a>
       <a href="#services">What I Do</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
@@ -1382,18 +1452,18 @@
 
   <section id="services">
     <h2 class="will-change">What I Do</h2>
-    <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: center;">
-      <div class="service-item" style="background: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(0,0,0,0.05); transition: var(--transition);">
+    <div class="services-grid">
+      <div class="service-item">
         <i class="fas fa-chart-pie" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
         <h4 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Traffic Impact Assessments</h4>
         <p style="font-size: 0.95rem;">Conducting detailed analyses of development impacts on traffic flow and recommending effective mitigation strategies.</p>
       </div>
-      <div class="service-item" style="background: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(0,0,0,0.05); transition: var(--transition);">
+      <div class="service-item">
         <i class="fas fa-network-wired" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
         <h4 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Traffic Simulation & Modeling</h4>
         <p style="font-size: 0.95rem;">Utilizing advanced software like SIDRA and VISSIM to model and optimize complex transportation networks.</p>
       </div>
-      <div class="service-item" style="background: var(--bg-light); padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(0,0,0,0.05); transition: var(--transition);">
+      <div class="service-item">
         <i class="fas fa-robot" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
         <h4 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Automation & Data Solutions</h4>
         <p style="font-size: 0.95rem;">Developing Python and VBA tools to automate workflows, process data, and generate insightful reports.</p>
@@ -1511,7 +1581,6 @@
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">AutoCAD Vehicle Tracking</span>
                 <span class="tech-tag">VISSIM</span>
-                <span class="tech-tag">GIS</span>
                 <span class="tech-tag">Multi-Modal Planning</span>
               </div>
             </div>
@@ -1539,7 +1608,6 @@
             <div class="project-header">
               <!-- EDIT THIS CONTENT: Project Title -->
               <h4>Swept Path Analysis for Penang High-Density Housing & Shop Lots</h4>
-              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-home"></i> Client: Penang Residential Developer
               </div>
@@ -1570,9 +1638,8 @@
               <h5>Technologies Used</h5>
               <div class="tech-tags">
                 <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
-                <span class="tech-tag">AutoTURN</span>
+                <span class="tech-tag">AutoCAD Vehicle Tracking</span>
                 <span class="tech-tag">AutoCAD</span>
-                <span class="tech-tag">Vehicle Tracking</span>
                 <span class="tech-tag">Geometric Design</span>
               </div>
             </div>
@@ -1583,7 +1650,7 @@
                 <h4>Methodology:</h4>
                 <ul>
                     <li><strong>Design Vehicle Identification:</strong> Key Malaysian design vehicles were meticulously identified and modeled, including Jabatan Bomba dan Penyelamat Malaysia (JBPM) fire engines (essential for emergency access), local municipal refuse collection vehicles, and various sizes of delivery vans and small trucks crucial for commercial servicing, all in strict accordance with prevailing local road design standards.</li>
-                    <li><strong>Site Layout Analysis:</strong> Existing and proposed site plans, meticulously prepared in AutoCAD, were seamlessly imported into AutoTURN for precise simulation of vehicle paths. Simulations rigorously tested critical maneuvers such as turning into and out of housing cul-de-sacs, navigating multi-storey car park ramps, accessing shop lot loading bays, and ensuring unhindered emergency vehicle access routes.</li>
+                    <li><strong>Site Layout Analysis:</strong> Existing and proposed site plans, meticulously prepared in AutoCAD, were seamlessly imported into AutoCAD Vehicle Tracking for precise simulation of vehicle paths. Simulations rigorously tested critical maneuvers such as turning into and out of housing cul-de-sacs, navigating multi-storey car park ramps, accessing shop lot loading bays, and ensuring unhindered emergency vehicle access routes.</li>
                     <li><strong>Conflict Resolution:</strong> Systematically identified and documented areas with insufficient turning radii, potential vehicle-to-vehicle conflicts, or inadequate clearances with existing or proposed infrastructure (e.g., street furniture, building corners).</li>
                     <li><strong>Geometric Optimization:</strong> Collaborated closely with the project architects and civil engineers to strategically recommend and rigorously test geometric adjustments. These included widening internal roads, modifying curb radii, and realigning parking bay entrances, all aimed at ensuring full compliance with regulatory requirements and optimizing traffic flow.</li>
                     <li><strong>Authority Submission:</strong> Prepared comprehensive swept path analysis reports, complete with clear visual overlays, for submission to local authorities (e.g., Majlis Bandaraya Pulau Pinang - MBPP). This documentation effectively demonstrated the development's unwavering adherence to stringent safety and accessibility standards.</li>
@@ -1609,7 +1676,6 @@
             <div class="project-header">
               <!-- EDIT THIS CONTENT: Project Title -->
               <h4>Python: Batch Junction Analysis Tool</h4>
-              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-code"></i> Internal Development
               </div>
@@ -1640,7 +1706,6 @@
               <div class="tech-tags">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">Pandas</span>
-                <span class="tech-tag">SIDRA API</span>
                 <span class="tech-tag">Excel Automation</span>
                 <span class="tech-tag">Data Processing</span>
               </div>
@@ -1787,7 +1852,6 @@
             <div class="project-header">
               <!-- EDIT THIS CONTENT: Project Title -->
               <h4>SIDRA Modelling: Urban Interchange Upgrade</h4>
-              <!-- EDIT THIS CONTENT: Client Name -->
               <div class="project-client">
                 <i class="fas fa-road"></i> Client: Highway Authority
               </div>
@@ -1804,8 +1868,8 @@
                   <div class="stat-label">Signal Scenarios</div>
                 </div>
                 <div class="project-stat">
-                  <div class="stat-value">$2.1M</div>
-                  <div class="stat-label">Project Value</div>
+                  <div class="stat-value">Significant</div>
+                  <div class="stat-label">Efficiency Gain</div>
                 </div>
               </div>
             </div>
@@ -1813,7 +1877,6 @@
               <h5>Technologies Used</h5>
               <div class="tech-tags">
                 <span class="tech-tag">SIDRA</span>
-                <span class="tech-tag">GIS</span>
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">AutoCAD</span>
                 <span class="tech-tag">Traffic Simulation</span>
@@ -1857,7 +1920,7 @@
                 </div>
                 <div class="project-stat">
                   <div class="stat-value">12%</div>
-                  <div class="stat-label">Fuel Savings</div>
+                  <div class="stat-label">Emissions Reduction</div>
                 </div>
                 <div class="project-stat">
                   <div class="stat-value">D → B</div>
@@ -1871,7 +1934,6 @@
                 <span class="tech-tag">SIDRA</span>
                 <span class="tech-tag">VISSIM</span>
                 <span class="tech-tag">Python</span>
-                <span class="tech-tag">GIS</span>
                 <span class="tech-tag">Traffic Simulation</span>
                 <span class="tech-tag">Corridor Optimization</span>
               </div>
@@ -1969,47 +2031,45 @@
         <div class="skill-category-content">
           <!-- START SKILL CARD: Traffic Engineering -->
           <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fas fa-road"></i>
+            <div class="skill-first-line">
+                <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+                <div class="skill-visual">
+                  <div class="skill-icon">
+                    <i class="fas fa-road"></i>
+                  </div>
+                </div>
+                <div class="skill-header">
+                    <!-- EDIT THIS CONTENT: Skill Title -->
+                    <h4 class="skill-title">Traffic Engineering & Planning</h4>
+                </div>
+            </div>
+            <!-- EDIT THIS CONTENT: Skill Short Description -->
+            <p class="skill-description">Proven expertise in optimizing signal timing, conducting thorough capacity analysis, and developing comprehensive transportation plans for complex intersections and urban corridors.</p>
+            <div class="skill-metrics">
+              <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+              <!-- EDIT THIS CONTENT: Skill Experience -->
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 4 years experience
               </div>
             </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">Traffic Engineering & Planning</h4>
+            <div class="skill-tech">
+              <h5>Key Concepts & Areas</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Signal Timing</span>
+                <span class="skill-tag">Capacity Analysis</span>
+                <span class="skill-tag">Corridor Planning</span>
+                <span class="skill-tag">Transportation Planning</span>
+                <span class="skill-tag">Traffic Flow Theory</span>
               </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Proven expertise in optimizing signal timing, conducting thorough capacity analysis, and developing comprehensive transportation plans for complex intersections and urban corridors.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>95%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 95%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 4 years experience
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Concepts & Areas</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">Signal Timing</span>
-                  <span class="skill-tag">Capacity Analysis</span>
-                  <span class="skill-tag">Corridor Planning</span>
-                  <span class="skill-tag">Transportation Planning</span>
-                  <span class="skill-tag">Traffic Flow Theory</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
+            </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>Traffic Engineering & Planning: Core Expertise</h3>
@@ -2031,46 +2091,44 @@
           
           <!-- START SKILL CARD: TIA Report -->
           <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fas fa-file-alt"></i>
+            <div class="skill-first-line">
+                <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+                <div class="skill-visual">
+                  <div class="skill-icon">
+                    <i class="fas fa-file-alt"></i>
+                  </div>
+                </div>
+                <div class="skill-header">
+                    <!-- EDIT THIS CONTENT: Skill Title -->
+                    <h4 class="skill-title">TIA Report Preparation & Submission</h4>
+                </div>
+            </div>
+            <!-- EDIT THIS CONTENT: Skill Short Description -->
+            <p class="skill-description">Skilled in preparing and submitting compliant Traffic Impact Assessment (TIA) reports, meticulously adhering to local and national guidelines to secure timely development approvals and facilitate effective stakeholder communication.</p>
+            <div class="skill-metrics">
+              <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+              <!-- EDIT THIS CONTENT: Skill Experience -->
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 50+ reports completed
               </div>
             </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">TIA Report Preparation & Submission</h4>
+            <div class="skill-tech">
+              <h5>Key Concepts & Tools</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Report Writing</span>
+                <span class="skill-tag">Guidelines Adherence</span>
+                <span class="skill-tag">Authority Liaison</span>
+                <span class="skill-tag">Development Planning</span>
               </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Skilled in preparing and submitting compliant Traffic Impact Assessment (TIA) reports, meticulously adhering to local and national guidelines to secure timely development approvals and facilitate effective stakeholder communication.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>90%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 90%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 50+ reports completed
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Concepts & Tools</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">Report Writing</span>
-                  <span class="skill-tag">Guidelines Adherence</span>
-                  <span class="skill-tag">Authority Liaison</span>
-                  <span class="skill-tag">Development Planning</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
+            </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>TIA Report Preparation: Comprehensive Documentation for Traffic Consulting</h3>
@@ -2099,47 +2157,45 @@
           
           <!-- START SKILL CARD: SIDRA INTERSECTION -->
           <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fas fa-chart-area"></i>
+            <div class="skill-first-line">
+                <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+                <div class="skill-visual">
+                  <div class="skill-icon">
+                    <i class="fas fa-chart-area"></i>
+                  </div>
+                </div>
+                <div class="skill-header">
+                    <!-- EDIT THIS CONTENT: Skill Title -->
+                    <h4 class="skill-title">SIDRA INTERSECTION</h4>
+                </div>
+            </div>
+            <!-- EDIT THIS CONTENT: Skill Short Description -->
+            <p class="skill-description">Advanced proficiency in SIDRA INTERSECTION for comprehensive intersection and network analysis, signal optimization, and efficient roundabout design, consistently delivering data-driven solutions for improved traffic flow and safety.</p>
+            <div class="skill-metrics">
+              <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>98%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 98%"></div>
+              </div>
+              <!-- EDIT THIS CONTENT: Skill Experience -->
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 4 years experience
               </div>
             </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">SIDRA INTERSECTION</h4>
+            <div class="skill-tech">
+              <h5>Key Applications</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Intersection Analysis</span>
+                <span class="skill-tag">Signal Optimization</span>
+                <span class="skill-tag">Roundabouts</span>
+                <span class="skill-tag">Network Modeling</span>
+                <span class="skill-tag">Capacity Analysis</span>
               </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Advanced proficiency in SIDRA INTERSECTION for comprehensive intersection and network analysis, signal optimization, and efficient roundabout design, consistently delivering data-driven solutions for improved traffic flow and safety.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>98%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 98%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 4 years experience
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Applications</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">Intersection Analysis</span>
-                  <span class="skill-tag">Signal Optimization</span>
-                  <span class="skill-tag">Roundabouts</span>
-                  <span class="skill-tag">Network Modeling</span>
-                  <span class="skill-tag">Capacity Analysis</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
+            </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>Mastering SIDRA INTERSECTION for Advanced Traffic Analysis</h3>
@@ -2161,46 +2217,44 @@
 
           <!-- START SKILL CARD: VISSIM Traffic Simulation -->
           <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fas fa-car-side"></i>
+            <div class="skill-first-line">
+                <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+                <div class="skill-visual">
+                  <div class="skill-icon">
+                    <i class="fas fa-car-side"></i>
+                  </div>
+                </div>
+                <div class="skill-header">
+                    <!-- EDIT THIS CONTENT: Skill Title -->
+                    <h4 class="skill-title">VISSIM Traffic Simulation</h4>
+                </div>
+            </div>
+            <!-- EDIT THIS CONTENT: Skill Short Description -->
+            <p class="skill-description">Adept at VISSIM microscopic traffic simulation, specializing in modeling intricate road networks and evaluating diverse traffic management strategies to predict and optimize system performance.</p>
+            <div class="skill-metrics">
+              <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>88%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 88%"></div>
+              </div>
+              <!-- EDIT THIS CONTENT: Skill Experience -->
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 4+ years experience
               </div>
             </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">VISSIM Traffic Simulation</h4>
+            <div class="skill-tech">
+              <h5>Key Applications</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Microscopic Simulation</span>
+                <span class="skill-tag">Network Modeling</span>
+                <span class="skill-tag">Traffic Management</span>
+                <span class="skill-tag">Queue Analysis</span>
               </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Adept at VISSIM microscopic traffic simulation, specializing in modeling intricate road networks and evaluating diverse traffic management strategies to predict and optimize system performance.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>88%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 88%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 4+ years experience
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Applications</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">Microscopic Simulation</span>
-                  <span class="skill-tag">Network Modeling</span>
-                  <span class="skill-tag">Traffic Management</span>
-                  <span class="skill-tag">Queue Analysis</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
+            </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>VISSIM Traffic Simulation: Advanced Network Modeling & Optimization</h3>
@@ -2222,48 +2276,46 @@
 
           <!-- START SKILL CARD: Python Automation -->
           <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fab fa-python"></i>
+            <div class="skill-first-line">
+                <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+                <div class="skill-visual">
+                  <div class="skill-icon">
+                    <i class="fab fa-python"></i>
+                  </div>
+                </div>
+                <div class="skill-header">
+                    <!-- EDIT THIS CONTENT: Skill Title -->
+                    <h4 class="skill-title">Python Automation & Data Analysis</h4>
+                </div>
+            </div>
+            <!-- EDIT THIS CONTENT: Skill Short Description -->
+            <p class="skill-description">Proficient in Python for developing robust automation scripts and performing advanced data analysis, streamlining traffic engineering workflows, automating report generation, and extracting actionable insights from complex datasets.</p>
+            <div class="skill-metrics">
+              <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+              <!-- EDIT THIS CONTENT: Skill Experience -->
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 3+ years experience
               </div>
             </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">Python Automation & Data Analysis</h4>
+            <div class="skill-tech">
+              <h5>Key Libraries & Concepts</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Scripting</span>
+                <span class="skill-tag">Data Processing</span>
+                <span class="tech-tag">Workflow Optimization</span>
+                <span class="tech-tag">Spatial Analysis</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">Matplotlib</span>
               </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Proficient in Python for developing robust automation scripts and performing advanced data analysis, streamlining traffic engineering workflows, automating report generation, and extracting actionable insights from complex datasets.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>85%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 85%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 3+ years experience
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Libraries & Concepts</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">Scripting</span>
-                  <span class="skill-tag">Data Processing</span>
-                  <span class="tech-tag">Workflow Optimization</span>
-                  <span class="tech-tag">API Integration</span>
-                  <span class="tech-tag">Pandas</span>
-                  <span class="tech-tag">Matplotlib</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
+            </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>Python Automation & Data Analysis: Streamlining Traffic Engineering Workflows</h3>
@@ -2272,7 +2324,7 @@
                 <ul>
                     <li><strong>Efficient Traffic Data Analysis:</strong> Developing robust pipelines for efficiently processing raw traffic count data, turning movement counts, speed data, and other critical datasets, transforming raw information into actionable intelligence.</li>
                     <li><strong>Automated Report Generation:</strong> Engineering dynamic scripts that automatically generate summary tables, charts, and figures directly from simulation outputs (e.g., SIDRA, VISSIM), enabling rapid and consistent reporting.</li>
-                    <li><strong>GIS Integration & Spatial Analysis:</strong> Automating complex spatial analysis tasks and map generation processes for traffic studies, enhancing geographical insights and visual communication.</li>
+                    <li><strong>Spatial Analysis & Mapping:</strong> Automating complex spatial analysis tasks and map generation processes for traffic studies, enhancing geographical insights and visual communication.</li>
                     <li><strong>Custom Tool Development:</strong> Building specialized Python scripts and applications tailored to unique project requirements, such as custom traffic calculations, data format conversions, or bespoke analytical tools.</li>
                     <li><strong>API Integration:</strong> Seamlessly connecting with traffic software APIs (Application Programming Interfaces) for direct, programmatic data extraction, manipulation, and model interaction, unlocking new levels of automation.</li>
                 </ul>
@@ -2285,46 +2337,44 @@
 
           <!-- START SKILL CARD: VBA Programming -->
           <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fas fa-file-excel"></i>
+            <div class="skill-first-line">
+                <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+                <div class="skill-visual">
+                  <div class="skill-icon">
+                    <i class="fas fa-file-excel"></i>
+                  </div>
+                </div>
+                <div class="skill-header">
+                    <!-- EDIT THIS CONTENT: Skill Title -->
+                    <h4 class="skill-title">VBA Programming for Office Automation</h4>
+                </div>
+            </div>
+            <!-- EDIT THIS CONTENT: Skill Short Description -->
+            <p class="skill-description">Skilled in VBA programming to develop custom macros and functions for Microsoft Excel and Word, automating routine office tasks, enhancing data processing capabilities, and standardizing report formatting for increased efficiency and accuracy.</p>
+            <div class="skill-metrics">
+              <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>75%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+              <!-- EDIT THIS CONTENT: Skill Experience -->
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 4+ years experience
               </div>
             </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">VBA Programming for Office Automation</h4>
+            <div class="skill-tech">
+              <h5>Key Applications</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Excel Macros</span>
+                <span class="skill-tag">Word Automation</span>
+                <span class="skill-tag">Data Entry Automation</span>
+                <span class="skill-tag">Custom Functions</span>
               </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Skilled in VBA programming to develop custom macros and functions for Microsoft Excel and Word, automating routine office tasks, enhancing data processing capabilities, and standardizing report formatting for increased efficiency and accuracy.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>75%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 75%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 4+ years experience
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Applications</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">Excel Macros</span>
-                  <span class="skill-tag">Word Automation</span>
-                  <span class="skill-tag">Data Entry Automation</span>
-                  <span class="skill-tag">Custom Functions</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
+            </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>VBA Programming: Enhancing Office Productivity in Traffic Engineering</h3>
@@ -2345,50 +2395,48 @@
 
           <!-- START SKILL CARD: Swept Path Analysis -->
           <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fas fa-truck"></i>
+            <div class="skill-first-line">
+                <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+                <div class="skill-visual">
+                  <div class="skill-icon">
+                    <i class="fas fa-truck"></i>
+                  </div>
+                </div>
+                <div class="skill-header">
+                    <!-- EDIT THIS CONTENT: Skill Title -->
+                    <h4 class="skill-title">Swept Path Analysis & Vehicle Maneuverability</h4>
+                </div>
+            </div>
+            <!-- EDIT THIS CONTENT: Skill Short Description -->
+            <p class="skill-description">Expert in conducting precise swept path analysis using AutoCAD Vehicle Tracking for diverse vehicle types, ensuring optimal maneuverability, enhancing safety, and validating the functional design of critical access points and internal circulation routes.</p>
+            <div class="skill-metrics">
+              <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+              <!-- EDIT THIS CONTENT: Skill Experience -->
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 4+ years experience
               </div>
             </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">Swept Path Analysis & Vehicle Maneuverability</h4>
+            <div class="skill-tech">
+              <h5>Key Tools & Applications</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">AutoCAD Vehicle Tracking</span>
+                <span class="skill-tag">Vehicle Maneuverability</span>
+                <span class="skill-tag">Site Access Design</span>
+                <span class="skill-tag">Geometric Design Validation</span>
               </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Expert in conducting precise swept path analysis using AutoTURN for diverse vehicle types, ensuring optimal maneuverability, enhancing safety, and validating the functional design of critical access points and internal circulation routes.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>90%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 90%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 4+ years experience
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Tools & Applications</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Tech Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">AutoTURN</span>
-                  <span class="skill-tag">Vehicle Maneuverability</span>
-                  <span class="skill-tag">Site Access Design</span>
-                  <span class="skill-tag">Geometric Design Validation</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
+            </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>Swept Path Analysis: Ensuring Optimal Vehicle Maneuverability & Safety</h3>
-                <p>Swept path analysis is a critical and specialized engineering discipline for rigorously verifying that proposed road geometries, complex intersections, and various access points can safely and efficiently accommodate the turning movements of a wide range of design vehicles. This is especially crucial for large trucks, public buses, and emergency vehicles. Highly proficient and experienced in utilizing AutoTURN, the industry-leading software for this advanced analysis, consistently ensuring optimal and inherently safe designs that meet stringent regulatory and operational requirements.</p>
+                <p>Swept path analysis is a critical and specialized engineering discipline for rigorously verifying that proposed road geometries, complex intersections, and various access points can safely and efficiently accommodate the turning movements of a wide range of design vehicles. This is especially crucial for large trucks, public buses, and emergency vehicles. Highly proficient and experienced in utilizing AutoCAD Vehicle Tracking, the industry-leading software for this advanced analysis, consistently ensuring optimal and inherently safe designs that meet stringent regulatory and operational requirements.</p>
                 <h4>Key Applications & Value Proposition:</h4>
                 <ul>
                     <li><strong>Optimized Site Access Design:</strong> Rigorously verifying and optimizing efficient and safe entry and exit points for all types of vehicles into new developments, minimizing conflicts and delays.</li>
@@ -2406,47 +2454,45 @@
 
           <!-- START SKILL CARD: AI-Assisted Workflows -->
           <div class="skill-card-enhanced">
-            <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
-            <div class="skill-visual">
-              <div class="skill-icon">
-                <i class="fas fa-brain"></i>
+            <div class="skill-first-line">
+                <!-- EDIT THIS CONTENT: Skill Visual Icon (Font Awesome icon class) -->
+                <div class="skill-visual">
+                  <div class="skill-icon">
+                    <i class="fas fa-brain"></i>
+                  </div>
+                </div>
+                <div class="skill-header">
+                    <!-- EDIT THIS CONTENT: Skill Title -->
+                    <h4 class="skill-title">AI-Assisted Traffic Engineering Workflows</h4>
+                </div>
+            </div>
+            <!-- EDIT THIS CONTENT: Skill Short Description -->
+            <p class="skill-description">Actively integrating AI tools to enhance traffic engineering workflows, including advanced data analysis, predictive modeling, and efficient report generation, driving innovation and delivering deeper, data-driven insights.</p>
+            <div class="skill-metrics">
+              <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
+              <div class="skill-level">
+                <span>Expertise</span>
+                <span>70%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+              <!-- EDIT THIS CONTENT: Skill Experience -->
+              <div class="skill-experience">
+                <i class="fas fa-clock"></i> 1+ year experience
               </div>
             </div>
-            <div class="skill-info-wrapper"> <!-- NEW WRAPPER FOR TEXT CONTENT -->
-              <div class="skill-header">
-                <!-- EDIT THIS CONTENT: Skill Title -->
-                <h4 class="skill-title">AI-Assisted Traffic Engineering Workflows</h4>
+            <div class="skill-tech">
+              <h5>Key Technologies & Concepts</h5>
+              <div class="skill-tags">
+                <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">Data Processing</span>
+                <span class="skill-tag">Predictive Analytics</span>
+                <span class="skill-tag">Natural Language Processing</span>
+                <span class="skill-tag">Generative AI</span>
               </div>
-              <div class="skill-content">
-                <!-- EDIT THIS CONTENT: Skill Short Description -->
-                <p class="skill-description">Actively integrating AI tools to enhance traffic engineering workflows, including advanced data analysis, predictive modeling, and efficient report generation, driving innovation and delivering deeper, data-driven insights.</p>
-                <div class="skill-metrics">
-                  <!-- EDIT THIS CONTENT: Skill Expertise Percentage (Value and Bar Width) -->
-                  <div class="skill-level">
-                    <span>Expertise</span>
-                    <span>70%</span>
-                  </div>
-                  <div class="skill-bar">
-                    <div class="skill-progress" style="width: 70%"></div>
-                  </div>
-                  <!-- EDIT THIS CONTENT: Skill Experience -->
-                  <div class="skill-experience">
-                    <i class="fas fa-clock"></i> 1+ year experience
-                  </div>
-                </div>
-              </div>
-              <div class="skill-tech">
-                <h5>Key Technologies & Concepts</h5>
-                <div class="skill-tags">
-                  <!-- EDIT THIS CONTENT: Skill Tags (copy/paste new span elements for more tags) -->
-                  <span class="skill-tag">Machine Learning</span>
-                  <span class="skill-tag">Data Processing</span>
-                  <span class="skill-tag">Predictive Analytics</span>
-                  <span class="skill-tag">Natural Language Processing</span>
-                  <span class="skill-tag">Generative AI</span>
-                </div>
-              </div>
-            </div> <!-- END NEW WRAPPER FOR TEXT CONTENT -->
+            </div>
             <!-- START EDIT THIS CONTENT: Detailed content for modal expansion -->
             <div class="card-detailed-content">
                 <h3>AI-Assisted Workflows: Driving Innovation in Traffic Engineering & Consulting</h3>
@@ -2474,11 +2520,11 @@
   <section id="contact">
     <h2 class="will-change">Contact Me</h2>
     <div style="text-align: center; opacity: 0; animation: fadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;">
-      <p style="margin-bottom: 1rem;">Email: <a href="mailto:ahr@example.com" style="color: var(--accent); text-decoration: none;">ahr@example.com</a></p>
+      <p style="margin-bottom: 1rem;">Email: <a href="mailto:sagasolusi@example.com" style="color: var(--accent); text-decoration: none;">ahr@example.com</a></p>
       <p>Phone: <a href="tel:+60123456789" style="color: var(--accent); text-decoration: none;">+60 12-345 6789</a></p>
     </div>
 
-    <form class="contact-form" id="contactForm" action="mailto:ahr@example.com" method="post" enctype="text/plain">
+    <form class="contact-form" id="contactForm" action="mailto:sagasolusi@example.com" method="post" enctype="text/plain">
       <label for="name">Your Name:</label>
       <input type="text" id="name" name="name" required>
 
@@ -2521,6 +2567,17 @@
   <script>
     let clickedCard = null; // To keep track of the currently clicked card for glow effect
 
+    // Function for smooth scrolling to a section
+    function scrollToSection(id) {
+        const target = document.getElementById(id);
+        if (target) {
+            window.scrollTo({
+                top: target.offsetTop - document.querySelector('header').offsetHeight,
+                behavior: 'smooth'
+            });
+        }
+    }
+
     // Function to open the modal
     function openModal(card) {
       const modalOverlay = document.getElementById('modal-overlay');
@@ -2561,44 +2618,52 @@
         }
 
       } else { // Skill Card
-        // Clone the new skill card elements
-        const skillVisual = card.querySelector('.skill-visual');
-        const skillHeader = card.querySelector('.skill-header');
-        const skillContent = card.querySelector('.skill-content');
+        // Clone the new skill card elements based on new structure
+        const skillFirstLine = card.querySelector('.skill-first-line');
+        const skillDescription = card.querySelector('.skill-description');
+        const skillMetrics = card.querySelector('.skill-metrics');
         const skillTech = card.querySelector('.skill-tech');
         const detailedContent = card.querySelector('.card-detailed-content');
 
         // For modal, we want the larger visual, so clone and adjust if necessary
-        if (skillVisual) {
-            const modalSkillVisual = skillVisual.cloneNode(true);
-            modalSkillVisual.style.width = '100%'; // Override to full width in modal
-            modalSkillVisual.style.height = '250px'; // Larger height in modal
-            modalSkillVisual.style.borderRadius = 'var(--border-radius)'; // Back to rounded rectangle
-            modalSkillVisual.style.marginBottom = '1.5rem';
-            modalSkillVisual.style.margin = '0 auto 1.5rem auto'; /* Center in modal */
-            modalSkillVisual.style.boxShadow = 'none'; /* Remove small icon shadow */
-            modalContent.appendChild(modalSkillVisual);
+        if (skillFirstLine) {
+            const modalSkillFirstLine = skillFirstLine.cloneNode(true);
+            // Adjust skill-visual within this cloned first line for modal
+            const modalSkillVisual = modalSkillFirstLine.querySelector('.skill-visual');
+            if (modalSkillVisual) {
+                modalSkillVisual.style.width = '100%'; // Override to full width in modal
+                modalSkillVisual.style.height = '250px'; // Larger height in modal
+                modalSkillVisual.style.borderRadius = 'var(--border-radius)'; // Back to rounded rectangle
+                modalSkillVisual.style.marginBottom = '1.5rem';
+                modalSkillVisual.style.margin = '0 auto 1.5rem auto'; /* Center in modal */
+                modalSkillVisual.style.boxShadow = 'none'; /* Remove small icon shadow */
+            }
+            // Adjust skill-header within this cloned first line for modal
+            const modalSkillHeader = modalSkillFirstLine.querySelector('.skill-header');
+            if (modalSkillHeader) {
+                modalSkillHeader.style.textAlign = 'center'; // Center title in modal header
+            }
+            
+            modalContent.appendChild(modalSkillFirstLine);
         }
 
-        // Clone the info wrapper which contains header, content, metrics, tech
-        const skillInfoWrapper = card.querySelector('.skill-info-wrapper');
-        if (skillInfoWrapper) {
-            const clonedInfoWrapper = skillInfoWrapper.cloneNode(true);
-            // Ensure elements inside cloned wrapper are left-aligned and styled for modal
-            clonedInfoWrapper.style.width = '100%';
-            clonedInfoWrapper.style.textAlign = 'left';
-
-            // Adjust paddings/margins for elements within the cloned wrapper for modal view
-            clonedInfoWrapper.querySelectorAll('.skill-header, .skill-content, .skill-metrics, .skill-tech').forEach(el => {
-                el.style.paddingLeft = '0';
-                el.style.paddingRight = '0';
-                el.style.textAlign = 'left';
+        if (skillDescription) modalContent.appendChild(skillDescription.cloneNode(true));
+        if (skillMetrics) {
+            const clonedSkillMetrics = skillMetrics.cloneNode(true);
+            modalContent.appendChild(clonedSkillMetrics);
+            // Re-animate skill bars within the modal
+            const modalSkillProgressBars = clonedSkillMetrics.querySelectorAll('.skill-progress');
+            modalSkillProgressBars.forEach(bar => {
+                const originalWidth = bar.getAttribute('style').match(/width:\s*(\d+)%/);
+                if (originalWidth && originalWidth[1]) {
+                    const widthValue = originalWidth[1] + '%';
+                    bar.style.width = '0';
+                    void bar.offsetWidth; 
+                    bar.style.width = widthValue;
+                }
             });
-            clonedInfoWrapper.querySelector('.skill-tech h5').style.textAlign = 'left'; // Align tech title left
-            clonedInfoWrapper.querySelector('.skill-tags').style.justifyContent = 'flex-start'; // Align tags left
-
-            modalContent.appendChild(clonedInfoWrapper);
         }
+        if (skillTech) modalContent.appendChild(skillTech.cloneNode(true));
         
         // Append detailed content, make sure it's visible
         if (detailedContent) {
@@ -2606,21 +2671,6 @@
             clonedDetailedContent.style.display = 'block';
             modalContent.appendChild(clonedDetailedContent);
         }
-
-        // Re-animate skill bars within the modal
-        const modalSkillProgressBars = modalContent.querySelectorAll('.skill-progress');
-        modalSkillProgressBars.forEach(bar => {
-            // Reset width to 0 for re-animation
-            const originalWidth = bar.getAttribute('style').match(/width:\s*(\d+)%/);
-            if (originalWidth && originalWidth[1]) {
-                const widthValue = originalWidth[1] + '%';
-                bar.style.width = '0';
-                // Force reflow
-                void bar.offsetWidth; 
-                // Apply original width after a short delay
-                bar.style.width = widthValue;
-            }
-        });
       }
 
       // Add close button listener to the new button in the modal
