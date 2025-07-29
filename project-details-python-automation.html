@@ -3,19 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- SEO Enhancement: More comprehensive title tag -->
-  <title>Amir H. Rusli | Traffic Engineer & Consultant | TIA, SIDRA, VISSIM, Python, VBA Automation</title>
-  <!-- SEO Enhancement: Expanded meta description with more keywords -->
-  <meta name="description" content="Amir H. Rusli's professional portfolio: Expert Traffic Engineer and Consultant specializing in Traffic Impact Assessments (TIA), SIDRA INTERSECTION, VISSIM, Python & VBA automation for traffic analysis, swept path analysis, and transportation planning.">
-  <!-- SEO Enhancement: Added more relevant keywords -->
-  <meta name="keywords" content="Amir H. Rusli, Traffic Engineer, Traffic Consultant, Traffic Engineering, TIA, SIDRA, VISSIM, Python, VBA, Automation, Swept Path Analysis, AutoCAD, GIS, Transportation Planning, Signal Optimization, Capacity Analysis, Road Design, Urban Planning, Infrastructure, Malaysia, Engineering Portfolio">
+  <title>Python Automation | Projects | Amir H. Rusli</title>
+  <meta name="description" content="Detailed information on the Python Automation project by Amir H. Rusli, including challenges, solutions, and outcomes.">
+  <meta name="keywords" content="Python Automation, VISSIM COM API, Traffic Data Analysis, Scripting, Workflow Automation">
   <meta name="author" content="Amir H. Rusli">
-  <!-- SEO Enhancement: Canonical URL to prevent duplicate content issues -->
-  <link rel="canonical" href="https://yourdomain.com/"> <!-- REMINDER: Update 'yourdomain.com' to your actual website domain -->
-  <!-- SEO Enhancement: Favicon for browser tabs -->
+  <link rel="canonical" href="https://yourdomain.com/project-details-python-automation.html">
   <link rel="icon" href="https://placehold.co/32x32/0077B6/ffffff?text=AR" type="image/png">
 
-  <!-- Preload fonts for better performance and to prevent FOUT (Flash of Unstyled Text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -23,22 +17,22 @@
   <style>
     /* ===== VARIABLES ===== */
     :root {
-      --bg-light: #ffffff; /* Pure white background */
-      --text-dark-primary: #1a1a1a; /* Very dark grey for main text */
-      --text-dark-secondary: #555555; /* Slightly lighter grey for secondary text */
-      --accent-blue: #0077B6; /* Deep blue for highlights */
-      --accent-blue-light: #e0f2f7; /* Very light blue for button background */
-      --border-radius-main: 16px; /* For main containers */
-      --border-radius-button: 8px; /* For buttons */
+      --bg-light: #ffffff;
+      --text-dark-primary: #1a1a1a;
+      --text-dark-secondary: #555555;
+      --accent-blue: #0077B6;
+      --accent-blue-light: #e0f2f7;
+      --border-radius-main: 16px;
+      --border-radius-button: 8px;
       --transition-speed: 0.2s;
 
       /* Dark Mode Variables */
-      --bg-dark: #1a1a1a; /* Dark background */
-      --text-light-primary: #e0e0e0; /* Light text for dark mode */
-      --text-light-secondary: #aaaaaa; /* Slightly darker light text */
-      --dark-mode-accent-blue: #4DA6FF; /* Brighter blue for highlights in dark mode */
-      --dark-mode-accent-blue-light: #004d77; /* Darker light blue for button background */
-      --neon-green-acid: #39FF14; /* Neon Green Acid */
+      --bg-dark: #1a1a1a;
+      --text-light-primary: #e0e0e0;
+      --text-light-secondary: #aaaaaa;
+      --dark-mode-accent-blue: #4DA6FF;
+      --dark-mode-accent-blue-light: #004d77;
+      --neon-green-acid: #39FF14;
     }
     
     /* ===== BASE STYLES ===== */
@@ -48,9 +42,8 @@
       box-sizing: border-box;
     }
     
-    html, body {
-        height: 100%; /* Ensure html and body take full viewport height */
-        overflow: hidden; /* Prevent all scrolling */
+    html {
+        scroll-behavior: smooth; /* Smooth scrolling for anchor links */
     }
 
     body {
@@ -58,16 +51,13 @@
       background-color: var(--bg-light);
       color: var(--text-dark-primary);
       line-height: 1.6;
-      display: flex; /* Use flexbox for layout */
-      flex-direction: column; /* Stack header and main vertically */
-      transition: background-color var(--transition-speed), color var(--transition-speed); /* Smooth theme transition */
-      min-height: 100vh; /* Keep for general safety, but overflow: hidden is dominant */
-      overflow-x: hidden; /* Prevent horizontal scrolling */
+      display: flex;
+      flex-direction: column;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Removed body:not(.modal-open) overflow-y: auto; */
-
-    /* Dark Mode Styles */
     body.dark {
       background-color: var(--bg-dark);
       color: var(--text-light-primary);
@@ -76,17 +66,16 @@
     /* ===== HEADER ===== */
     header {
       width: 100%;
-      padding: 1.5rem 4rem; /* Padding matches the image's spacing */
+      padding: 1.5rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative; /* Changed from sticky */
+      position: sticky;
       top: 0;
       z-index: 1000;
-      background-color: var(--bg-light); /* Ensure header background transitions */
+      background-color: var(--bg-light);
       transition: background-color var(--transition-speed), border-bottom var(--transition-speed);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
-      flex-shrink: 0; /* Prevent header from shrinking */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     body.dark header {
@@ -94,14 +83,15 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .header-logo-text { /* New class for AHR text */
-      font-family: 'Playfair Display', serif; /* Use a distinct font for the logo */
+    .header-logo-text {
+      font-family: 'Playfair Display', serif;
       font-weight: 700;
-      font-size: 2rem; /* Adjusted size for desktop */
-      color: var(--accent-blue); /* Blue color for AHR */
-      flex-shrink: 0; /* Prevent shrinking */
+      font-size: 1.5rem;
+      color: var(--accent-blue);
+      flex-shrink: 0;
       transition: color var(--transition-speed);
-      text-decoration: none; /* Removed underline */
+      cursor: pointer; /* Indicate it's clickable */
+      text-decoration: none; /* Remove underline for AHR link */
     }
 
     body.dark .header-logo-text {
@@ -111,14 +101,14 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 2rem; /* Space between nav items and button */
+      gap: 2rem;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1.5rem; /* Space between nav links */
-      margin-right: 1rem; /* Space between links and resume button */
+      gap: 1.5rem;
+      margin-right: 1rem;
     }
 
     nav ul li a {
@@ -126,8 +116,8 @@
       color: var(--text-dark-primary);
       font-weight: 500;
       font-size: 1rem;
-      padding: 0.5rem 0; /* Vertical padding for click area */
-      position: relative; /* For dropdown arrow */
+      padding: 0.5rem 0;
+      position: relative;
       transition: color var(--transition-speed);
     }
 
@@ -143,10 +133,9 @@
         color: var(--dark-mode-accent-blue);
     }
 
-    /* Active link style */
     nav ul li a.active {
       color: var(--accent-blue);
-      font-weight: 600; /* Slightly bolder for active */
+      font-weight: 600;
     }
 
     body.dark nav ul li a.active {
@@ -166,8 +155,8 @@
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
       border-radius: var(--border-radius-button);
-      overflow: hidden; /* Ensures rounded corners apply to content */
-      top: calc(100% + 10px); /* Position below the "Skills" link */
+      overflow: hidden;
+      top: calc(100% + 10px);
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
@@ -186,7 +175,7 @@
       text-decoration: none;
       display: block;
       text-align: left;
-      font-weight: 400; /* Reset font weight for dropdown items */
+      font-weight: 400;
       font-size: 0.95rem;
       transition: background-color 0.2s ease, color 0.2s ease;
     }
@@ -205,56 +194,54 @@
         color: var(--dark-mode-accent-blue);
     }
 
-    .dropdown.show .dropdown-content { /* Use .show class for JS control */
+    .dropdown.show .dropdown-content {
       display: block;
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Dropdown arrow */
     .dropdown-arrow {
       margin-left: 0.5rem;
       font-size: 0.8rem;
       transition: transform 0.3s ease;
     }
 
-    .dropdown.show .dropdown-arrow { /* Rotate arrow when dropdown is open */
+    .dropdown.show .dropdown-arrow {
       transform: rotate(180deg);
     }
 
-
     .resume-button {
-      background-color: var(--accent-blue-light); /* Light blue background */
-      color: var(--accent-blue); /* Blue text */
+      background-color: var(--accent-blue-light);
+      color: var(--accent-blue);
       padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: var(--border-radius-button); /* Rounded corners */
+      border-radius: var(--border-radius-button);
       font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       transition: background-color var(--transition-speed), transform var(--transition-speed), color var(--transition-speed), box-shadow var(--transition-speed);
-      white-space: nowrap; /* Prevent text wrapping */
+      white-space: nowrap;
     }
 
     body.dark .resume-button {
-        background-color: var(--neon-green-acid); /* Neon green acid background in dark mode */
-        color: var(--bg-dark); /* Dark text for contrast */
-        box-shadow: 0 0 15px var(--neon-green-acid), 0 0 25px var(--neon-green-acid); /* Neon glow */
+        background-color: var(--neon-green-acid);
+        color: var(--bg-dark);
+        box-shadow: 0 0 15px var(--neon-green-acid), 0 0 25px var(--neon-green-acid);
     }
 
     .resume-button:hover {
-      background-color: var(--accent-blue); /* Darker blue on hover */
+      background-color: var(--accent-blue);
       color: white;
-      transform: translateY(-2px); /* Subtle lift */
+      transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     body.dark .resume-button:hover {
-        background-color: var(--neon-green-acid); /* Keep neon green on hover in dark mode */
-        color: var(--bg-dark); /* Keep dark text on hover in dark mode */
-        transform: translateY(-3px); /* Slightly more lift on hover */
-        box-shadow: 0 0 20px var(--neon-green-acid), 0 0 30px var(--neon-green-acid), 0 0 40px var(--neon-green-acid); /* Stronger neon glow on hover */
+        background-color: var(--neon-green-acid);
+        color: var(--bg-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px var(--neon-green-acid), 0 0 30px var(--neon-green-acid), 0 0 40px var(--neon-green-acid);
     }
 
     /* Theme toggle button */
@@ -272,7 +259,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
       font-size: 1.1rem;
-      margin-left: 1rem; /* Space from resume button */
+      margin-left: 1rem;
     }
 
     body.dark .theme-toggle-button {
@@ -296,13 +283,13 @@
 
     /* Hamburger menu for mobile */
     .hamburger-menu {
-        display: none; /* Hidden by default on desktop */
+        display: none;
         flex-direction: column;
         justify-content: space-around;
         width: 30px;
         height: 25px;
         cursor: pointer;
-        z-index: 1001; /* Above other content */
+        z-index: 1001;
         margin-left: 1rem;
     }
 
@@ -330,13 +317,13 @@
 
     /* Mobile Nav Overlay */
     .mobile-nav-overlay {
-        display: none; /* Hidden by default */
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent overlay */
+        background-color: rgba(0, 0, 0, 0.8);
         z-index: 999;
         opacity: 0;
         visibility: hidden;
@@ -352,8 +339,8 @@
     .mobile-nav {
         position: fixed;
         top: 0;
-        right: -300px; /* Start off-screen */
-        width: 280px; /* Width of the mobile menu */
+        right: -300px;
+        width: 280px;
         height: 100%;
         background-color: var(--bg-light);
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
@@ -370,7 +357,7 @@
     }
 
     .mobile-nav.open {
-        right: 0; /* Slide in */
+        right: 0;
     }
 
     .mobile-nav ul {
@@ -407,395 +394,160 @@
     }
 
     /* Mobile dropdown specific styles */
-    .mobile-nav .dropdown-content-mobile { /* Corrected class name */
-        position: static; /* Remove absolute positioning */
+    .mobile-nav .dropdown-content { /* Use .dropdown-content for mobile as well */
+        position: static;
         display: none;
         opacity: 1;
         visibility: visible;
         transform: none;
-        background-color: transparent; /* No background for nested dropdown */
+        background-color: transparent;
         box-shadow: none;
         min-width: unset;
-        padding-left: 1.5rem; /* Indent dropdown items */
+        padding-left: 1.5rem;
         margin-top: 0.5rem;
     }
 
-    .mobile-nav .dropdown-content-mobile a { /* Corrected class name */
-        font-size: 1rem; /* Smaller font for sub-items */
+    .mobile-nav .dropdown-content a {
+        font-size: 1rem;
         padding: 0.3rem 0;
     }
 
     /* ===== MAIN CONTENT SECTIONS ===== */
     main {
-        flex-grow: 1; /* Takes all available vertical space between header and footer */
-        display: flex;
-        flex-direction: column; /* Stack sections vertically */
-        justify-content: center; /* Center content vertically */
-        align-items: center;
-        padding: 1rem 4rem; /* Reduced padding */
-        width: 100%;
-        max-width: 1200px; /* Max width for main content */
-        margin: 0 auto; /* Center main content */
-    }
-
-    section {
-        padding: 1rem 0; /* Reduced padding for sections */
-        width: 100%;
-        min-height: auto; /* Allow height to be determined by content */
+        flex-grow: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        text-align: center;
-        flex-grow: 1; /* Allow section to grow if needed */
+        padding: 2rem 4rem;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
-    section:first-of-type { /* Adjust padding for the very first section if needed */
-        padding-top: 1rem; /* Reduced padding */
+    .project-detail-container {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg-light);
+        border-radius: var(--border-radius-main);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        margin-top: 2rem;
+        width: 100%;
+        max-width: 900px;
+        text-align: left;
+    }
+    body.dark .project-detail-container {
+        background-color: var(--bg-dark);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
-    section h2 {
+    .project-detail-container img {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: var(--border-radius-main);
+        margin-bottom: 1.5rem;
+    }
+
+    .project-detail-container h2 {
         font-family: 'Playfair Display', serif;
         font-size: clamp(2rem, 4vw, 3rem);
         color: var(--accent-blue);
-        margin-bottom: 1rem; /* Reduced margin */
-        transition: color var(--transition-speed);
-    }
-    body.dark section h2 {
-        color: var(--dark-mode-accent-blue);
-    }
-
-    section p {
-        max-width: 800px;
-        font-size: 1.1rem;
-        line-height: 1.6; /* Reduced line height */
-        margin-bottom: 1rem; /* Reduced margin */
-    }
-
-    /* Hero section specific styles (retained and adjusted) */
-    #hero-section {
-        display: flex;
-        flex-direction: row; /* Horizontal layout for hero */
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 0; /* Adjusted padding within main container */
-        min-height: auto; /* Removed fixed min-height */
-    }
-
-    .hero-image-col {
-        flex: 0 0 350px; /* Fixed width for image column */
-        max-width: 350px;
-        height: 350px; /* Fixed height for image column */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        flex-shrink: 0; /* Prevent shrinking */
-    }
-
-    .profile-image {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%; /* Circular image */
-        object-fit: cover; /* Ensure image covers the circle */
-        border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        display: block;
-    }
-
-    body.dark .profile-image {
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-text-col {
-        flex-grow: 1; /* Text column takes remaining space */
-        padding-left: 2rem; /* Space from image */
-    }
-
-    .greeting {
-        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-        color: var(--text-dark-primary);
-        margin-bottom: 0.5rem;
-        line-height: 1.2;
-    }
-
-    body.dark .greeting {
-        color: var(--text-light-primary);
-    }
-
-    .highlight-name {
-        color: var(--accent-blue);
-        font-weight: 700; /* Bolder for the name */
-        font-family: 'Playfair Display', serif; /* Use a distinct font for the name */
-        transition: color var(--transition-speed);
-    }
-
-    body.dark .highlight-name {
-        color: var(--dark-mode-accent-blue);
-    }
-
-    .tagline {
-        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-        color: var(--text-dark-primary);
-        margin-bottom: 1rem; /* Reduced margin */
-        line-height: 1.4;
-    }
-
-    body.dark .tagline {
-        color: var(--text-light-primary);
-    }
-
-    .key-points {
-        list-style: none; /* Remove default list bullets */
-        padding-left: 0;
-    }
-
-    .key-points li {
-        display: flex;
-        align-items: flex-start; /* Align icon and text to top */
-        font-size: 1.rem;
-        color: var(--text-dark-secondary);
-        margin-bottom: 0.6rem; /* Reduced margin */
-    }
-
-    body.dark .key-points li {
-        color: var(--text-light-secondary);
-    }
-
-    .key-points li i {
-        color: var(--accent-blue);
-        font-size: 1.1rem;
-        margin-right: 0.8rem;
-        margin-top: 0.2rem; /* Adjust icon vertical alignment */
-        flex-shrink: 0; /* Prevent icon from shrinking */
-        transition: color var(--transition-speed);
-    }
-
-    body.dark .key-points li i {
-        color: var(--dark-mode-accent-blue);
-    }
-
-    /* Project Grid */
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        width: 100%;
-        max-width: 1000px;
-        margin-top: 2rem;
-    }
-
-    .project-card {
-        background-color: var(--bg-light);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: var(--border-radius-main);
-        padding: 1.5rem;
-        text-align: left;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    }
-    body.dark .project-card {
-        background-color: var(--bg-dark);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .project-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    body.dark .project-card:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .project-card h3 {
-        color: var(--accent-blue);
-        font-size: 1.4rem;
-        margin-bottom: 0.5rem;
-        transition: color var(--transition-speed);
-    }
-    body.dark .project-card h3 {
-        color: var(--dark-mode-accent-blue);
-    }
-
-    .project-card p {
-        font-size: 0.95rem;
-        color: var(--text-dark-secondary);
         margin-bottom: 1rem;
-        transition: color var(--transition-speed);
+        text-align: center;
     }
-    body.dark .project-card p {
-        color: var(--text-light-secondary);
-    }
-
-    .project-card .project-link {
-        color: var(--accent-blue);
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.2s ease;
-    }
-    body.dark .project-card .project-link {
+    body.dark .project-detail-container h2 {
         color: var(--dark-mode-accent-blue);
     }
 
-    .project-card .project-link:hover {
-        text-decoration: underline;
-    }
-
-    /* Contact Form */
-    .contact-form-container {
-        width: 100%;
-        max-width: 600px;
-        background-color: var(--bg-light);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: var(--border-radius-main);
-        padding: 2rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        text-align: left;
-    }
-    body.dark .contact-form-container {
-        background-color: var(--bg-dark);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .contact-form-container label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        color: var(--text-dark-primary);
-    }
-    body.dark .contact-form-container label {
-        color: var(--text-light-primary);
-    }
-
-    .contact-form-container input[type="text"],
-    .contact-form-container input[type="email"],
-    .contact-form-container textarea {
-        width: 100%;
-        padding: 0.8rem;
-        margin-bottom: 1rem;
-        border: 1px solid rgba(0, 0, 0, 0.15);
-        border-radius: var(--border-radius-button);
-        background-color: var(--bg-light);
-        color: var(--text-dark-primary);
+    .project-detail-container h3 {
         font-family: 'Inter', sans-serif;
-        font-size: 1rem;
-        transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-dark-primary);
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
     }
-    body.dark .contact-form-container input[type="text"],
-    body.dark .contact-form-container input[type="email"],
-    body.dark .contact-form-container textarea {
-        background-color: #2a2a2a;
-        border: 1px solid rgba(255, 255, 255, 0.15);
+    body.dark .project-detail-container h3 {
         color: var(--text-light-primary);
     }
 
-    .contact-form-container input[type="text"]:focus,
-    .contact-form-container input[type="email"]:focus,
-    .contact-form-container textarea:focus {
-        outline: none;
-        border-color: var(--accent-blue);
-        box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.2);
+    .project-detail-container p {
+        font-size: 1rem;
+        color: var(--text-dark-secondary);
+        line-height: 1.7;
+        margin-bottom: 1rem;
     }
-    body.dark .contact-form-container input[type="text"]:focus,
-    body.dark .contact-form-container input[type="email"]:focus,
-    body.dark .contact-form-container textarea:focus {
-        border-color: var(--dark-mode-accent-blue);
-        box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.2);
+    body.dark .project-detail-container p {
+        color: var(--text-light-secondary);
     }
 
-    .contact-form-container textarea {
-        resize: vertical;
-        min-height: 120px;
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
     }
 
-    .contact-form-container button[type="submit"] {
+    .tag {
+        background-color: var(--accent-blue-light);
+        color: var(--accent-blue);
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        border-radius: 9999px; /* Pill shape */
+        white-space: nowrap;
+        transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+    body.dark .tag {
+        background-color: var(--dark-mode-accent-blue-light);
+        color: var(--dark-mode-accent-blue);
+    }
+
+    .back-button {
         background-color: var(--accent-blue);
         color: white;
-        padding: 0.8rem 1.8rem;
+        padding: 0.75rem 1.5rem;
         border: none;
         border-radius: var(--border-radius-button);
         font-size: 1rem;
         font-weight: 600;
         cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
         transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        margin-top: 2rem;
+        align-self: center; /* Center the button */
     }
-    body.dark .contact-form-container button[type="submit"] {
+    body.dark .back-button {
         background-color: var(--dark-mode-accent-blue);
     }
-
-    .contact-form-container button[type="submit"]:hover {
-        background-color: var(--accent-blue-dark);
+    .back-button:hover {
+        background-color: #005f8e; /* Darker blue */
         transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    body.dark .contact-form-container button[type="submit"]:hover {
-        background-color: var(--dark-mode-accent-blue); /* Keep same color for dark mode hover */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Gallery Grid */
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-        width: 100%;
-        max-width: 1000px;
-        margin-top: 2rem;
+    body.dark .back-button:hover {
+        background-color: #3a8ee0; /* Darker dark mode blue */
     }
 
-    .gallery-item {
-        background-color: var(--bg-light);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: var(--border-radius-main);
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    }
-    body.dark .gallery-item {
-        background-color: var(--bg-dark);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .gallery-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    body.dark .gallery-item:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .gallery-item img {
-        width: 100%;
-        height: 200px; /* Fixed height for gallery images */
-        object-fit: cover;
-        display: block;
-    }
-
-    .gallery-item .caption {
-        padding: 1rem;
-        font-size: 0.9rem;
-        color: var(--text-dark-primary);
-        transition: color var(--transition-speed);
-    }
-    body.dark .gallery-item .caption {
-        color: var(--text-light-primary);
-    }
 
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
-      padding: 1rem 2rem; /* Reduced padding */
-      font-size: 0.8rem; /* Smaller font */
+      padding: 1.5rem 2rem;
+      font-size: 0.85rem;
       width: 100%;
       box-sizing: border-box;
-      flex-shrink: 0; /* Prevent footer from shrinking */
-      color: var(--text-dark-primary); /* Ensure footer text color matches body */
+      flex-shrink: 0;
+      color: var(--text-dark-primary);
       opacity: 0.8;
-      background-color: var(--bg-light); /* Ensure footer background transitions */
+      background-color: var(--bg-light);
       transition: background-color var(--transition-speed), color var(--transition-speed);
       border-top: 1px solid rgba(0, 0, 0, 0.05);
     }
@@ -813,15 +565,15 @@
     }
 
     .social-links {
-      margin-top: 0.5rem; /* Reduced margin */
-      gap: 0.6rem; /* Reduced gap */
+      margin-top: 0.8rem;
+      gap: 0.8rem;
       display: flex;
       justify-content: center;
     }
 
     .social-links a {
-      font-size: 1.2rem; /* Slightly smaller icons */
-      color: var(--text-dark-primary); /* Inherit from body for consistency */
+      font-size: 1.3rem;
+      color: var(--text-dark-primary);
       transition: color 0.2s ease-out, transform 0.2s ease-out;
       opacity: 0.7;
     }
@@ -831,8 +583,8 @@
     }
 
     .social-links a:hover {
-      color: var(--accent-blue); /* Use primary accent for hover */
-      transform: translateY(-2px); /* Less dramatic lift */
+      color: var(--accent-blue);
+      transform: translateY(-2px);
       opacity: 1;
     }
 
@@ -843,170 +595,126 @@
     /* ===== RESPONSIVE ADJUSTMENTS ===== */
     @media (max-width: 1024px) {
         header {
-            padding: 1rem 2rem; /* Reduced horizontal padding */
+            padding: 1.5rem 2rem;
         }
         nav ul {
-            gap: 0.8rem; /* Tighter gap for nav links */
+            gap: 1rem;
         }
         nav ul li a {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         nav .resume-button {
-            padding: 0.6rem 1rem;
-            font-size: 0.85rem;
+            padding: 0.7rem 1.2rem;
+            font-size: 0.9rem;
         }
         main {
-            padding: 0.5rem 2rem; /* Reduced padding */
+            padding: 1.5rem 2rem;
         }
-        #hero-section {
-            gap: 1rem; /* Reduced gap between columns */
+        .project-detail-container {
+            padding: 1.5rem;
         }
-        .hero-image-col {
-            flex: 0 0 280px; /* Smaller fixed width */
-            max-width: 280px;
-            height: 280px; /* Smaller fixed height */
+        .project-detail-container h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
         }
-        .hero-text-col {
-            padding-left: 1rem; /* Reduced padding */
+        .project-detail-container h3 {
+            font-size: 1.3rem;
         }
-        section {
-            padding: 0.5rem 0; /* Reduced section padding */
-        }
-        section h2 {
-            margin-bottom: 0.8rem; /* Reduced margin */
-        }
-        section p {
-            font-size: 1rem; /* Slightly smaller font */
-            margin-bottom: 0.8rem; /* Reduced margin */
+        .project-detail-container p {
+            font-size: 0.95rem;
         }
     }
 
     @media (max-width: 768px) {
+        html {
+            scroll-padding-top: 60px;
+        }
         header {
-            padding: 0.8rem 1.5rem; /* Further reduce padding */
-            height: 55px; /* Fixed height for mobile header */
+            padding: 1rem 1.5rem;
+            flex-direction: row;
+            justify-content: space-between;
+            height: 60px;
         }
         .header-logo-text {
-            font-size: 1.5rem; /* Adjusted size for mobile */
+            font-size: 1.2rem;
         }
         nav {
-            display: none; /* Hide desktop nav */
+            display: none;
         }
         .hamburger-menu {
-            display: flex; /* Show hamburger */
+            display: flex;
         }
         .theme-toggle-button {
-            margin-left: 0.5rem; /* Adjust margin for mobile */
+            margin-left: 0.5rem;
         }
         main {
-            padding: 0.5rem 1rem; /* Reduced padding for main content */
-        }
-        #hero-section {
-            flex-direction: column; /* Stack image and text vertically */
-            text-align: center; /* Center text content */
-            gap: 1rem; /* Space between stacked columns */
-            min-height: auto; /* Removed fixed min-height */
-        }
-        .hero-image-col {
-            flex: none; /* Remove flex basis */
-            width: 200px; /* Smaller fixed width */
-            height: 200px; /* Smaller fixed height */
-            margin-bottom: 0.8rem; /* Space below image */
-        }
-        .hero-text-col {
-            padding-left: 0; /* Remove left padding */
-            padding-top: 0.8rem; /* Add top padding */
-        }
-        .greeting, .tagline {
-            text-align: center; /* Ensure text is centered */
-            margin-bottom: 0.4rem; /* Reduced margin */
-        }
-        .key-points {
-            align-items: center; /* Center list items */
-        }
-        .key-points li {
-            justify-content: center; /* Center list item content */
-            text-align: left; /* Keep text left aligned within its space */
-            flex-wrap: wrap; /* Allow wrapping for long lines */
-            font-size: 0.9rem; /* Smaller font */
-            margin-bottom: 0.5rem; /* Reduced margin */
-        }
-        .key-points li i {
-            margin-right: 0.5rem; /* Reduce margin */
-        }
-        .projects-grid, .gallery-grid {
-            grid-template-columns: 1fr; /* Single column on mobile */
-        }
-        .contact-form-container {
             padding: 1rem;
         }
-        footer {
-            padding: 0.8rem 1rem;
-            font-size: 0.75rem;
+        .project-detail-container {
+            padding: 1rem;
+            margin-top: 1rem;
         }
-        .social-links {
-            margin-top: 0.4rem;
-            gap: 0.5rem;
+        .project-detail-container h2 {
+            font-size: clamp(1.5rem, 6vw, 2rem);
         }
-        .social-links a {
+        .project-detail-container h3 {
             font-size: 1.1rem;
+        }
+        .project-detail-container p {
+            font-size: 0.85rem;
+        }
+        .back-button {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
         }
     }
 
     @media (max-width: 480px) {
         header {
-            padding: 0.6rem 0.8rem;
-            height: 50px;
+            padding: 0.8rem 1rem;
+            height: 55px;
         }
         .header-logo-text {
-            font-size: 1.2rem; /* Even smaller for very small screens */
+            font-size: 1.1rem;
         }
         .hamburger-menu {
-            width: 25px;
-            height: 20px;
+            width: 28px;
+            height: 22px;
         }
         .hamburger-menu span {
             height: 2px;
         }
         .hamburger-menu.open span:nth-child(1) {
-            transform: translateY(9px) rotate(45deg);
+            transform: translateY(10px) rotate(45deg);
         }
         .hamburger-menu.open span:nth-child(3) {
-            transform: translateY(-9px) rotate(-45deg);
+            transform: translateY(-10px) rotate(-45deg);
         }
         .theme-toggle-button {
-            width: 30px;
-            height: 30px;
-            font-size: 0.75rem;
+            width: 32px;
+            height: 32px;
+            font-size: 0.8rem;
         }
         main {
             padding: 0.5rem;
         }
-        #hero-section {
-            min-height: auto; /* Removed fixed min-height */
-        }
-        .hero-image-col {
-            width: 150px; /* Even smaller image */
-            height: 150px;
-            margin-bottom: 0.5rem;
-        }
-        section {
-            padding: 0.5rem 0;
-        }
-        section h2 {
-            font-size: clamp(1.5rem, 8vw, 2rem);
-            margin-bottom: 0.5rem;
-        }
-        section p {
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-        }
-        .project-card, .gallery-item, .contact-form-container {
+        .project-detail-container {
             padding: 0.8rem;
+            margin-top: 0.8rem;
         }
-        footer {
-            padding: 0.6rem 0.8rem;
-            font-size: 0.7rem;
+        .project-detail-container h2 {
+            font-size: clamp(1.2rem, 8vw, 1.8rem);
+        }
+        .project-detail-container h3 {
+            font-size: 1rem;
+        }
+        .project-detail-container p {
+            font-size: 0.8rem;
+        }
+        .back-button {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            margin-top: 1rem;
         }
     }
   </style>
@@ -1017,14 +725,14 @@
     "@type": "Person",
     "name": "Amir H. Rusli",
     "jobTitle": "Traffic Engineer & Consultant",
-    "url": "https://yourdomain.com/", <!-- REMINDER: Update 'yourdomain.com' to your actual website domain -->
+    "url": "https://yourdomain.com/",
     "alumniOf": {
       "@type": "EducationalOrganization",
       "name": "University Malaya"
     },
     "sameAs": [
-      "https://www.linkedin.com/in/yourprofile", <!-- REMINDER: Update with your LinkedIn profile URL -->
-      "https://github.com/yourusername" <!-- REMINDER: Update with your GitHub profile URL -->
+      "https://www.linkedin.com/in/yourprofile",
+      "https://github.com/yourusername"
     ],
     "worksFor": {
       "@type": "Organization",
@@ -1039,13 +747,13 @@
     <nav class="desktop-nav">
         <ul>
             <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li> <!-- Active for this page -->
             <li class="dropdown">
                 <a href="#" class="dropbtn" onclick="return false;" aria-haspopup="true" aria-expanded="false" aria-controls="skills-dropdown-content">Skills <i class="fas fa-caret-down dropdown-arrow"></i></a>
                 <div class="dropdown-content" id="skills-dropdown-content" role="menu">
                     <a href="skill-details-sidra.html" role="menuitem">Sidra</a>
                     <a href="skill-details-vissim.html" role="menuitem">Vissim</a>
-                    <a href="skill-details-sumo.html" role="menuitem">SUMO Traffic</a>
+                    <a href="skill-details-programming.html" role="menuitem">Programming</a>
                     <a href="skill-details-swept-path.html" role="menuitem">Swept Path Analysis</a>
                 </div>
             </li>
@@ -1074,10 +782,10 @@
           <li><a href="projects.html">Projects</a></li>
           <li class="dropdown-mobile">
               <a href="#" class="dropbtn-mobile" onclick="return false;" aria-haspopup="true" aria-expanded="false" aria-controls="skills-dropdown-mobile-content">Skills <i class="fas fa-caret-down dropdown-arrow"></i></a>
-              <div class="dropdown-content-mobile" id="skills-dropdown-mobile-content" role="menu">
+              <div class="dropdown-content" id="skills-dropdown-mobile-content" role="menu">
                   <a href="skill-details-sidra.html" role="menuitem">Sidra</a>
                   <a href="skill-details-vissim.html" role="menuitem">Vissim</a>
-                  <a href="skill-details-sumo.html" role="menuitem">SUMO Traffic</a>
+                  <a href="skill-details-programming.html" role="menuitem">Programming</a>
                   <a href="skill-details-swept-path.html" role="menuitem">Swept Path Analysis</a>
               </div>
           </li>
@@ -1087,21 +795,29 @@
   </div>
 
   <main>
-    <section id="hero-section">
-        <div class="hero-image-col">
-            <!-- Placeholder for the image, similar to the provided picture -->
-            <img src="https://placehold.co/350x350/E0F2F7/0077B6?text=Amir+H.+Rusli" alt="Amir H. Rusli Profile Picture" class="profile-image">
+    <section class="project-detail-container">
+        <img src="https://placehold.co/800x400/2a2a2a/e0e0e0?text=Python+Automation+Details" alt="Python Automation Project Details">
+        <h2>Python Automation for Traffic Workflows</h2>
+        <p>This project involves developing custom Python scripts to automate various aspects of traffic simulation using the VISSIM COM API. The automation includes tasks such as model setup, running multiple simulation scenarios, extracting specific output data, and generating customized reports. This significantly reduces manual effort, improves efficiency, and allows for more extensive scenario testing in complex projects.</p>
+        
+        <h3>Challenges:</h3>
+        <p>Interfacing with proprietary software APIs (VISSIM COM) and handling large-scale simulation outputs programmatically. Ensuring robust error handling and data consistency across automated workflows.</p>
+        
+        <h3>Solutions:</h3>
+        <p>Developed modular Python scripts leveraging the VISSIM COM API to automate model setup, simulation runs, data extraction, and post-processing. Implemented batch processing capabilities for multiple scenarios and integrated with data visualization libraries (e.g., Matplotlib, Seaborn) for automated reporting and interactive dashboards.</p>
+        
+        <h3>Outcomes:</h3>
+        <p>Significantly reduced simulation run times and manual data handling by over 80%, allowing for more comprehensive scenario testing and faster project delivery. Improved consistency and accuracy of simulation outputs, enabling quicker insights and data-driven decision-making for complex traffic engineering problems.</p>
+
+        <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">VISSIM API</span>
+            <span class="tag">Automation</span>
+            <span class="tag">Batch Processing</span>
+            <span class="tag">Data Analysis</span>
         </div>
-        <div class="hero-text-col">
-            <p class="greeting">Hi! I am <span class="highlight-name">Amir H. Rusli</span>,</p>
-            <p class="tagline">a Traffic Engineer crafting impactful urban mobility solutions.</p>
-            <ul class="key-points">
-                <li><i class="fas fa-graduation-cap"></i> M.Eng in Transportation Engineering @University Malaya</li>
-                <li><i class="fas fa-briefcase"></i> 4+ years of experience in Traffic Engineering & Consulting</li>
-                <li><i class="fas fa-lightbulb"></i> Specializing in Traffic Impact Assessments & Simulation (Vissim) and analysis (Sidra)</li>
-                <li><i class="fas fa-code"></i> Apprentice in Python & VBA for automation and data analysis</li>
-            </ul>
-        </div>
+
+        <a href="projects.html" class="back-button">&larr; Back to Projects</a>
     </section>
   </main>
 
@@ -1146,7 +862,6 @@
       const body = document.body;
       const themeIconDesktop = document.getElementById('theme-icon');
       const themeIconMobile = document.getElementById('theme-icon-mobile');
-      // Removed navLinks as they now navigate to new pages
       const dropdown = document.querySelector('.dropdown');
       const dropbtn = document.querySelector('.dropbtn');
       const dropdownContent = document.getElementById('skills-dropdown-content');
@@ -1177,7 +892,7 @@
         if (themeIconDesktop) themeIconDesktop.textContent = '🌙';
         if (themeIconMobile) themeIconMobile.textContent = '🌙';
       } else {
-        if (themeIconDesktop) themeIconDesktop.textContent = '🌞';
+        if (themeIconDesktop) themeIconDesktop.textContent = '�';
         if (themeIconMobile) themeIconMobile.textContent = '🌞';
       }
 
@@ -1188,8 +903,6 @@
       document.querySelectorAll('nav ul li a, .resume-button, .theme-toggle-button, .mobile-nav ul li a').forEach(el => {
         el.style.transform = 'translateZ(0)'; /* Force hardware acceleration */
       });
-
-      // Removed smooth scrolling for navigation links
 
       // Desktop Dropdown menu toggle
       if (dropdown && dropbtn && dropdownContent) {
@@ -1281,3 +994,4 @@
   </script>
 </body>
 </html>
+�

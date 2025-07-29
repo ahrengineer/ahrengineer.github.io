@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUMO Traffic Skill | Amir H. Rusli</title>
+  <meta name="description" content="Detailed information on Amir H. Rusli's expertise in SUMO (Simulation of Urban MObility) for microscopic traffic simulation, network modeling, and intelligent transportation systems.">
+  <meta name="keywords" content="SUMO Traffic, Traffic Simulation, Microscopic Modeling, ITS, Intelligent Transportation Systems, Network Simulation, Mobility, Traffic Engineering, Open-Source Simulation">
+  <meta name="author" content="Amir H. Rusli">
+  <link rel="canonical" href="https://yourdomain.com/skill-details-sumo.html">
+  <link rel="icon" href="https://placehold.co/32x32/0077B6/ffffff?text=AR" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --bg-light: #ffffff;
+      --text-dark-primary: #1a1a1a;
+      --text-dark-secondary: #555555;
+      --accent-blue: #0077B6;
+      --accent-blue-light: #e0f2f7;
+      --border-radius-main: 16px;
+      --border-radius-button: 8px;
+      --transition-speed: 0.2s;
+
+      /* Dark Mode Variables */
+      --bg-dark: #1a1a1a;
+      --text-light-primary: #e0e0e0;
+      --text-light-secondary: #aaaaaa;
+      --dark-mode-accent-blue: #4DA6FF;
+      --dark-mode-accent-blue-light: #004d77;
+      --neon-green-acid: #39FF14;
+    }
+    
+    /* ===== BASE STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+        scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark-primary);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto; /* Changed to auto to allow scrolling */
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-light-primary);
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      width: 100%;
+      padding: 1rem 4rem; /* Slightly reduced header padding */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--bg-light);
+      transition: background-color var(--transition-speed), border-bottom var(--transition-speed);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
+    }
+
+    body.dark header {
+        background-color: var(--bg-dark);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2rem; /* Adjusted size for desktop */
+      color: var(--accent-blue);
+      flex-shrink: 0;
+      transition: color var(--transition-speed);
+      cursor: pointer; /* Indicate it's clickable */
+      text-decoration: none; /* Remove underline for AHR link */
+    }
+
+    body.dark .header-logo-text {
+        color: var(--dark-mode-accent-blue);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin-right: 1rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--text-dark-primary);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.5rem 0;
+      position: relative; /* Essential for ripple effect */
+      transition: color var(--transition-speed);
+      overflow: hidden; /* Essential for ripple effect */
+    }
+
+    body.dark nav ul li a {
+        color: var(--text-light-primary);
+    }
+
+    nav ul li a:hover {
+      color: var(--accent-blue);
+    }
+
+    body.dark nav ul li a:hover {
+        color: var(--dark-mode-accent-blue);
+    }
+
+    nav ul li a.active {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    body.dark nav ul li a.active {
+        color: var(--dark-mode-accent-blue);
+    }
+
+    /* Dropdown menu styles */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--bg-light);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: var(--border-radius-button);
+      overflow: hidden;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    }
+
+    body.dark .dropdown-content {
+        background-color: var(--bg-dark);
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark-primary);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      font-weight: 400;
+      font-size: 0.95rem;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      position: relative; /* Essential for ripple effect */
+      overflow: hidden; /* Essential for ripple effect */
+    }
+
+    body.dark .dropdown-content a {
+        color: var(--text-light-primary);
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--accent-blue-light);
+      color: var(--accent-blue);
+    }
+
+    body.dark .dropdown-content a:hover {
+        background-color: var(--dark-mode-accent-blue-light);
+        color: var(--dark-mode-accent-blue);
+    }
+
+    .dropdown.show .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-arrow {
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown.show .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .resume-button {
+      background-color: var(--accent-blue-light);
+      color: var(--accent-blue);
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--border-radius-button);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--transition-speed), transform var(--transition-speed), color var(--transition-speed), box-shadow var(--transition-speed);
+      white-space: nowrap;
+      position: relative; /* Essential for ripple effect */
+      overflow: hidden; /* Essential for ripple effect */
+    }
+
+    body.dark .resume-button {
+        background-color: var(--neon-green-acid);
+        color: var(--bg-dark);
+        box-shadow: 0 0 15px var(--neon-green-acid), 0 0 25px var(--neon-green-acid);
+    }
+
+    .resume-button:hover {
+      background-color: var(--accent-blue);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark .resume-button:hover {
+        background-color: var(--neon-green-acid);
+        color: var(--bg-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px var(--neon-green-acid), 0 0 30px var(--neon-green-acid), 0 0 40px var(--neon-green-acid);
+    }
+
+    /* Theme toggle button */
+    .theme-toggle-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+      font-size: 1.1rem;
+      margin-left: 1rem;
+    }
+
+    body.dark .theme-toggle-button {
+        background: var(--dark-mode-accent-blue-light);
+        color: var(--dark-mode-accent-blue);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .theme-toggle-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    body.dark .theme-toggle-button:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .theme-toggle-button #theme-icon {
+        transition: transform 0.5s ease-in-out;
+    }
+    .theme-toggle-button #theme-icon.rotating {
+        transform: rotate(360deg);
+    }
+
+    /* Hamburger menu for mobile */
+    .hamburger-menu {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        cursor: pointer;
+        z-index: 1001;
+        margin-left: 1rem;
+    }
+
+    .hamburger-menu span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--text-dark-primary);
+        border-radius: 3px;
+        transition: all 0.3s ease-in-out;
+    }
+    body.dark .hamburger-menu span {
+        background-color: var(--text-light-primary);
+    }
+
+    .hamburger-menu.open span:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+    .hamburger-menu.open span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger-menu.open span:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* Mobile Nav Overlay */
+    .mobile-nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-nav-overlay.open {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 280px;
+        height: 100%;
+        background-color: var(--bg-light);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        transition: right 0.3s ease-in-out;
+    }
+
+    body.dark .mobile-nav {
+        background-color: var(--bg-dark);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-nav.open {
+        right: 0;
+    }
+
+    .mobile-nav ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .mobile-nav ul li a, .mobile-nav .resume-button {
+      text-decoration: none;
+      color: var(--text-dark-primary);
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: block;
+      padding: 0.5rem 0;
+      transition: color 0.2s ease;
+      position: relative; /* Essential for ripple effect */
+      overflow: hidden; /* Essential for ripple effect */
+    }
+    body.dark .mobile-nav ul li a {
+        color: var(--text-light-primary);
+    }
+
+    .mobile-nav ul li a:hover {
+        color: var(--accent-blue);
+    }
+    body.dark .mobile-nav ul li a:hover {
+        color: var(--dark-mode-accent-blue);
+    }
+
+    .mobile-nav .resume-button {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    /* Mobile dropdown specific styles */
+    .mobile-nav .dropdown-content { /* Use .dropdown-content for mobile as well */
+        position: static;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background-color: transparent;
+        box-shadow: none;
+        min-width: unset;
+        padding-left: 1.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .mobile-nav .dropdown-content a {
+        font-size: 1rem;
+        padding: 0.3rem 0;
+    }
+
+    /* Ripple Effect CSS */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.7); /* White ripple */
+      animation: ripple-animation 0.6s linear forwards;
+      pointer-events: none; /* Ensure clicks pass through */
+      z-index: 0; /* Behind text */
+    }
+
+    body.dark .ripple {
+        background-color: rgba(77, 166, 255, 0.3); /* Blue ripple for dark mode */
+    }
+
+    @keyframes ripple-animation {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5); /* Increased scale for better visibility */
+        opacity: 0;
+      }
+    }
+
+    /* ===== MAIN CONTENT SECTIONS ===== */
+    main {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.5rem 4rem; /* Reduced padding for main */
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .page-content { /* General style for content on new pages */
+        padding: 1.5rem 0; /* Reduced padding for page content */
+        width: 100%;
+        min-height: auto; /* Allow height to be determined by content */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Align content to top */
+        align-items: center;
+        text-align: left; /* Align text to left */
+    }
+
+    .page-content h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem); /* Slightly smaller font for main title */
+        color: var(--accent-blue);
+        margin-bottom: 1rem; /* Reduced margin */
+        transition: color var(--transition-speed);
+        text-align: center; /* Center main title */
+        width: 100%;
+    }
+    body.dark .page-content h2 {
+        color: var(--dark-mode-accent-blue);
+    }
+
+    .page-content h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.3rem, 2.5vw, 2rem); /* Slightly smaller font for subheadings */
+        color: var(--text-dark-primary);
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        transition: color var(--transition-speed);
+        width: 100%;
+    }
+    body.dark .page-content h3 {
+        color: var(--text-light-primary);
+    }
+
+    .page-content p {
+        max-width: 800px;
+        font-size: 1rem; /* Slightly reduced font size for paragraphs */
+        line-height: 1.6; /* Slightly tighter line height */
+        margin-bottom: 1rem; /* Reduced margin */
+        width: 100%;
+    }
+
+    .skill-detail-section { /* Renamed from project-detail-section */
+        max-width: 800px;
+        width: 100%;
+        margin-bottom: 1rem; /* Reduced margin */
+        background-color: var(--bg-light);
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: var(--border-radius-main);
+        padding: 1rem; /* Reduced padding */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    body.dark .skill-detail-section { /* Renamed */
+        background-color: var(--bg-dark);
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .skill-detail-section img { /* Renamed */
+        width: 100%;
+        max-height: 30vh; /* Make height relative to viewport height */
+        height: auto;
+        object-fit: cover; /* Cover the area, cropping if necessary */
+        border-radius: var(--border-radius-button);
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add transition for zoom */
+    }
+    body.dark .skill-detail-section img {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .skill-detail-section img:hover {
+        transform: scale(1.03); /* Slightly zoom in on hover */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Add subtle shadow on hover */
+    }
+    body.dark .skill-detail-section img:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+
+    .skill-detail-section p, /* Renamed */
+    .skill-detail-section ul { /* Renamed */
+        font-size: 0.95rem; /* Slightly smaller font for body text */
+        line-height: 1.6; /* Slightly tighter line height */
+        margin-bottom: 0.8rem; /* Reduced margin */
+        color: var(--text-dark-secondary);
+    }
+    body.dark .skill-detail-section p,
+    body.dark .skill-detail-section ul {
+        color: var(--text-light-secondary);
+    }
+
+    .skill-detail-section ul {
+        list-style: disc;
+        margin-left: 1.2rem; /* Slightly reduced indent */
+    }
+
+    .skill-detail-section ul li {
+        margin-bottom: 0.3rem; /* Reduced margin between list items */
+    }
+
+    .back-to-skills { /* Changed class name */
+        display: inline-block;
+        margin-top: 1rem; /* Reduced margin */
+        padding: 0.75rem 1.5rem;
+        background-color: var(--accent-blue);
+        color: white;
+        text-decoration: none;
+        border-radius: var(--border-radius-button);
+        font-weight: 600;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        position: relative; /* Essential for ripple effect */
+        overflow: hidden; /* Essential for ripple effect */
+    }
+    body.dark .back-to-skills { /* Changed class name */
+        background-color: var(--dark-mode-accent-blue);
+    }
+
+    .back-to-skills:hover { /* Changed class name */
+        background-color: var(--accent-blue-dark);
+        transform: translateY(-2px);
+    }
+    body.dark .back-to-skills:hover { /* Changed class name */
+        background-color: var(--dark-mode-accent-blue);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 0.8rem 2rem; /* Reduced footer padding */
+      font-size: 0.8rem; /* Smaller font */
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      color: var(--text-dark-primary);
+      opacity: 0.8;
+      background-color: var(--bg-light);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    body.dark footer {
+        color: var(--text-light-primary);
+        background-color: var(--bg-dark);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer p {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .social-links {
+      margin-top: 0.5rem; /* Reduced margin */
+      gap: 0.6rem; /* Reduced gap */
+      display: flex;
+      justify-content: center;
+    }
+
+    .social-links a {
+      font-size: 1.2rem; /* Slightly smaller icons */
+      color: var(--text-dark-primary);
+      transition: color 0.2s ease-out, transform 0.2s ease-out;
+      opacity: 0.7;
+    }
+
+    body.dark .social-links a {
+      color: var(--text-light-primary);
+    }
+
+    .social-links a:hover {
+      color: var(--accent-blue);
+      transform: translateY(-2px);
+      opacity: 1;
+    }
+
+    body.dark .social-links a:hover {
+      color: var(--dark-mode-accent-blue);
+    }
+
+    /* Ripple Effect CSS */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.7); /* White ripple */
+      animation: ripple-animation 0.6s linear forwards;
+      pointer-events: none; /* Ensure clicks pass through */
+      z-index: 0; /* Behind text */
+    }
+
+    body.dark .ripple {
+        background-color: rgba(77, 166, 255, 0.3); /* Blue ripple for dark mode */
+    }
+
+    @keyframes ripple-animation {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5); /* Increased scale for better visibility */
+        opacity: 0;
+      }
+    }
+    
+    /* ===== RESPONSIVE ADJUSTMENTS ===== */
+    @media (max-width: 1024px) {
+        header {
+            padding: 1rem 2rem;
+        }
+        nav ul {
+            gap: 0.8rem;
+        }
+        nav ul li a {
+            font-size: 0.9rem;
+        }
+        nav .resume-button {
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+        }
+        main {
+            padding: 0.5rem 2rem;
+        }
+        .page-content {
+            padding: 1rem 0;
+        }
+        .skill-detail-section {
+            padding: 0.8rem;
+        }
+        .skill-detail-section img {
+            max-height: 35vh;
+        }
+        .skill-detail-section p,
+        .skill-detail-section ul {
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+        }
+        .back-to-skills {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        html, body {
+            overflow-y: auto; /* Re-enable scroll for mobile if content overflows */
+        }
+        header {
+            padding: 0.8rem 1.5rem;
+            height: 55px;
+        }
+        .header-logo-text {
+            font-size: 1.5rem; /* Adjusted size for mobile */
+        }
+        nav {
+            display: none;
+        }
+        .hamburger-menu {
+            display: flex;
+        }
+        .theme-toggle-button {
+            margin-left: 0.5rem;
+        }
+        main {
+            padding: 0.5rem 1rem;
+        }
+        .page-content {
+            padding: 0.5rem 0;
+            min-height: auto;
+        }
+        .page-content h2 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 0.8rem;
+        }
+        .page-content p {
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+        .skill-detail-section {
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+        .skill-detail-section img {
+            max-height: 30vh;
+            margin-bottom: 0.6rem;
+        }
+        .skill-detail-section h3 {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .skill-detail-section p,
+        .skill-detail-section ul {
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+        }
+        .skill-detail-section ul {
+            margin-left: 1rem;
+        }
+        .skill-detail-section ul li {
+            margin-bottom: 0.2rem;
+        }
+        .back-to-skills {
+            margin-top: 0.8rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+        footer {
+            padding: 0.8rem 1rem;
+            font-size: 0.75rem;
+        }
+        .social-links {
+            margin-top: 0.4rem;
+            gap: 0.5rem;
+        }
+        .social-links a {
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        header {
+            padding: 0.6rem 0.8rem;
+            height: 50px;
+        }
+        .header-logo-text {
+            font-size: 1.2rem; /* Adjusted size for very small screens */
+        }
+        .hamburger-menu {
+            width: 25px;
+            height: 20px;
+        }
+        .hamburger-menu span {
+            height: 2px;
+        }
+        .hamburger-menu.open span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .hamburger-menu.open span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        .theme-toggle-button {
+            width: 30px;
+            height: 30px;
+            font-size: 0.75rem;
+        }
+        main {
+            padding: 0.5rem;
+        }
+        .page-content {
+            padding: 0.5rem 0;
+        }
+        .page-content h2 {
+            font-size: clamp(1.5rem, 8vw, 2rem);
+            margin-bottom: 0.5rem;
+        }
+        .page-content p {
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .skill-detail-section {
+            padding: 0.5rem;
+        }
+        .skill-detail-section img {
+            max-height: 25vh;
+        }
+        .skill-detail-section h3 {
+            margin-top: 0.8rem;
+            margin-bottom: 0.4rem;
+        }
+        .skill-detail-section p,
+        .skill-detail-section ul {
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .back-to-skills {
+            margin-top: 0.6rem;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+        footer {
+            padding: 0.6rem 0.8rem;
+            font-size: 0.7rem;
+        }
+        .social-links a {
+            font-size: 1rem;
+        }
+    }
+  </style>
+  <!-- SEO Enhancement: JSON-LD Structured Data for Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Amir H. Rusli",
+    "jobTitle": "Traffic Engineer & Consultant",
+    "url": "https://yourdomain.com/",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "University Malaya"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/yourprofile",
+      "https://github.com/yourusername"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Self-Employed"
+    }
+  }
+  </script>
+</head>
+<body class="no-tap-highlight">
+  <header>
+    <a href="index.html" class="header-logo-text" aria-label="Go to homepage">AHR</a>
+    <nav class="desktop-nav">
+        <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn" onclick="return false;" aria-haspopup="true" aria-expanded="false" aria-controls="skills-dropdown-content">Skills <i class="fas fa-caret-down dropdown-arrow"></i></a>
+                <div class="dropdown-content" id="skills-dropdown-content" role="menu">
+                    <a href="skill-details-sidra.html" role="menuitem">Sidra</a>
+                    <a href="skill-details-vissim.html" role="menuitem">Vissim</a>
+                    <a href="skill-details-sumo.html" role="menuitem">SUMO Traffic</a>
+                    <a href="skill-details-swept-path.html" role="menuitem">Swept Path Analysis</a>
+                </div>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="/path/to/your-resume.pdf" download="Amir_H_Rusli_Resume.pdf" class="resume-button">Resume</a>
+        <button class="theme-toggle-button" onclick="toggleTheme()" aria-label="Toggle dark mode">
+            <span id="theme-icon">🌞</span>
+        </button>
+    </nav>
+    <div class="hamburger-menu" aria-label="Open navigation menu" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+      <button class="theme-toggle-button" onclick="toggleTheme()" aria-label="Toggle dark mode">
+          <span id="theme-icon-mobile">🌞</span>
+      </button>
+      <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li class="dropdown-mobile">
+              <a href="#" class="dropbtn-mobile" onclick="return false;" aria-haspopup="true" aria-expanded="false" aria-controls="skills-dropdown-mobile-content">Skills <i class="fas fa-caret-down dropdown-arrow"></i></a>
+              <div class="dropdown-content" id="skills-dropdown-mobile-content" role="menu">
+                  <a href="skill-details-sidra.html" role="menuitem">Sidra</a>
+                  <a href="skill-details-vissim.html" role="menuitem">Vissim</a>
+                  <a href="skill-details-sumo.html" role="menuitem">SUMO Traffic</a>
+                  <a href="skill-details-swept-path.html" role="menuitem">Swept Path Analysis</a>
+              </div>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="/path/to/your-resume.pdf" download="Amir_H_Rusli_Resume.pdf" class="resume-button">Resume</a>
+  </div>
+
+  <main>
+    <section class="page-content">
+        <h2>SUMO Traffic</h2>
+        
+        <div class="skill-detail-section">
+            <!-- REPLACE THIS IMAGE WITH A RELEVANT SUMO TRAFFIC IMAGE -->
+            <img src="https://placehold.co/800x450/0077B6/ffffff?text=SUMO+Traffic" alt="SUMO Traffic Simulation Interface">
+            <h3>Overview of SUMO Traffic</h3>
+            <p>SUMO (Simulation of Urban MObility) is a highly versatile, open-source microscopic traffic simulation package designed to handle large-scale road networks. My expertise in SUMO allows me to model complex traffic dynamics, evaluate various traffic management strategies, and analyze the behavior of individual vehicles in a detailed environment.</p>
+            
+            <h3>Key Applications & Capabilities</h3>
+            <p>My proficiency in SUMO Traffic is applied to a diverse range of scenarios, including:</p>
+            <ul>
+                <li><strong>Traffic Flow Analysis:</strong> Simulating and analyzing traffic flow, congestion patterns, and bottlenecks on urban and highway networks.</li>
+                <li><strong>Intelligent Transportation Systems (ITS) Evaluation:</strong> Testing and evaluating the effectiveness of various ITS applications, such as adaptive traffic signals, ramp metering, and vehicle-to-everything (V2X) communication.</li>
+                <li><strong>Public Transport Modeling:</strong> Simulating bus, tram, and rail operations within a multi-modal network to optimize routes and schedules.</li>
+                <li><strong>Emission Modeling:</strong> Analyzing vehicle emissions based on driving behavior and traffic conditions to assess environmental impacts.</li>
+                <li><strong>Scenario Testing:</strong> Creating and testing various hypothetical scenarios, including road closures, new infrastructure, or changes in traffic demand.</li>
+                <li><strong>Autonomous Vehicle Integration:</strong> Simulating the interaction of autonomous vehicles with human-driven traffic and infrastructure.</li>
+                <li><strong>Pedestrian and Bicycle Simulation:</strong> Incorporating pedestrian and bicycle movements to analyze complete urban mobility solutions.</li>
+            </ul>
+
+            <h3>Methodology & Workflow</h3>
+            <p>My typical workflow when utilizing SUMO involves:</p>
+            <ul>
+                <li><strong>Network Import/Creation:</strong> Importing road networks from OpenStreetMap (OSM), creating custom networks using NETEDIT, or converting from other formats.</li>
+                <li><strong>Demand Modeling:</strong> Defining traffic demand by generating routes, trips, and public transport schedules.</li>
+                <li><strong>Traffic Light Logic:</strong> Implementing and optimizing traffic light programs, including fixed-time, actuated, and adaptive control.</li>
+                <li><strong>Simulation Execution:</strong> Running microscopic simulations to observe individual vehicle movements and network-wide performance.</li>
+                <li><strong>Data Extraction & Analysis:</strong> Extracting various simulation outputs (e.g., travel times, delays, queue lengths, emissions) and analyzing them to derive insights.</li>
+                <li><strong>Visualization:</strong> Utilizing SUMO-GUI for real-time visualization of simulations and generating animated outputs for presentations.</li>
+                <li><strong>Scripting & Automation:</strong> Leveraging Python (TraCI) for advanced control, data extraction, and automation of simulation workflows.</li>
+            </ul>
+            <p>My hands-on experience with SUMO ensures that I can deliver precise, reliable, and actionable insights for a wide range of traffic engineering and intelligent transportation system projects.</p>
+
+            <a href="index.html#skills-section" class="back-to-skills">&larr; Back to Skills Overview</a>
+        </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Amir H. Rusli Traffic Engineer. Built with ❤</p>
+    <div class="social-links">
+      <!-- REPLACE THESE WITH YOUR ACTUAL SOCIAL MEDIA LINKS -->
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // Function to toggle theme between light and dark mode
+    function toggleTheme() {
+      const body = document.body;
+      const themeIconDesktop = document.getElementById('theme-icon');
+      const themeIconMobile = document.getElementById('theme-icon-mobile');
+
+      // Add rotating class for visual feedback during theme change
+      if (themeIconDesktop) themeIconDesktop.classList.add('rotating');
+      if (themeIconMobile) themeIconMobile.classList.add('rotating');
+
+      // Toggle 'dark' class on the body
+      body.classList.toggle('dark');
+      const isDark = body.classList.contains('dark');
+      
+      // Update theme icon and button title based on current theme
+      if (themeIconDesktop) {
+        themeIconDesktop.textContent = isDark ? '🌙' : '🌞'; // Moon for dark, Sun for light
+        document.querySelector('.theme-toggle-button').title = isDark ? 'Toggle light mode' : 'Toggle dark mode';
+      }
+      if (themeIconMobile) {
+        themeIconMobile.textContent = isDark ? '🌙' : '🌞'; // Moon for dark, Sun for light
+      }
+
+      // Save the current theme preference to local storage
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+      // Remove rotating class after a short delay to complete animation
+      setTimeout(() => {
+        if (themeIconDesktop) themeIconDesktop.classList.remove('rotating');
+        if (themeIconMobile) themeIconMobile.classList.remove('rotating');
+      }, 600);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get references to various DOM elements
+      const body = document.body;
+      const themeIconDesktop = document.getElementById('theme-icon');
+      const themeIconMobile = document.getElementById('theme-icon-mobile');
+      const dropdown = document.querySelector('.dropdown');
+      const dropbtn = document.querySelector('.dropbtn');
+      const dropdownContent = document.getElementById('skills-dropdown-content');
+
+      const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+      const mobileNav = document.querySelector('.mobile-nav');
+      const hamburgerMenu = document.querySelector('.hamburger-menu');
+      const mobileDropdown = document.querySelector('.dropdown-mobile');
+      const mobileDropbtn = document.querySelector('.dropbtn-mobile');
+      const mobileDropdownContent = document.getElementById('skills-dropdown-mobile-content');
+
+
+      // Set initial theme based on localStorage or system preference
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (savedTheme) {
+        // If a theme is saved in local storage, apply it
+        if (savedTheme === 'dark') {
+          body.classList.add('dark');
+          if (themeIconDesktop) themeIconDesktop.textContent = '�';
+          if (themeIconMobile) themeIconMobile.textContent = '🌙';
+        } else {
+          if (themeIconDesktop) themeIconDesktop.textContent = '🌞';
+          if (themeIconMobile) themeIconMobile.textContent = '🌞';
+        }
+      } else if (prefersDark) {
+        // If no theme saved, check system preference
+        body.classList.add('dark');
+        if (themeIconDesktop) themeIconDesktop.textContent = '🌙';
+        if (themeIconMobile) themeIconMobile.textContent = '🌙';
+      } else {
+        // Default to light theme if no preference found
+        if (themeIconDesktop) themeIconDesktop.textContent = '🌞';
+        if (themeIconMobile) themeIconMobile.textContent = '🌞';
+      }
+
+      // Add 'no-tap-highlight' class for better mobile experience (removes default tap highlight)
+      document.body.classList.add('no-tap-highlight');
+
+      // Preload hover states for smoother transitions on interactive elements
+      document.querySelectorAll('nav ul li a, .resume-button, .theme-toggle-button, .mobile-nav ul li a').forEach(el => {
+        el.style.transform = 'translateZ(0)'; /* Force hardware acceleration */
+      });
+
+      // Desktop Dropdown menu toggle functionality
+      if (dropdown && dropbtn && dropdownContent) {
+          dropbtn.addEventListener('click', function(event) {
+              event.stopPropagation(); // Prevent document click from immediately closing the dropdown
+              dropdown.classList.toggle('show');
+              this.setAttribute('aria-expanded', dropdown.classList.contains('show'));
+          });
+
+          // Close the dropdown if the user clicks outside of it
+          document.addEventListener('click', function(event) {
+              if (!dropdown.contains(event.target)) {
+                  dropdown.classList.remove('show');
+                  dropbtn.setAttribute('aria-expanded', 'false');
+              }
+          });
+
+          // Keyboard navigation for desktop dropdown
+          dropbtn.addEventListener('keydown', function(event) {
+              if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  dropdown.classList.toggle('show');
+                  this.setAttribute('aria-expanded', dropdown.classList.contains('show'));
+                  if (dropdown.classList.contains('show')) {
+                      dropdownContent.querySelector('a').focus(); // Focus the first item in the dropdown
+                  }
+              } else if (event.key === 'ArrowDown' && dropdown.classList.contains('show')) {
+                  event.preventDefault();
+                  dropdownContent.querySelector('a').focus(); // Move focus to the first item
+              }
+          });
+
+          dropdownContent.addEventListener('keydown', function(event) {
+              const focusableElements = Array.from(this.querySelectorAll('a'));
+              const focusedItemIndex = focusableElements.indexOf(document.activeElement);
+
+              if (event.key === 'ArrowDown') {
+                  event.preventDefault();
+                  // Move focus to the next item, or loop to the first if at the end
+                  if (focusedItemIndex < focusableElements.length - 1) {
+                      focusableElements[focusedItemIndex + 1].focus();
+                  } else {
+                      focusableElements[0].focus(); 
+                  }
+              } else if (event.key === 'ArrowUp') {
+                  event.preventDefault();
+                  // Move focus to the previous item, or loop to the last if at the beginning
+                  if (focusedItemIndex > 0) {
+                      focusableElements[focusedItemIndex - 1].focus();
+                  } else {
+                      focusableElements[focusableElements.length - 1].focus();
+                  }
+              } else if (event.key === 'Escape') {
+                  event.preventDefault();
+                  dropdown.classList.remove('show'); // Close dropdown
+                  dropbtn.setAttribute('aria-expanded', 'false');
+                  dropbtn.focus(); // Return focus to the dropdown button
+              }
+          });
+      }
+
+      // Mobile Menu Functionality (Hamburger menu and overlay)
+      function openMobileMenu() {
+          mobileNavOverlay.classList.add('open');
+          mobileNav.classList.add('open');
+          hamburgerMenu.classList.add('open');
+          document.body.style.overflowY = 'hidden'; /* Prevent body scroll when menu is open */
+      }
+
+      function closeMobileMenu() {
+          mobileNavOverlay.classList.remove('open');
+          mobileNav.classList.remove('open');
+          hamburgerMenu.classList.remove('open');
+          document.body.style.overflowY = 'auto'; /* Restore body scroll when menu is closed */
+      }
+
+      hamburgerMenu.addEventListener('click', openMobileMenu);
+      mobileNavOverlay.addEventListener('click', closeMobileMenu); // Close when clicking outside menu
+
+      // Mobile Dropdown toggle functionality
+      if (mobileDropdown && mobileDropbtn && mobileDropdownContent) {
+          mobileDropbtn.addEventListener('click', function(event) {
+              event.stopPropagation(); // Prevent click from propagating
+              mobileDropdown.classList.toggle('show');
+              // Toggle display of dropdown content (block/none)
+              mobileDropdownContent.style.display = mobileDropdown.classList.contains('show') ? 'block' : 'none';
+              this.setAttribute('aria-expanded', mobileDropdown.classList.contains('show'));
+          });
+      }
+
+      // Ripple effect functionality for buttons/links
+      function createRipple(event) {
+        const button = event.currentTarget;
+        const ripple = document.createElement('span');
+        // Calculate diameter and radius for the ripple effect
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        // Position the ripple at the click location relative to the button
+        ripple.style.width = ripple.style.height = `${diameter}px`;
+        ripple.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+        ripple.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+        
+        ripple.classList.add('ripple');
+
+        // Remove any existing ripples to prevent accumulation before adding a new one
+        const existingRipple = button.querySelector('.ripple');
+        if (existingRipple) {
+          existingRipple.remove();
+        }
+
+        button.appendChild(ripple);
+
+        // Remove the ripple element after its animation completes
+        ripple.addEventListener('animationend', () => {
+          ripple.remove();
+        });
+      }
+
+      // Apply ripple effect to all relevant interactive elements
+      document.querySelectorAll('nav ul li a, .resume-button, .dropdown-content a, .mobile-nav ul li a, .mobile-nav .resume-button, .mobile-nav .dropdown-content a, .back-to-skills').forEach(button => {
+        button.addEventListener('click', createRipple);
+      });
+
+      // Special handling for dropdown buttons to ensure ripple is contained within them
+      if (dropbtn) {
+        dropbtn.addEventListener('click', createRipple);
+      }
+      if (mobileDropbtn) {
+        mobileDropbtn.addEventListener('click', createRipple);
+      }
+    });
+  </script>
+</body>
+</html>
+�

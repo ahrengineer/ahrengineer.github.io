@@ -3,19 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- SEO Enhancement: More comprehensive title tag -->
-  <title>Amir H. Rusli | Traffic Engineer & Consultant | TIA, SIDRA, VISSIM, Python, VBA Automation</title>
-  <!-- SEO Enhancement: Expanded meta description with more keywords -->
-  <meta name="description" content="Amir H. Rusli's professional portfolio: Expert Traffic Engineer and Consultant specializing in Traffic Impact Assessments (TIA), SIDRA INTERSECTION, VISSIM, Python & VBA automation for traffic analysis, swept path analysis, and transportation planning.">
-  <!-- SEO Enhancement: Added more relevant keywords -->
-  <meta name="keywords" content="Amir H. Rusli, Traffic Engineer, Traffic Consultant, Traffic Engineering, TIA, SIDRA, VISSIM, Python, VBA, Automation, Swept Path Analysis, AutoCAD, GIS, Transportation Planning, Signal Optimization, Capacity Analysis, Road Design, Urban Planning, Infrastructure, Malaysia, Engineering Portfolio">
+  <title>SIDRA INTERSECTION Skill | Amir H. Rusli</title>
+  <meta name="description" content="Detailed information on Amir H. Rusli's expertise in SIDRA INTERSECTION for intersection capacity analysis, signal optimization, and network modeling.">
+  <meta name="keywords" content="SIDRA INTERSECTION, Traffic Capacity Analysis, Signal Optimization, Roundabout Analysis, Network Modeling, Traffic Engineering, Transportation Planning, Intersection Design">
   <meta name="author" content="Amir H. Rusli">
-  <!-- SEO Enhancement: Canonical URL to prevent duplicate content issues -->
-  <link rel="canonical" href="https://yourdomain.com/"> <!-- REMINDER: Update 'yourdomain.com' to your actual website domain -->
-  <!-- SEO Enhancement: Favicon for browser tabs -->
+  <link rel="canonical" href="https://yourdomain.com/skill-details-sidra.html">
   <link rel="icon" href="https://placehold.co/32x32/0077B6/ffffff?text=AR" type="image/png">
 
-  <!-- Preload fonts for better performance and to prevent FOUT (Flash of Unstyled Text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -23,22 +17,22 @@
   <style>
     /* ===== VARIABLES ===== */
     :root {
-      --bg-light: #ffffff; /* Pure white background */
-      --text-dark-primary: #1a1a1a; /* Very dark grey for main text */
-      --text-dark-secondary: #555555; /* Slightly lighter grey for secondary text */
-      --accent-blue: #0077B6; /* Deep blue for highlights */
-      --accent-blue-light: #e0f2f7; /* Very light blue for button background */
-      --border-radius-main: 16px; /* For main containers */
-      --border-radius-button: 8px; /* For buttons */
+      --bg-light: #ffffff;
+      --text-dark-primary: #1a1a1a;
+      --text-dark-secondary: #555555;
+      --accent-blue: #0077B6;
+      --accent-blue-light: #e0f2f7;
+      --border-radius-main: 16px;
+      --border-radius-button: 8px;
       --transition-speed: 0.2s;
 
       /* Dark Mode Variables */
-      --bg-dark: #1a1a1a; /* Dark background */
-      --text-light-primary: #e0e0e0; /* Light text for dark mode */
-      --text-light-secondary: #aaaaaa; /* Slightly darker light text */
-      --dark-mode-accent-blue: #4DA6FF; /* Brighter blue for highlights in dark mode */
-      --dark-mode-accent-blue-light: #004d77; /* Darker light blue for button background */
-      --neon-green-acid: #39FF14; /* Neon Green Acid */
+      --bg-dark: #1a1a1a;
+      --text-light-primary: #e0e0e0;
+      --text-light-secondary: #aaaaaa;
+      --dark-mode-accent-blue: #4DA6FF;
+      --dark-mode-accent-blue-light: #004d77;
+      --neon-green-acid: #39FF14;
     }
     
     /* ===== BASE STYLES ===== */
@@ -48,9 +42,8 @@
       box-sizing: border-box;
     }
     
-    html, body {
-        height: 100%; /* Ensure html and body take full viewport height */
-        overflow: hidden; /* Prevent all scrolling */
+    html {
+        scroll-behavior: smooth; /* Smooth scrolling for anchor links */
     }
 
     body {
@@ -58,16 +51,14 @@
       background-color: var(--bg-light);
       color: var(--text-dark-primary);
       line-height: 1.6;
-      display: flex; /* Use flexbox for layout */
-      flex-direction: column; /* Stack header and main vertically */
-      transition: background-color var(--transition-speed), color var(--transition-speed); /* Smooth theme transition */
-      min-height: 100vh; /* Keep for general safety, but overflow: hidden is dominant */
-      overflow-x: hidden; /* Prevent horizontal scrolling */
+      display: flex;
+      flex-direction: column;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto; /* Changed to auto to allow scrolling */
     }
 
-    /* Removed body:not(.modal-open) overflow-y: auto; */
-
-    /* Dark Mode Styles */
     body.dark {
       background-color: var(--bg-dark);
       color: var(--text-light-primary);
@@ -76,17 +67,17 @@
     /* ===== HEADER ===== */
     header {
       width: 100%;
-      padding: 1.5rem 4rem; /* Padding matches the image's spacing */
+      padding: 1rem 4rem; /* Slightly reduced header padding */
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative; /* Changed from sticky */
+      position: sticky;
       top: 0;
       z-index: 1000;
-      background-color: var(--bg-light); /* Ensure header background transitions */
+      background-color: var(--bg-light);
       transition: background-color var(--transition-speed), border-bottom var(--transition-speed);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
-      flex-shrink: 0; /* Prevent header from shrinking */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
     }
 
     body.dark header {
@@ -94,14 +85,15 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .header-logo-text { /* New class for AHR text */
-      font-family: 'Playfair Display', serif; /* Use a distinct font for the logo */
+    .header-logo-text {
+      font-family: 'Playfair Display', serif;
       font-weight: 700;
       font-size: 2rem; /* Adjusted size for desktop */
-      color: var(--accent-blue); /* Blue color for AHR */
-      flex-shrink: 0; /* Prevent shrinking */
+      color: var(--accent-blue);
+      flex-shrink: 0;
       transition: color var(--transition-speed);
-      text-decoration: none; /* Removed underline */
+      cursor: pointer; /* Indicate it's clickable */
+      text-decoration: none; /* Remove underline for AHR link */
     }
 
     body.dark .header-logo-text {
@@ -111,14 +103,14 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 2rem; /* Space between nav items and button */
+      gap: 2rem;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1.5rem; /* Space between nav links */
-      margin-right: 1rem; /* Space between links and resume button */
+      gap: 1.5rem;
+      margin-right: 1rem;
     }
 
     nav ul li a {
@@ -126,9 +118,10 @@
       color: var(--text-dark-primary);
       font-weight: 500;
       font-size: 1rem;
-      padding: 0.5rem 0; /* Vertical padding for click area */
-      position: relative; /* For dropdown arrow */
+      padding: 0.5rem 0;
+      position: relative; /* Essential for ripple effect */
       transition: color var(--transition-speed);
+      overflow: hidden; /* Essential for ripple effect */
     }
 
     body.dark nav ul li a {
@@ -143,10 +136,9 @@
         color: var(--dark-mode-accent-blue);
     }
 
-    /* Active link style */
     nav ul li a.active {
       color: var(--accent-blue);
-      font-weight: 600; /* Slightly bolder for active */
+      font-weight: 600;
     }
 
     body.dark nav ul li a.active {
@@ -166,8 +158,8 @@
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
       border-radius: var(--border-radius-button);
-      overflow: hidden; /* Ensures rounded corners apply to content */
-      top: calc(100% + 10px); /* Position below the "Skills" link */
+      overflow: hidden;
+      top: calc(100% + 10px);
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
@@ -186,9 +178,11 @@
       text-decoration: none;
       display: block;
       text-align: left;
-      font-weight: 400; /* Reset font weight for dropdown items */
+      font-weight: 400;
       font-size: 0.95rem;
       transition: background-color 0.2s ease, color 0.2s ease;
+      position: relative; /* Essential for ripple effect */
+      overflow: hidden; /* Essential for ripple effect */
     }
 
     body.dark .dropdown-content a {
@@ -205,56 +199,56 @@
         color: var(--dark-mode-accent-blue);
     }
 
-    .dropdown.show .dropdown-content { /* Use .show class for JS control */
+    .dropdown.show .dropdown-content {
       display: block;
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Dropdown arrow */
     .dropdown-arrow {
       margin-left: 0.5rem;
       font-size: 0.8rem;
       transition: transform 0.3s ease;
     }
 
-    .dropdown.show .dropdown-arrow { /* Rotate arrow when dropdown is open */
+    .dropdown.show .dropdown-arrow {
       transform: rotate(180deg);
     }
 
-
     .resume-button {
-      background-color: var(--accent-blue-light); /* Light blue background */
-      color: var(--accent-blue); /* Blue text */
+      background-color: var(--accent-blue-light);
+      color: var(--accent-blue);
       padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: var(--border-radius-button); /* Rounded corners */
+      border-radius: var(--border-radius-button);
       font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       transition: background-color var(--transition-speed), transform var(--transition-speed), color var(--transition-speed), box-shadow var(--transition-speed);
-      white-space: nowrap; /* Prevent text wrapping */
+      white-space: nowrap;
+      position: relative; /* Essential for ripple effect */
+      overflow: hidden; /* Essential for ripple effect */
     }
 
     body.dark .resume-button {
-        background-color: var(--neon-green-acid); /* Neon green acid background in dark mode */
-        color: var(--bg-dark); /* Dark text for contrast */
-        box-shadow: 0 0 15px var(--neon-green-acid), 0 0 25px var(--neon-green-acid); /* Neon glow */
+        background-color: var(--neon-green-acid);
+        color: var(--bg-dark);
+        box-shadow: 0 0 15px var(--neon-green-acid), 0 0 25px var(--neon-green-acid);
     }
 
     .resume-button:hover {
-      background-color: var(--accent-blue); /* Darker blue on hover */
+      background-color: var(--accent-blue);
       color: white;
-      transform: translateY(-2px); /* Subtle lift */
+      transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     body.dark .resume-button:hover {
-        background-color: var(--neon-green-acid); /* Keep neon green on hover in dark mode */
-        color: var(--bg-dark); /* Keep dark text on hover in dark mode */
-        transform: translateY(-3px); /* Slightly more lift on hover */
-        box-shadow: 0 0 20px var(--neon-green-acid), 0 0 30px var(--neon-green-acid), 0 0 40px var(--neon-green-acid); /* Stronger neon glow on hover */
+        background-color: var(--neon-green-acid);
+        color: var(--bg-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px var(--neon-green-acid), 0 0 30px var(--neon-green-acid), 0 0 40px var(--neon-green-acid);
     }
 
     /* Theme toggle button */
@@ -272,7 +266,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
       font-size: 1.1rem;
-      margin-left: 1rem; /* Space from resume button */
+      margin-left: 1rem;
     }
 
     body.dark .theme-toggle-button {
@@ -296,13 +290,13 @@
 
     /* Hamburger menu for mobile */
     .hamburger-menu {
-        display: none; /* Hidden by default on desktop */
+        display: none;
         flex-direction: column;
         justify-content: space-around;
         width: 30px;
         height: 25px;
         cursor: pointer;
-        z-index: 1001; /* Above other content */
+        z-index: 1001;
         margin-left: 1rem;
     }
 
@@ -330,13 +324,13 @@
 
     /* Mobile Nav Overlay */
     .mobile-nav-overlay {
-        display: none; /* Hidden by default */
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent overlay */
+        background-color: rgba(0, 0, 0, 0.8);
         z-index: 999;
         opacity: 0;
         visibility: hidden;
@@ -352,8 +346,8 @@
     .mobile-nav {
         position: fixed;
         top: 0;
-        right: -300px; /* Start off-screen */
-        width: 280px; /* Width of the mobile menu */
+        right: -300px;
+        width: 280px;
         height: 100%;
         background-color: var(--bg-light);
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
@@ -370,7 +364,7 @@
     }
 
     .mobile-nav.open {
-        right: 0; /* Slide in */
+        right: 0;
     }
 
     .mobile-nav ul {
@@ -382,13 +376,15 @@
     }
 
     .mobile-nav ul li a, .mobile-nav .resume-button {
-        text-decoration: none;
-        color: var(--text-dark-primary);
-        font-size: 1.2rem;
-        font-weight: 500;
-        display: block;
-        padding: 0.5rem 0;
-        transition: color 0.2s ease;
+      text-decoration: none;
+      color: var(--text-dark-primary);
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: block;
+      padding: 0.5rem 0;
+      transition: color 0.2s ease;
+      position: relative; /* Essential for ripple effect */
+      overflow: hidden; /* Essential for ripple effect */
     }
     body.dark .mobile-nav ul li a {
         color: var(--text-light-primary);
@@ -407,395 +403,203 @@
     }
 
     /* Mobile dropdown specific styles */
-    .mobile-nav .dropdown-content-mobile { /* Corrected class name */
-        position: static; /* Remove absolute positioning */
+    .mobile-nav .dropdown-content { /* Use .dropdown-content for mobile as well */
+        position: static;
         display: none;
         opacity: 1;
         visibility: visible;
         transform: none;
-        background-color: transparent; /* No background for nested dropdown */
+        background-color: transparent;
         box-shadow: none;
         min-width: unset;
-        padding-left: 1.5rem; /* Indent dropdown items */
+        padding-left: 1.5rem;
         margin-top: 0.5rem;
     }
 
-    .mobile-nav .dropdown-content-mobile a { /* Corrected class name */
-        font-size: 1rem; /* Smaller font for sub-items */
+    .mobile-nav .dropdown-content a {
+        font-size: 1rem;
         padding: 0.3rem 0;
+    }
+
+    /* Ripple Effect CSS */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.7); /* White ripple */
+      animation: ripple-animation 0.6s linear forwards;
+      pointer-events: none; /* Ensure clicks pass through */
+      z-index: 0; /* Behind text */
+    }
+
+    body.dark .ripple {
+        background-color: rgba(77, 166, 255, 0.3); /* Blue ripple for dark mode */
+    }
+
+    @keyframes ripple-animation {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5); /* Increased scale for better visibility */
+        opacity: 0;
+      }
     }
 
     /* ===== MAIN CONTENT SECTIONS ===== */
     main {
-        flex-grow: 1; /* Takes all available vertical space between header and footer */
+        flex-grow: 1;
         display: flex;
-        flex-direction: column; /* Stack sections vertically */
-        justify-content: center; /* Center content vertically */
+        flex-direction: column;
+        justify-content: flex-start;
         align-items: center;
-        padding: 1rem 4rem; /* Reduced padding */
+        padding: 0.5rem 4rem; /* Reduced padding for main */
         width: 100%;
-        max-width: 1200px; /* Max width for main content */
-        margin: 0 auto; /* Center main content */
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
-    section {
-        padding: 1rem 0; /* Reduced padding for sections */
+    .page-content { /* General style for content on new pages */
+        padding: 1.5rem 0; /* Reduced padding for page content */
         width: 100%;
         min-height: auto; /* Allow height to be determined by content */
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start; /* Align content to top */
         align-items: center;
-        text-align: center;
-        flex-grow: 1; /* Allow section to grow if needed */
+        text-align: left; /* Align text to left */
     }
 
-    section:first-of-type { /* Adjust padding for the very first section if needed */
-        padding-top: 1rem; /* Reduced padding */
-    }
-
-    section h2 {
+    .page-content h2 {
         font-family: 'Playfair Display', serif;
-        font-size: clamp(2rem, 4vw, 3rem);
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem); /* Slightly smaller font for main title */
         color: var(--accent-blue);
         margin-bottom: 1rem; /* Reduced margin */
         transition: color var(--transition-speed);
+        text-align: center; /* Center main title */
+        width: 100%;
     }
-    body.dark section h2 {
+    body.dark .page-content h2 {
         color: var(--dark-mode-accent-blue);
     }
 
-    section p {
+    .page-content h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.3rem, 2.5vw, 2rem); /* Slightly smaller font for subheadings */
+        color: var(--text-dark-primary);
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        transition: color var(--transition-speed);
+        width: 100%;
+    }
+    body.dark .page-content h3 {
+        color: var(--text-light-primary);
+    }
+
+    .page-content p {
         max-width: 800px;
-        font-size: 1.1rem;
-        line-height: 1.6; /* Reduced line height */
+        font-size: 1rem; /* Slightly reduced font size for paragraphs */
+        line-height: 1.6; /* Slightly tighter line height */
         margin-bottom: 1rem; /* Reduced margin */
-    }
-
-    /* Hero section specific styles (retained and adjusted) */
-    #hero-section {
-        display: flex;
-        flex-direction: row; /* Horizontal layout for hero */
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 0; /* Adjusted padding within main container */
-        min-height: auto; /* Removed fixed min-height */
-    }
-
-    .hero-image-col {
-        flex: 0 0 350px; /* Fixed width for image column */
-        max-width: 350px;
-        height: 350px; /* Fixed height for image column */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        flex-shrink: 0; /* Prevent shrinking */
-    }
-
-    .profile-image {
         width: 100%;
-        height: 100%;
-        border-radius: 50%; /* Circular image */
-        object-fit: cover; /* Ensure image covers the circle */
-        border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        display: block;
     }
 
-    body.dark .profile-image {
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-text-col {
-        flex-grow: 1; /* Text column takes remaining space */
-        padding-left: 2rem; /* Space from image */
-    }
-
-    .greeting {
-        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-        color: var(--text-dark-primary);
-        margin-bottom: 0.5rem;
-        line-height: 1.2;
-    }
-
-    body.dark .greeting {
-        color: var(--text-light-primary);
-    }
-
-    .highlight-name {
-        color: var(--accent-blue);
-        font-weight: 700; /* Bolder for the name */
-        font-family: 'Playfair Display', serif; /* Use a distinct font for the name */
-        transition: color var(--transition-speed);
-    }
-
-    body.dark .highlight-name {
-        color: var(--dark-mode-accent-blue);
-    }
-
-    .tagline {
-        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-        color: var(--text-dark-primary);
+    .skill-detail-section { /* Renamed from project-detail-section */
+        max-width: 800px;
+        width: 100%;
         margin-bottom: 1rem; /* Reduced margin */
-        line-height: 1.4;
-    }
-
-    body.dark .tagline {
-        color: var(--text-light-primary);
-    }
-
-    .key-points {
-        list-style: none; /* Remove default list bullets */
-        padding-left: 0;
-    }
-
-    .key-points li {
-        display: flex;
-        align-items: flex-start; /* Align icon and text to top */
-        font-size: 1.rem;
-        color: var(--text-dark-secondary);
-        margin-bottom: 0.6rem; /* Reduced margin */
-    }
-
-    body.dark .key-points li {
-        color: var(--text-light-secondary);
-    }
-
-    .key-points li i {
-        color: var(--accent-blue);
-        font-size: 1.1rem;
-        margin-right: 0.8rem;
-        margin-top: 0.2rem; /* Adjust icon vertical alignment */
-        flex-shrink: 0; /* Prevent icon from shrinking */
-        transition: color var(--transition-speed);
-    }
-
-    body.dark .key-points li i {
-        color: var(--dark-mode-accent-blue);
-    }
-
-    /* Project Grid */
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        width: 100%;
-        max-width: 1000px;
-        margin-top: 2rem;
-    }
-
-    .project-card {
         background-color: var(--bg-light);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0,0,0,0.1);
         border-radius: var(--border-radius-main);
-        padding: 1.5rem;
-        text-align: left;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        padding: 1rem; /* Reduced padding */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
     }
-    body.dark .project-card {
+    body.dark .skill-detail-section { /* Renamed */
         background-color: var(--bg-dark);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    .project-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    body.dark .project-card:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .project-card h3 {
-        color: var(--accent-blue);
-        font-size: 1.4rem;
-        margin-bottom: 0.5rem;
-        transition: color var(--transition-speed);
-    }
-    body.dark .project-card h3 {
-        color: var(--dark-mode-accent-blue);
-    }
-
-    .project-card p {
-        font-size: 0.95rem;
-        color: var(--text-dark-secondary);
-        margin-bottom: 1rem;
-        transition: color var(--transition-speed);
-    }
-    body.dark .project-card p {
-        color: var(--text-light-secondary);
-    }
-
-    .project-card .project-link {
-        color: var(--accent-blue);
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.2s ease;
-    }
-    body.dark .project-card .project-link {
-        color: var(--dark-mode-accent-blue);
-    }
-
-    .project-card .project-link:hover {
-        text-decoration: underline;
-    }
-
-    /* Contact Form */
-    .contact-form-container {
+    .skill-detail-section img { /* Renamed */
         width: 100%;
-        max-width: 600px;
-        background-color: var(--bg-light);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: var(--border-radius-main);
-        padding: 2rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        text-align: left;
-    }
-    body.dark .contact-form-container {
-        background-color: var(--bg-dark);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .contact-form-container label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        color: var(--text-dark-primary);
-    }
-    body.dark .contact-form-container label {
-        color: var(--text-light-primary);
-    }
-
-    .contact-form-container input[type="text"],
-    .contact-form-container input[type="email"],
-    .contact-form-container textarea {
-        width: 100%;
-        padding: 0.8rem;
-        margin-bottom: 1rem;
-        border: 1px solid rgba(0, 0, 0, 0.15);
+        max-height: 30vh; /* Make height relative to viewport height */
+        height: auto;
+        object-fit: cover; /* Cover the area, cropping if necessary */
         border-radius: var(--border-radius-button);
-        background-color: var(--bg-light);
-        color: var(--text-dark-primary);
-        font-family: 'Inter', sans-serif;
-        font-size: 1rem;
-        transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add transition for zoom */
     }
-    body.dark .contact-form-container input[type="text"],
-    body.dark .contact-form-container input[type="email"],
-    body.dark .contact-form-container textarea {
-        background-color: #2a2a2a;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        color: var(--text-light-primary);
+    body.dark .skill-detail-section img {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
-    .contact-form-container input[type="text"]:focus,
-    .contact-form-container input[type="email"]:focus,
-    .contact-form-container textarea:focus {
-        outline: none;
-        border-color: var(--accent-blue);
-        box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.2);
+    .skill-detail-section img:hover {
+        transform: scale(1.03); /* Slightly zoom in on hover */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Add subtle shadow on hover */
     }
-    body.dark .contact-form-container input[type="text"]:focus,
-    body.dark .contact-form-container input[type="email"]:focus,
-    body.dark .contact-form-container textarea:focus {
-        border-color: var(--dark-mode-accent-blue);
-        box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.2);
+    body.dark .skill-detail-section img:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.4);
     }
 
-    .contact-form-container textarea {
-        resize: vertical;
-        min-height: 120px;
+    .skill-detail-section p, /* Renamed */
+    .skill-detail-section ul { /* Renamed */
+        font-size: 0.95rem; /* Slightly smaller font for body text */
+        line-height: 1.6; /* Slightly tighter line height */
+        margin-bottom: 0.8rem; /* Reduced margin */
+        color: var(--text-dark-secondary);
+    }
+    body.dark .skill-detail-section p,
+    body.dark .skill-detail-section ul {
+        color: var(--text-light-secondary);
     }
 
-    .contact-form-container button[type="submit"] {
+    .skill-detail-section ul {
+        list-style: disc;
+        margin-left: 1.2rem; /* Slightly reduced indent */
+    }
+
+    .skill-detail-section ul li {
+        margin-bottom: 0.3rem; /* Reduced margin between list items */
+    }
+
+    .back-to-skills { /* Changed class name */
+        display: inline-block;
+        margin-top: 1rem; /* Reduced margin */
+        padding: 0.75rem 1.5rem;
         background-color: var(--accent-blue);
         color: white;
-        padding: 0.8rem 1.8rem;
-        border: none;
+        text-decoration: none;
         border-radius: var(--border-radius-button);
-        font-size: 1rem;
         font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        position: relative; /* Essential for ripple effect */
+        overflow: hidden; /* Essential for ripple effect */
     }
-    body.dark .contact-form-container button[type="submit"] {
+    body.dark .back-to-skills { /* Changed class name */
         background-color: var(--dark-mode-accent-blue);
     }
 
-    .contact-form-container button[type="submit"]:hover {
+    .back-to-skills:hover { /* Changed class name */
         background-color: var(--accent-blue-dark);
         transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    body.dark .contact-form-container button[type="submit"]:hover {
-        background-color: var(--dark-mode-accent-blue); /* Keep same color for dark mode hover */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Gallery Grid */
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-        width: 100%;
-        max-width: 1000px;
-        margin-top: 2rem;
-    }
-
-    .gallery-item {
-        background-color: var(--bg-light);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: var(--border-radius-main);
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    }
-    body.dark .gallery-item {
-        background-color: var(--bg-dark);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .gallery-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    body.dark .gallery-item:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .gallery-item img {
-        width: 100%;
-        height: 200px; /* Fixed height for gallery images */
-        object-fit: cover;
-        display: block;
-    }
-
-    .gallery-item .caption {
-        padding: 1rem;
-        font-size: 0.9rem;
-        color: var(--text-dark-primary);
-        transition: color var(--transition-speed);
-    }
-    body.dark .gallery-item .caption {
-        color: var(--text-light-primary);
+    body.dark .back-to-skills:hover { /* Changed class name */
+        background-color: var(--dark-mode-accent-blue);
     }
 
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
-      padding: 1rem 2rem; /* Reduced padding */
+      padding: 0.8rem 2rem; /* Reduced footer padding */
       font-size: 0.8rem; /* Smaller font */
       width: 100%;
       box-sizing: border-box;
-      flex-shrink: 0; /* Prevent footer from shrinking */
-      color: var(--text-dark-primary); /* Ensure footer text color matches body */
+      flex-shrink: 0;
+      color: var(--text-dark-primary);
       opacity: 0.8;
-      background-color: var(--bg-light); /* Ensure footer background transitions */
+      background-color: var(--bg-light);
       transition: background-color var(--transition-speed), color var(--transition-speed);
       border-top: 1px solid rgba(0, 0, 0, 0.05);
     }
@@ -821,7 +625,7 @@
 
     .social-links a {
       font-size: 1.2rem; /* Slightly smaller icons */
-      color: var(--text-dark-primary); /* Inherit from body for consistency */
+      color: var(--text-dark-primary);
       transition: color 0.2s ease-out, transform 0.2s ease-out;
       opacity: 0.7;
     }
@@ -831,22 +635,47 @@
     }
 
     .social-links a:hover {
-      color: var(--accent-blue); /* Use primary accent for hover */
-      transform: translateY(-2px); /* Less dramatic lift */
+      color: var(--accent-blue);
+      transform: translateY(-2px);
       opacity: 1;
     }
 
     body.dark .social-links a:hover {
       color: var(--dark-mode-accent-blue);
     }
+
+    /* Ripple Effect CSS */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.7); /* White ripple */
+      animation: ripple-animation 0.6s linear forwards;
+      pointer-events: none; /* Ensure clicks pass through */
+      z-index: 0; /* Behind text */
+    }
+
+    body.dark .ripple {
+        background-color: rgba(77, 166, 255, 0.3); /* Blue ripple for dark mode */
+    }
+
+    @keyframes ripple-animation {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5); /* Increased scale for better visibility */
+        opacity: 0;
+      }
+    }
     
     /* ===== RESPONSIVE ADJUSTMENTS ===== */
     @media (max-width: 1024px) {
         header {
-            padding: 1rem 2rem; /* Reduced horizontal padding */
+            padding: 1rem 2rem;
         }
         nav ul {
-            gap: 0.8rem; /* Tighter gap for nav links */
+            gap: 0.8rem;
         }
         nav ul li a {
             font-size: 0.9rem;
@@ -856,89 +685,90 @@
             font-size: 0.85rem;
         }
         main {
-            padding: 0.5rem 2rem; /* Reduced padding */
+            padding: 0.5rem 2rem;
         }
-        #hero-section {
-            gap: 1rem; /* Reduced gap between columns */
+        .page-content {
+            padding: 1rem 0;
         }
-        .hero-image-col {
-            flex: 0 0 280px; /* Smaller fixed width */
-            max-width: 280px;
-            height: 280px; /* Smaller fixed height */
+        .skill-detail-section {
+            padding: 0.8rem;
         }
-        .hero-text-col {
-            padding-left: 1rem; /* Reduced padding */
+        .skill-detail-section img {
+            max-height: 35vh;
         }
-        section {
-            padding: 0.5rem 0; /* Reduced section padding */
+        .skill-detail-section p,
+        .skill-detail-section ul {
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
         }
-        section h2 {
-            margin-bottom: 0.8rem; /* Reduced margin */
-        }
-        section p {
-            font-size: 1rem; /* Slightly smaller font */
-            margin-bottom: 0.8rem; /* Reduced margin */
+        .back-to-skills {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
         }
     }
 
     @media (max-width: 768px) {
+        html, body {
+            overflow-y: auto; /* Re-enable scroll for mobile if content overflows */
+        }
         header {
-            padding: 0.8rem 1.5rem; /* Further reduce padding */
-            height: 55px; /* Fixed height for mobile header */
+            padding: 0.8rem 1.5rem;
+            height: 55px;
         }
         .header-logo-text {
             font-size: 1.5rem; /* Adjusted size for mobile */
         }
         nav {
-            display: none; /* Hide desktop nav */
+            display: none;
         }
         .hamburger-menu {
-            display: flex; /* Show hamburger */
+            display: flex;
         }
         .theme-toggle-button {
-            margin-left: 0.5rem; /* Adjust margin for mobile */
+            margin-left: 0.5rem;
         }
         main {
-            padding: 0.5rem 1rem; /* Reduced padding for main content */
+            padding: 0.5rem 1rem;
         }
-        #hero-section {
-            flex-direction: column; /* Stack image and text vertically */
-            text-align: center; /* Center text content */
-            gap: 1rem; /* Space between stacked columns */
-            min-height: auto; /* Removed fixed min-height */
+        .page-content {
+            padding: 0.5rem 0;
+            min-height: auto;
         }
-        .hero-image-col {
-            flex: none; /* Remove flex basis */
-            width: 200px; /* Smaller fixed width */
-            height: 200px; /* Smaller fixed height */
-            margin-bottom: 0.8rem; /* Space below image */
+        .page-content h2 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 0.8rem;
         }
-        .hero-text-col {
-            padding-left: 0; /* Remove left padding */
-            padding-top: 0.8rem; /* Add top padding */
+        .page-content p {
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
         }
-        .greeting, .tagline {
-            text-align: center; /* Ensure text is centered */
-            margin-bottom: 0.4rem; /* Reduced margin */
+        .skill-detail-section {
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
         }
-        .key-points {
-            align-items: center; /* Center list items */
+        .skill-detail-section img {
+            max-height: 30vh;
+            margin-bottom: 0.6rem;
         }
-        .key-points li {
-            justify-content: center; /* Center list item content */
-            text-align: left; /* Keep text left aligned within its space */
-            flex-wrap: wrap; /* Allow wrapping for long lines */
-            font-size: 0.9rem; /* Smaller font */
-            margin-bottom: 0.5rem; /* Reduced margin */
+        .skill-detail-section h3 {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
         }
-        .key-points li i {
-            margin-right: 0.5rem; /* Reduce margin */
+        .skill-detail-section p,
+        .skill-detail-section ul {
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
         }
-        .projects-grid, .gallery-grid {
-            grid-template-columns: 1fr; /* Single column on mobile */
+        .skill-detail-section ul {
+            margin-left: 1rem;
         }
-        .contact-form-container {
-            padding: 1rem;
+        .skill-detail-section ul li {
+            margin-bottom: 0.2rem;
+        }
+        .back-to-skills {
+            margin-top: 0.8rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
         }
         footer {
             padding: 0.8rem 1rem;
@@ -959,7 +789,7 @@
             height: 50px;
         }
         .header-logo-text {
-            font-size: 1.2rem; /* Even smaller for very small screens */
+            font-size: 1.2rem; /* Adjusted size for very small screens */
         }
         .hamburger-menu {
             width: 25px;
@@ -982,31 +812,43 @@
         main {
             padding: 0.5rem;
         }
-        #hero-section {
-            min-height: auto; /* Removed fixed min-height */
-        }
-        .hero-image-col {
-            width: 150px; /* Even smaller image */
-            height: 150px;
-            margin-bottom: 0.5rem;
-        }
-        section {
+        .page-content {
             padding: 0.5rem 0;
         }
-        section h2 {
+        .page-content h2 {
             font-size: clamp(1.5rem, 8vw, 2rem);
             margin-bottom: 0.5rem;
         }
-        section p {
-            font-size: 0.85rem;
+        .page-content p {
+            font-size: 0.8rem;
             margin-bottom: 0.5rem;
         }
-        .project-card, .gallery-item, .contact-form-container {
-            padding: 0.8rem;
+        .skill-detail-section {
+            padding: 0.5rem;
+        }
+        .skill-detail-section img {
+            max-height: 25vh;
+        }
+        .skill-detail-section h3 {
+            margin-top: 0.8rem;
+            margin-bottom: 0.4rem;
+        }
+        .skill-detail-section p,
+        .skill-detail-section ul {
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .back-to-skills {
+            margin-top: 0.6rem;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
         }
         footer {
             padding: 0.6rem 0.8rem;
             font-size: 0.7rem;
+        }
+        .social-links a {
+            font-size: 1rem;
         }
     }
   </style>
@@ -1017,14 +859,14 @@
     "@type": "Person",
     "name": "Amir H. Rusli",
     "jobTitle": "Traffic Engineer & Consultant",
-    "url": "https://yourdomain.com/", <!-- REMINDER: Update 'yourdomain.com' to your actual website domain -->
+    "url": "https://yourdomain.com/",
     "alumniOf": {
       "@type": "EducationalOrganization",
       "name": "University Malaya"
     },
     "sameAs": [
-      "https://www.linkedin.com/in/yourprofile", <!-- REMINDER: Update with your LinkedIn profile URL -->
-      "https://github.com/yourusername" <!-- REMINDER: Update with your GitHub profile URL -->
+      "https://www.linkedin.com/in/yourprofile",
+      "https://github.com/yourusername"
     ],
     "worksFor": {
       "@type": "Organization",
@@ -1074,7 +916,7 @@
           <li><a href="projects.html">Projects</a></li>
           <li class="dropdown-mobile">
               <a href="#" class="dropbtn-mobile" onclick="return false;" aria-haspopup="true" aria-expanded="false" aria-controls="skills-dropdown-mobile-content">Skills <i class="fas fa-caret-down dropdown-arrow"></i></a>
-              <div class="dropdown-content-mobile" id="skills-dropdown-mobile-content" role="menu">
+              <div class="dropdown-content" id="skills-dropdown-mobile-content" role="menu">
                   <a href="skill-details-sidra.html" role="menuitem">Sidra</a>
                   <a href="skill-details-vissim.html" role="menuitem">Vissim</a>
                   <a href="skill-details-sumo.html" role="menuitem">SUMO Traffic</a>
@@ -1087,20 +929,40 @@
   </div>
 
   <main>
-    <section id="hero-section">
-        <div class="hero-image-col">
-            <!-- Placeholder for the image, similar to the provided picture -->
-            <img src="https://placehold.co/350x350/E0F2F7/0077B6?text=Amir+H.+Rusli" alt="Amir H. Rusli Profile Picture" class="profile-image">
-        </div>
-        <div class="hero-text-col">
-            <p class="greeting">Hi! I am <span class="highlight-name">Amir H. Rusli</span>,</p>
-            <p class="tagline">a Traffic Engineer crafting impactful urban mobility solutions.</p>
-            <ul class="key-points">
-                <li><i class="fas fa-graduation-cap"></i> M.Eng in Transportation Engineering @University Malaya</li>
-                <li><i class="fas fa-briefcase"></i> 4+ years of experience in Traffic Engineering & Consulting</li>
-                <li><i class="fas fa-lightbulb"></i> Specializing in Traffic Impact Assessments & Simulation (Vissim) and analysis (Sidra)</li>
-                <li><i class="fas fa-code"></i> Apprentice in Python & VBA for automation and data analysis</li>
+    <section class="page-content">
+        <h2>SIDRA INTERSECTION</h2>
+        
+        <div class="skill-detail-section">
+            <img src="https://placehold.co/800x450/0077B6/ffffff?text=SIDRA+INTERSECTION" alt="SIDRA INTERSECTION Software Interface">
+            <h3>Overview of SIDRA INTERSECTION</h3>
+            <p>SIDRA INTERSECTION is a powerful micro-simulation and analytical tool widely used for the capacity and performance analysis of intersections and networks. My expertise in SIDRA enables me to accurately model complex traffic scenarios, evaluate various design alternatives, and optimize traffic operations to improve efficiency and safety.</p>
+            
+            <h3>Key Applications & Capabilities</h3>
+            <p>My expertise in SIDRA INTERSECTION covers a wide range of applications, including:</p>
+            <ul>
+                <li><strong>Intersection Capacity Analysis:</strong> Accurately calculating the capacity and level of service (LOS) for various intersection types, including signalized intersections, roundabouts, two-way stop-controlled (TWSC), and all-way stop-controlled (AWSC) intersections.</li>
+                <li><strong>Traffic Signal Optimization:</strong> Developing and optimizing signal timings, phase plans, and coordination strategies to minimize delays, reduce queues, and improve overall traffic flow for isolated intersections and arterial networks.</li>
+                <li><strong>Roundabout Design & Analysis:</strong> Evaluating the operational performance of roundabouts, including capacity, delay, and queueing, and optimizing their geometry for safe and efficient operation.</li>
+                <li><strong>Network Analysis:</strong> Modeling and analyzing the interactions between multiple intersections within a network to assess overall network performance and identify bottlenecks.</li>
+                <li><strong>Traffic Impact Assessments (TIA):</strong> Providing robust analytical support for TIAs by predicting future traffic conditions and evaluating the impact of new developments on existing infrastructure.</li>
+                <li><strong>Geometric Design Evaluation:</strong> Assessing the impact of geometric design elements (e.g., lane configurations, turn pockets, channelization) on intersection performance.</li>
+                <li><strong>Queue Length and Delay Estimation:</strong> Accurately predicting queue lengths, vehicle delays, and other key performance indicators under various traffic demand scenarios.</li>
             </ul>
+
+            <h3>Methodology & Workflow</h3>
+            <p>My typical workflow when utilizing SIDRA INTERSECTION involves:</p>
+            <ul>
+                <li><strong>Data Input:</strong> Importing traffic count data, geometric layouts (from CAD or other sources), signal timing plans, and vehicle composition data into the software.</li>
+                <li><strong>Model Setup:</strong> Building and configuring intersection and network models, including defining lane configurations, movement definitions, and control parameters.</li>
+                <li><strong>Calibration & Validation:</strong> Calibrating the model parameters to reflect local traffic conditions and validating the model against observed field data to ensure accuracy.</li>
+                <li><strong>Scenario Analysis:</strong> Developing and analyzing various "what-if" scenarios, such as future traffic growth, alternative signal timings, or proposed geometric changes.</li>
+                <li><strong>Performance Evaluation:</strong> Interpreting SIDRA's detailed output reports, including LOS, delay, queue lengths, and environmental impacts, to assess performance.</li>
+                <li><strong>Optimization & Recommendations:</strong> Using SIDRA's optimization features to identify the most efficient signal timings or geometric layouts, and formulating clear, data-driven recommendations for clients.</li>
+                <li><strong>Reporting:</strong> Presenting findings and recommendations through comprehensive reports, often incorporating visualizations and comparative analyses.</li>
+            </ul>
+            <p>My hands-on experience with SIDRA INTERSECTION ensures that I can deliver precise, reliable, and actionable insights for a wide range of traffic engineering projects.</p>
+
+            <a href="index.html#skills-section" class="back-to-skills">&larr; Back to Skills Overview</a>
         </div>
     </section>
   </main>
@@ -1108,8 +970,8 @@
   <footer>
     <p>© 2025 Amir H. Rusli Traffic Engineer. Built with ❤</p>
     <div class="social-links">
-      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a> <!-- REMINDER: Update with your LinkedIn profile URL -->
-      <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a> <!-- REMINDER: Update with your GitHub profile URL -->
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
     </div>
   </footer>
 
@@ -1146,7 +1008,6 @@
       const body = document.body;
       const themeIconDesktop = document.getElementById('theme-icon');
       const themeIconMobile = document.getElementById('theme-icon-mobile');
-      // Removed navLinks as they now navigate to new pages
       const dropdown = document.querySelector('.dropdown');
       const dropbtn = document.querySelector('.dropbtn');
       const dropdownContent = document.getElementById('skills-dropdown-content');
@@ -1188,8 +1049,6 @@
       document.querySelectorAll('nav ul li a, .resume-button, .theme-toggle-button, .mobile-nav ul li a').forEach(el => {
         el.style.transform = 'translateZ(0)'; /* Force hardware acceleration */
       });
-
-      // Removed smooth scrolling for navigation links
 
       // Desktop Dropdown menu toggle
       if (dropdown && dropbtn && dropdownContent) {
@@ -1276,6 +1135,47 @@
               mobileDropdownContent.style.display = mobileDropdown.classList.contains('show') ? 'block' : 'none';
               this.setAttribute('aria-expanded', mobileDropdown.classList.contains('show'));
           });
+      }
+
+      // Ripple effect functionality (copied from about.html for consistency)
+      function createRipple(event) {
+        const button = event.currentTarget;
+        const ripple = document.createElement('span');
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        // Position the ripple at the click location
+        ripple.style.width = ripple.style.height = `${diameter}px`;
+        ripple.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+        ripple.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+        
+        ripple.classList.add('ripple');
+
+        // Remove any existing ripples to prevent accumulation
+        const existingRipple = button.querySelector('.ripple');
+        if (existingRipple) {
+          existingRipple.remove();
+        }
+
+        button.appendChild(ripple);
+
+        // Remove the ripple element after its animation completes
+        ripple.addEventListener('animationend', () => {
+          ripple.remove();
+        });
+      }
+
+      // Apply ripple effect to all relevant elements (copied from about.html for consistency)
+      document.querySelectorAll('nav ul li a, .resume-button, .dropdown-content a, .mobile-nav ul li a, .mobile-nav .resume-button, .mobile-nav .dropdown-content a, .back-to-skills').forEach(button => {
+        button.addEventListener('click', createRipple);
+      });
+
+      // Special handling for dropdown button to ensure ripple is contained
+      if (dropbtn) {
+        dropbtn.addEventListener('click', createRipple);
+      }
+      if (mobileDropbtn) {
+        mobileDropbtn.addEventListener('click', createRipple);
       }
     });
   </script>
